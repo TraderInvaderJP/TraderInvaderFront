@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
 import { Paper, Grid, TextField, List, 
   ListItem, ListItemText, Container, IconButton } from '@material-ui/core'
@@ -7,11 +6,6 @@ import { Search } from '@material-ui/icons'
 const axios = require('axios')
 
 function App() {
-  const [options, setOptions] = useState([])
-  useEffect(() => {
-
-  })
-
   const [input, setInput] = useState('')
 
   const [stock, setStock] = useState({
@@ -22,7 +16,7 @@ function App() {
   const loadStock = async () => {
     try {
       let { data } = await axios.get(`https://o5gn70te7h.execute-api.us-west-2.amazonaws.com/latest/stock/${input}`)
-      console.log(data)
+      
       setStock(data)
     }
     catch(err) {
