@@ -29,6 +29,7 @@ const Main = () => (
   <Switch>
     <Route exact path='/' component={Home}></Route>
     <Route exact path='/createaccount' component={CreateAccount}></Route>
+    <Route exact path='/verification' component={Verification}></Route>
     <Route exact path='/userhome' component={UserHome}></Route>
   </Switch>
 );
@@ -55,6 +56,7 @@ class Home extends Component {
       [event.target.name]: event.target.value
     })
   }
+  //render login page
   render() {
     return (
       <form>
@@ -101,11 +103,10 @@ export class CreateAccount extends Component {
       [event.target.name]: event.target.value
     })
   }
-
+//render create user page
   render() {
     return (
       <form>
-
         <div className="createaccount" style={{ backgroundColor: '#87ACA3', height: '50vh' }} >
           <Container style={{ padding: '5vh' }}>
             <Grid container row justify='center' alignItems='center' spacing={6}>
@@ -117,13 +118,52 @@ export class CreateAccount extends Component {
               <Grid item><TextField name='confirmpassword' placeholder='Confirm Password' variant='outlined' onChange={e => this.handleInputChange(e)} fullWidth /></Grid>
             </Grid>
             <Grid container row justify='center' alignItems='center' spacing={6}>
-              <Grid item padding='25px'><Button onClick={this.handleSubmit} variant='contained'>Confirm</Button></Grid>
+              <Grid item padding='25px'><NavLink to='/verification'><Button onClick={this.handleSubmit} variant='contained'>Confirm</Button></NavLink></Grid>
               <Grid item padding='25px'><Button onClick={this.cleanInput} variant='contained'>Cancel</Button></Grid>
             </Grid>
           </Container>
         </div>
       </form>
 
+    )
+  }
+}
+
+/* Verification page*/
+class Verification extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      verificationCode: ''
+    }
+  }
+
+  handleSubmit = (event) => {
+    const data = this.state
+    console.log(data)
+  }
+
+  /* console log input and sets user values */
+  handleInputChange = (event) => {
+    this.setState({
+      [event.target.name]: event.target.value
+    })
+  }
+  //render Verification page
+  render() {
+    return (
+      <form>
+        <div className="verification" style={{ backgroundColor: '#87ACA3', height: '50vh' }} >
+          <Container style={{ padding: '15vh' }}>
+            <Grid container row justify='center' alignItems='center' spacing={6}>
+              <Grid item><TextField name='verificationCode' placeholder='Verification Code ' type='text' variant='outlined' onChange={e => this.handleInputChange(e)} fullWidth /></Grid>
+            </Grid>
+            <Grid container row justify='center' alignItems='center' spacing={6}>
+              <Grid item padding='25px'> <NavLink to="/"> <Button onClick={this.handleSubmit} variant='contained'>Confirm</Button> </NavLink> </Grid>
+            </Grid>
+          </Container>
+        </div>
+      </form>
     )
   }
 }
