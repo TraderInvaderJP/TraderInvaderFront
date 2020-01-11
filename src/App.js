@@ -7,7 +7,6 @@ import {
 import { NavLink, Switch, Route } from 'react-router-dom';
 
 const axios = require('axios')
-
 /* App, Nav and Main are used to set/navigate different pages throughout site */
 const App = () => (
   <div className='app'>
@@ -30,6 +29,7 @@ const Main = () => (
   <Switch>
     <Route exact path='/' component={Home}></Route>
     <Route exact path='/createaccount' component={CreateAccount}></Route>
+    <Route exact path='/userhome' component={UserHome}></Route>
   </Switch>
 );
 /* Home page, it is the login page */
@@ -65,7 +65,7 @@ class Home extends Component {
               <Grid item><TextField name='password' placeholder='Password' type='text' variant='outlined' onChange={e => this.handleInputChange(e)} fullWidth /></Grid>
             </Grid>
             <Grid container row justify='center' alignItems='center' spacing={6}>
-              <Grid item padding='25px'><Button onClick={this.handleSubmit} variant='contained'>Confirm</Button></Grid>
+              <Grid item padding='25px'> <NavLink to="/userhome"> <Button onClick={this.handleSubmit} variant='contained'>Confirm</Button> </NavLink> </Grid>
             </Grid>
           </Container>
         </div>
@@ -73,6 +73,7 @@ class Home extends Component {
     )
   }
 }
+
 /* create user page */
 export class CreateAccount extends Component {
   constructor(props) {
@@ -123,6 +124,16 @@ export class CreateAccount extends Component {
         </div>
       </form>
 
+    )
+  }
+}
+
+/* User landing page, the first page that appears once the user has logged in successfully */
+class UserHome extends Component {
+
+  render() {
+    return (
+      <h1>This page is a working progress</h1>
     )
   }
 }
