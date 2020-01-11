@@ -1,15 +1,14 @@
 import React, { useState, Component } from 'react';
 import './App.css';
 import {
-  Paper, Grid, TextField, List,
+  Paper, Grid, TextField, List, Stepper, Step, StepLabel, makeStyles,
   ListItem, ListItemText, Container, IconButton, CardHeader, Toolbar, Typography, Button
 } from '@material-ui/core'
 import { NavLink, Switch, Route } from 'react-router-dom';
 
 const axios = require('axios')
 
-
-/* App, Nav and Main are used to set/navigate different pages throughout site */ 
+/* App, Nav and Main are used to set/navigate different pages throughout site */
 const App = () => (
   <div className='app'>
     <h1>TraderInvader</h1>
@@ -83,8 +82,6 @@ export class CreateAccount extends Component {
       password: '',
       confirmpassword: '',
       email: '',
-      firstname: '',
-      lastname: ''
     }
   }
 
@@ -94,28 +91,11 @@ export class CreateAccount extends Component {
     const user = {
       username,
       password,
-      email,
-      firstname,
-      lastname
+      email
     }
-
-    function makePost(user) {
-      //cant figure out what url to use or how this works
-      axios.post('http://localhost:8080/createuser', { user }, {
-
-      })
-        .then(res => {
-          console.log(res.data)
-        }, (error) => {
-          console.log(error)
-        })
-    }
-    makePost(user)
   }
   /* console log input and sets user values */
   handleInputChange = (event) => {
-    // console.log(event.target.name)
-    // console.log(event.target.value)
     this.setState({
       [event.target.name]: event.target.value
     })
@@ -124,6 +104,7 @@ export class CreateAccount extends Component {
   render() {
     return (
       <form>
+
         <div className="createaccount" style={{ backgroundColor: '#87ACA3', height: '50vh' }} >
           <Container style={{ padding: '5vh' }}>
             <Grid container row justify='center' alignItems='center' spacing={6}>
@@ -133,10 +114,6 @@ export class CreateAccount extends Component {
             <Grid container row justify='center' alignItems='center' spacing={6}>
               <Grid item><TextField name='password' placeholder='Password' variant='outlined' onChange={e => this.handleInputChange(e)} fullWidth /></Grid>
               <Grid item><TextField name='confirmpassword' placeholder='Confirm Password' variant='outlined' onChange={e => this.handleInputChange(e)} fullWidth /></Grid>
-            </Grid>
-            <Grid container row justify='center' alignItems='center' spacing={6}>
-              <Grid item><TextField name='firstname' placeholder='First Name' variant='outlined' onChange={e => this.handleInputChange(e)} fullWidth /></Grid>
-              <Grid item><TextField name='lastname' placeholder='Last Name' variant='outlined' onChange={e => this.handleInputChange(e)} fullWidth /></Grid>
             </Grid>
             <Grid container row justify='center' alignItems='center' spacing={6}>
               <Grid item padding='25px'><Button onClick={this.handleSubmit} variant='contained'>Confirm</Button></Grid>
