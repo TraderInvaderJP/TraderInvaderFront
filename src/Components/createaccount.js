@@ -48,7 +48,7 @@ class CreateAccount extends Component {
               </Grid>
               <Grid container row justify='center' alignItems='center' spacing={6}>
                 <Grid item padding='25px'><NavLink to='/verification'><Button onClick={this.handleSubmit} variant='contained'>Confirm</Button></NavLink></Grid>
-                <Grid item padding='25px'><NavLink to='/'><Button onClick={this.cleanInput} variant='contained'>Cancel</Button></NavLink></Grid>
+                <Grid item padding='25px'><NavLink to='/'><Button onClick={this.cleanInput}  variant='contained'>Cancel</Button></NavLink></Grid>
               </Grid>
             </Container>
           </div>

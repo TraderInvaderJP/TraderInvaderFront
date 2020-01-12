@@ -41,7 +41,7 @@ html {
 nav ul {
   list-style: none;
   display: flex;
-  background-color: black;
+  background-color: #2B7C85;
   margin-bottom: 20px;
 }
 
@@ -60,7 +60,7 @@ nav ul li a {
 
 h1 {
   margin-bottom: 20px;
-
+  color: white
 }
 
 p {
