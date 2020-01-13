@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import {
-  Grid, TextField, Container, Button
-} from '@material-ui/core'
+import { Grid, TextField, Container, Button } from '@material-ui/core'
 import { NavLink } from 'react-router-dom';
 import axios from 'axios';
 
@@ -19,17 +17,13 @@ class CreateAccount extends Component {
 
   /*When comfirm is clicked, this set the user values, and posts to back end*/
   handleSubmit = (event) => {
-    const { Username, Password, Email } = this.state;
-    const user = {
-      Password,
-      Username,
-      Email
-    }
+    const { username, password, email } = this.state
+
     //post new user info to back end, which sends verification email to new user's email address
     axios.post('https://o5gn70te7h.execute-api.us-west-2.amazonaws.com/latest/users/', {
-      password: user.Password,
-      username: user.Username,
-      email: user.Email,
+      password: password,
+      username: username,
+      email: email,
     })
       .then(function (response) {
         console.log(response)
@@ -47,13 +41,13 @@ class CreateAccount extends Component {
     return (
       <form>
         <div className="createaccount" style={{ backgroundColor: '#87ACA3', height: '50vh' }} >
-          <Container style={{ padding: '5vh' }}>
+          <Container style={{ padding: '10vh' }}>
             <Grid container row justify='center' alignItems='center' spacing={6}>
-              <Grid item><TextField name='Username' placeholder='Username' variant='outlined' onChange={e => this.handleInputChange(e)} fullWidth /></Grid>
-              <Grid item><TextField name='Email' placeholder='Email' variant='outlined' onChange={e => this.handleInputChange(e)} fullWidth /></Grid>
+              <Grid item><TextField name='username' placeholder='Username' variant='outlined' onChange={e => this.handleInputChange(e)} fullWidth /></Grid>
+              <Grid item><TextField name='email' placeholder='Email' variant='outlined' onChange={e => this.handleInputChange(e)} fullWidth /></Grid>
             </Grid>
             <Grid container row justify='center' alignItems='center' spacing={6}>
-              <Grid item><TextField name='Password' placeholder='Password' variant='outlined' onChange={e => this.handleInputChange(e)} fullWidth /></Grid>
+              <Grid item><TextField name='password' placeholder='Password' variant='outlined' onChange={e => this.handleInputChange(e)} fullWidth /></Grid>
               <Grid item><TextField name='confirmpassword' placeholder='Confirm Password' variant='outlined' onChange={e => this.handleInputChange(e)} fullWidth /></Grid>
             </Grid>
             <Grid container row justify='center' alignItems='center' spacing={6}>
