@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import {
-  Paper, Grid, TextField, Container, Button
+ Grid, TextField, Container, Button
 } from '@material-ui/core'
-import { NavLink, Switch, Route } from 'react-router-dom';
+import { NavLink, } from 'react-router-dom';
 
 /* Verification page*/
 class Verification extends Component {

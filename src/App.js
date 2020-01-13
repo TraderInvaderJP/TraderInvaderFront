@@ -1,16 +1,12 @@
-import React, { useState, Component } from 'react';
+import React, { } from 'react';
 import './App.css';
 import  {Home} from './Components/home.js'
 import {CreateAccount} from './Components/createaccount.js'
 import {Verification} from './Components/verification.js'
 import {UserHome} from './Components/userhome.js'
-import {
-  Paper, Grid, TextField, List, Stepper, Step, StepLabel, makeStyles,
-  ListItem, ListItemText, Container, IconButton, CardHeader, Toolbar, Typography, Button
-} from '@material-ui/core'
+import {} from '@material-ui/core'
 import { NavLink, Switch, Route } from 'react-router-dom';
 
-const axios = require('axios')
 /* App, Nav and Main are used to set/navigate different pages throughout site */
 const App = () => (
   <div className='app'>

@@ -1,7 +1,7 @@
 /* Home page, it is the login page */
 import React, { Component } from 'react';
 import {
-  Paper, Grid, TextField, Container, Button
+  Grid, TextField, Container, Button
 } from '@material-ui/core'
 import { NavLink, } from 'react-router-dom';
 
