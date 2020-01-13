@@ -4,7 +4,6 @@ import {
 } from '@material-ui/core'
 import { NavLink } from 'react-router-dom';
 import axios from 'axios';
-const qs = require('qs');
 
 /* create user page */
 class CreateAccount extends Component {
@@ -18,7 +17,7 @@ class CreateAccount extends Component {
     }
   }
 
-  /*need to send data to backend to be able to add user info to database, not just console.log*/
+  /*When comfirm is clicked, this set the user values, and posts to back end*/
   handleSubmit = (event) => {
     const { Username, Password, Email } = this.state;
     const user = {
@@ -26,23 +25,18 @@ class CreateAccount extends Component {
       Username,
       Email
     }
-    //this isn't working
-   // axios.post('https://o5gn70te7h.execute-api.us-west-2.amazonaws.com/latest/users', { user })
-   return axios({
-    method: 'post',
-    url: 'https://o5gn70te7h.execute-api.us-west-2.amazonaws.com/latest/users/',
-    params: qs.stringify(user),
-      
-    
-  })
-      .then(res => {
-        console.log(res)
-        console.log(user)
+    //post new user info to back end, which sends verification email to new user's email address
+    axios.post('https://o5gn70te7h.execute-api.us-west-2.amazonaws.com/latest/users/', {
+      password: user.Password,
+      username: user.Username,
+      email: user.Email,
+    })
+      .then(function (response) {
+        console.log(response)
       }).catch(function (error) {
         console.log(error);
       })
   }
-  /* console log input and sets user values */
   handleInputChange = (event) => {
     this.setState({
       [event.target.name]: event.target.value
