@@ -4,6 +4,7 @@ import {
 } from '@material-ui/core'
 import { NavLink } from 'react-router-dom';
 import axios from 'axios';
+const qs = require('qs');
 
 /* create user page */
 class CreateAccount extends Component {
@@ -27,15 +28,12 @@ class CreateAccount extends Component {
     }
     //this isn't working
    // axios.post('https://o5gn70te7h.execute-api.us-west-2.amazonaws.com/latest/users', { user })
-   axios({
+   return axios({
     method: 'post',
     url: 'https://o5gn70te7h.execute-api.us-west-2.amazonaws.com/latest/users/',
-    headers: {}, 
-    data: {
-      Password: this.Password,
-      Username: this.Username,
-      Email: this.Email
-    }
+    params: qs.stringify(user),
+      
+    
   })
       .then(res => {
         console.log(res)

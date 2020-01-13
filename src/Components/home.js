@@ -1,10 +1,9 @@
 /* Home page, it is the login page */
-import React, { useState, Component } from 'react';
+import React, { Component } from 'react';
 import {
-  Paper, Grid, TextField, List, Stepper, Step, StepLabel, makeStyles,
-  ListItem, ListItemText, Container, IconButton, CardHeader, Toolbar, Typography, Button
+  Paper, Grid, TextField, Container, Button
 } from '@material-ui/core'
-import { NavLink, Switch, Route } from 'react-router-dom';
+import { NavLink, } from 'react-router-dom';
 
 class Home extends Component {
     constructor(props) {
@@ -22,8 +21,6 @@ class Home extends Component {
   
     /* console log input and sets user values */
     handleInputChange = (event) => {
-      // console.log(event.target.name)
-      // console.log(event.target.value)
       this.setState({
         [event.target.name]: event.target.value
       })

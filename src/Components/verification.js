@@ -1,7 +1,6 @@
-import React, { useState, Component } from 'react';
+import React, { Component } from 'react';
 import {
-  Paper, Grid, TextField, List, Stepper, Step, StepLabel, makeStyles,
-  ListItem, ListItemText, Container, IconButton, CardHeader, Toolbar, Typography, Button
+  Paper, Grid, TextField, Container, Button
 } from '@material-ui/core'
 import { NavLink, Switch, Route } from 'react-router-dom';
 
