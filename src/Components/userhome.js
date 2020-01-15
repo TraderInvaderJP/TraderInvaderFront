@@ -12,4 +12,4 @@ class UserHome extends Component {
     }
   }
   
-  export {UserHome}
+  export default UserHome
