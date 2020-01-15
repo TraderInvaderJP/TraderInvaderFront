@@ -1,4 +1,28 @@
-.App {
+.centered {
+  height: 100vh; 
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #B1B1B1;
+}
+
+.textfield {
+  color: #B1B1B1;
+  outline-color: #B1B1B1;
+  border-bottom-color: #B1B1B1; 
+  text-align: center;
+  width: 40vh;
+}
+
+.toolbar {
+  background-color: #747474;
+  justify-content: center;
+  color: #0A0708
+}
+
+
+
+/* .App {
   text-align: center;
 }
 
@@ -64,4 +88,4 @@ h1 {
 
 p {
   margin-bottom: 15px;
-}
+} */

@@ -1,7 +1,10 @@
-import React, { Component } from 'react';
-import { Grid, TextField, Container, Button} from '@material-ui/core'
+import React, { Component, PreventDefault } from 'react';
+import { Grid, TextField, Container, Button, CssBaseline, Typography, List, ListItem, Toolbar, AppBar, Link } from '@material-ui/core'
 import { NavLink, } from 'react-router-dom';
-import axios from 'axios';
+import Authentication from './Authentication';
+import '../App.css'
+import axios from 'axios'
+import templogo from '../templogo.png';
 
 /* Comfirmation page*/
 class Verification extends Component {
@@ -15,16 +18,17 @@ class Verification extends Component {
   //not working yet, says invalid code for some reason
   handleSubmit = (event) => {
     const { verification_code, username } = this.state
-
-    axios.put('https://o5gn70te7h.execute-api.us-west-2.amazonaws.com/latest/users/:username/verification', {
-      confirmation_code: verification_code,
-      username: username,
-    })
-      .then(function (response) {
-        console.log(response)
-      }).catch(function (error) {
-        console.log(error);
-      })
+    //let url = `https://o5gn70te7h.execute-api.us-west-2.amazonaws.com/latest/users/${username}/verification`
+    //console.log(url)
+    console.log(this.state.username)
+    // axios.put(`https://o5gn70te7h.execute-api.us-west-2.amazonaws.com/latest/users/${username}/verification`, {
+    //   confirmation_code: verification_code
+    // })
+    //   .then(function (response) {
+    //     console.log(response)
+    //   }).catch(function (error) {
+    //     console.log(error);
+    //   })
   }
 
   /* console log input and sets verification value */
@@ -36,21 +40,23 @@ class Verification extends Component {
   //render Verification page
   render() {
     return (
-      <form>
-        <div className="verification" style={{ backgroundColor: '#87ACA3', height: '50vh' }} >
-          <Container style={{ padding: '15vh' }}>
-            <Grid container row justify='center' alignItems='center' spacing={6}>
-              <Grid item><TextField name='username' placeholder='Username' type='text' variant='outlined' onChange={e => this.handleInputChange(e)} fullWidth /></Grid>
-              <Grid item><TextField name='verification_code' placeholder='Verification Code ' type='text' variant='outlined' onChange={e => this.handleInputChange(e)} fullWidth /></Grid>
-            </Grid>
-            <Grid container row justify='center' alignItems='center' spacing={6}>
-              <Grid item padding='25px'> <NavLink to="/"> <Button onClick={this.handleSubmit} variant='contained'>Confirm</Button> </NavLink> </Grid>
-            </Grid>
-          </Container>
-        </div>
-      </form>
+      <div className={'centered'}>
+        <AppBar position='fixed' className={'toolbar'}>
+          <Toolbar position='fixed' className={'toolbar'}>
+          <h1><img src={templogo} alt="Logo" height='100'/></h1>
+          </Toolbar>
+        </AppBar>
+        <List>
+          <ListItem><TextField inputProps={{ style: {textAlign: 'center'} }} className={'textfield'} name='verification' placeholder='Verification Code' type='text' variant='standard' onChange={e => this.handleInputChange(e)} /></ListItem>
+          <ListItem style={{justifyContent: 'center'}}><Button variant='outlined' onClick={this.handleSubmit}>Confirm</Button>&nbsp;&nbsp;
+          <NavLink to='/'><Button variant='outlined'>Cancel</Button></NavLink></ListItem>
+          <List>
+            <ListItem style={{justifyContent: 'center'}}><Link href='#'>Resend Code</Link></ListItem>
+          </List>
+        </List>
+      </div>
     )
   }
 }
 
-export { Verification }
+export default Verification 

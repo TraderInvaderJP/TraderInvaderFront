@@ -7,6 +7,7 @@ import { BrowserRouter } from 'react-router-dom';
 
 //changed this to support routes for switching between pages
 ReactDOM.render(<BrowserRouter><App/></BrowserRouter>, document.getElementById('root'));
+//render(<App/>, document.getElementById('container'));
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
