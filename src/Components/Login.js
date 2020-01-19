@@ -1,6 +1,6 @@
 /* Home page, it is the login page */
 import React, { Component, PreventDefault } from 'react';
-import { TextField, Button, List, ListItem, Toolbar, AppBar, Link } from '@material-ui/core'
+import { TextField, Button, List, ListItem, Toolbar, AppBar, Link, LinkButton } from '@material-ui/core'
 import '../App.css'
 import templogo from '../templogo.png';
 
@@ -35,7 +35,7 @@ class Home extends Component {
           </Toolbar>
         </AppBar>
         <List>
-          <ListItem><TextField inputProps={{ style: { textAlign: 'center', margin: 'normal' } }} className={'textfield'} name='username' placeholder='UserName ' type='text' variant='standard' /></ListItem>
+          <ListItem><TextField inputProps={{ style: { textAlign: 'center', margin: 'normal' } }} className={'textfield'} name='username' placeholder='Username ' type='text' variant='standard' /></ListItem>
           <ListItem><TextField inputProps={{ style: { textAlign: 'center' } }} className={'textfield'} name='password' placeholder='Password' type='text' variant='standard' /></ListItem>
           <ListItem>&nbsp;</ListItem>
           <ListItem style={{ justifyContent: 'center' }} display='flex' display='flex'><Button linkButton={true} href='/userhome' variant='outlined'>Confirm</Button></ListItem>
