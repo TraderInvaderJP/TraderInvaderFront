@@ -6,21 +6,18 @@ import axios from 'axios'
 import templogo from '../templogo.png';
 
 /* create user page */
-class Create extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      username: '',
-      password: '',
-      confirmpassword: '',
-      email: '',
-    }
-  }
+function Create() {
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+  const [confirm, setConfirm] = useState('')
+  const [email, setEmail] = useState('')
 
   /*When comfirm is clicked, this set the user values, and posts to back end*/
-  handleSubmit = (event) => {
-    const { username, password, email } = this.state
-
+  const handleSubmit = () => {
+    console.log(username)
+    console.log(email)
+    console.log(password)
+    console.log(confirm)
     //post new user info to back end, which sends verification email to new user's email address
     // axios.post('https://o5gn70te7h.execute-api.us-west-2.amazonaws.com/latest/users/', {
     //   password: password,
@@ -33,32 +30,41 @@ class Create extends Component {
     //     console.log(error);
     //   })
   }
-  handleInputChange = (event) => {
-    this.setState({
-      [event.target.name]: event.target.value
-    })
+
+  const handleNameChange = (event) => {
+     setUsername(event.target.value)
+  }
+
+  const handlePasswordChange = (event) => {
+    setPassword(event.target.value)
+  }
+
+  const handleConfirmChange = (event) => {
+    setConfirm(event.target.value)
+  }
+
+  const handleEmailChange = (event) => {
+    setEmail(event.target.value)
   }
   //render create user page
-  render() {
-    return (
-      <div className={'centered'}>
-        <AppBar position='fixed' className={'toolbar'}>
-          <Toolbar position='fixed' className={'toolbar'}>
-            <h1><img src={templogo} alt="Logo" height='100' /></h1>
-          </Toolbar>
-        </AppBar>
-        <List>
-          <ListItem><TextField inputProps={{ style: { textAlign: 'center' } }} className={'textfield'} name='username' placeholder='Username ' type='text' variant='standard' onChange={e => this.handleInputChange(e)} /></ListItem>
-          <ListItem><TextField inputProps={{ style: { textAlign: 'center' } }} className={'textfield'} name='email' placeholder='Email' type='text' variant='standard' onChange={e => this.handleInputChange(e)} /></ListItem>
-          <ListItem><TextField inputProps={{ style: { textAlign: 'center' } }} className={'textfield'} name='password' placeholder='Password' type='text' variant='standard' onChange={e => this.handleInputChange(e)} /></ListItem>
-          <ListItem><TextField inputProps={{ style: { textAlign: 'center' } }} className={'textfield'} name='confirm' placeholder='Confirm Password' type='text' variant='standard' onChange={e => this.handleInputChange(e)} /></ListItem>
-          <ListItem>&nbsp;</ListItem>
-          <ListItem style={{ justifyContent: 'center' }}><Button LinkButton={true} href='/Verification' onClick={this.handleSubmit} variant='outlined'>Confirm</Button>
-            &nbsp;&nbsp;<Button LinkButton={true} href='/' onClick={this.cleanInput} variant='outlined'>Cancel</Button></ListItem>
-        </List>
-      </div>
-    )
-  }
+  return (
+    <div className={'centered'}>
+      <AppBar position='fixed' className={'toolbar'}>
+        <Toolbar position='fixed' className={'toolbar'}>
+          <h1><img src={templogo} alt="Logo" height='100' /></h1>
+        </Toolbar>
+      </AppBar>
+      <List>
+        <ListItem><TextField onChange={handleNameChange} inputProps={{ style: { textAlign: 'center' } }} className={'textfield'} name='username' placeholder='Username ' type='text' variant='standard'/></ListItem>
+        <ListItem><TextField onChange={handleEmailChange} inputProps={{ style: { textAlign: 'center' } }} className={'textfield'} name='email' placeholder='Email' type='text' variant='standard' /></ListItem>
+        <ListItem><TextField onChange={handlePasswordChange} inputProps={{ style: { textAlign: 'center' } }} className={'textfield'} name='password' placeholder='Password' type='text' variant='standard'/></ListItem>
+        <ListItem><TextField onChange={handleConfirmChange} inputProps={{ style: { textAlign: 'center' } }} className={'textfield'} name='confirm' placeholder='Confirm Password' type='text' variant='standard'/></ListItem>
+        <ListItem>&nbsp;</ListItem>
+        <ListItem style={{ justifyContent: 'center' }}><Button LinkButton={true} href='/Verification' onClick={handleSubmit} variant='outlined'>Confirm</Button>
+          &nbsp;&nbsp;<Button LinkButton={true} href='/' variant='outlined'>Cancel</Button></ListItem>
+      </List>
+    </div>
+  )
 }
 
 export default Create 

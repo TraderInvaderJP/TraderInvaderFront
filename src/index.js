@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { BrowserRouter } from 'react-router-dom';
+import Authentication from './Components/Authentication';
 
 //changed this to support routes for switching between pages
 ReactDOM.render(<BrowserRouter><App/></BrowserRouter>, document.getElementById('root'));

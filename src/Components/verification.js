@@ -1,22 +1,16 @@
-import React, { Component, PreventDefault } from 'react';
-import { TextField, Container, Button, List, ListItem, Toolbar, AppBar, Link } from '@material-ui/core'
+import React, { Component, PreventDefault, useImperativeHandle, useState } from 'react';
+import { TextField, Container, Button, List, ListItem, Toolbar, AppBar, Link, LinkButton } from '@material-ui/core'
 import Authentication from './Authentication';
 import '../App.css'
 import axios from 'axios'
 import templogo from '../templogo.png';
 
 /* Comfirmation page*/
-class Verification extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      verification_code: '',
-      username: ''
-    }
-  }
-  //not working yet, says invalid code for some reason
-  handleSubmit = (event) => {
-    const { verification_code, username } = this.state
+function Verification() {
+  const [verification, setVerification] = useState('')
+
+  const handleSubmit = () => {
+    console.log(verification)
     //let url = `https://o5gn70te7h.execute-api.us-west-2.amazonaws.com/latest/users/${username}/verification`
     //console.log(url)
     // axios.put(`https://o5gn70te7h.execute-api.us-west-2.amazonaws.com/latest/users/${username}/verification`, {
@@ -30,30 +24,26 @@ class Verification extends Component {
   }
 
   /* console log input and sets verification value */
-  handleInputChange = (event) => {
-    this.setState({
-      [event.target.name]: event.target.value
-    })
+  const handleVerificationChange = (event) => {
+    setVerification(event.target.value)
   }
   //render Verification page
-  render() {
-    return (
-      <div className={'centered'}>
-        <AppBar position='fixed' className={'toolbar'}>
-          <Toolbar position='fixed' className={'toolbar'}>
-            <h1><img src={templogo} alt="Logo" height='100'/></h1>
-          </Toolbar>
-        </AppBar>
-        <List>
-          <ListItem><TextField inputProps={{ style: { textAlign: 'center' } }} className={'textfield'} name='verification' placeholder='Verification Code' type='text' variant='standard' onChange={e => this.handleInputChange(e)} /></ListItem>
-          <ListItem>&nbsp;</ListItem>
-          <ListItem style={{ justifyContent: 'center' }}><Button variant='outlined' onClick={this.handleSubmit}>Confirm</Button>&nbsp;&nbsp;
-          <Button linkButton={true} href='/' variant='outlined'>Cancel</Button></ListItem>
-          <ListItem style={{ justifyContent: 'center' }}><Link href='#'>Resend Code</Link></ListItem>
-        </List>
-      </div>
-    )
-  }
+  return (
+    <div className={'centered'}>
+      <AppBar position='fixed' className={'toolbar'}>
+        <Toolbar position='fixed' className={'toolbar'}>
+          <h1><img src={templogo} alt="Logo" height='100' /></h1>
+        </Toolbar>
+      </AppBar>
+      <List>
+        <ListItem><TextField onChange={handleVerificationChange} inputProps={{ style: { textAlign: 'center' } }} className={'textfield'} name='verification' placeholder='Verification Code' type='text' variant='standard'/></ListItem>
+        <ListItem>&nbsp;</ListItem>
+        <ListItem style={{ justifyContent: 'center' }}><Button variant='outlined' onClick={handleSubmit}>Confirm</Button>&nbsp;&nbsp;
+          <Button LinkButton={true} href='/' variant='outlined'>Cancel</Button></ListItem>
+        <ListItem style={{ justifyContent: 'center' }}><Link href='#'>Resend Code</Link></ListItem>
+      </List>
+    </div>
+  )
 }
 
 export default Verification 
