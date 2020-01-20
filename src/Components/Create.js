@@ -1,5 +1,6 @@
 import React, { Component, PreventDefault, useState } from 'react';
-import { Grid, TextField, Button, List, ListItem, Toolbar, AppBar, LinkButton } from '@material-ui/core'
+import { Grid, TextField, Button, List, ListItem, Toolbar, AppBar, LinkButton, Input, InputAdornment, IconButton } from '@material-ui/core'
+import { VisibilityOff, Visibility } from '@material-ui/icons'
 import Authentication from './Authentication';
 import '../App.css'
 import axios from 'axios'
@@ -31,21 +32,31 @@ function Create() {
     //   })
   }
 
-  const handleNameChange = (event) => {
-     setUsername(event.target.value)
+  const handleNameChange = prop => event => {
+    setUsername(event.target.value)
   }
 
-  const handlePasswordChange = (event) => {
+  const handlePasswordChange = prop => event => {
     setPassword(event.target.value)
   }
 
-  const handleConfirmChange = (event) => {
+  const handleConfirmChange = prop => event => {
     setConfirm(event.target.value)
   }
 
-  const handleEmailChange = (event) => {
+  const handleEmailChange = prop => event => {
     setEmail(event.target.value)
   }
+
+  const handleClickShowPassword = () => {
+    setPassword({ password, showPassword: !password.showPassword })
+    setConfirm({ confirm, showConfirm: !confirm.showConfirm })
+  }
+
+  const handleMouseDownPressed = event => {
+    event.preventDefault()
+  }
+
   //render create user page
   return (
     <div className={'centered'}>
@@ -55,13 +66,85 @@ function Create() {
         </Toolbar>
       </AppBar>
       <List>
-        <ListItem><TextField onChange={handleNameChange} inputProps={{ style: { textAlign: 'center' } }} className={'textfield'} name='username' placeholder='Username ' type='text' variant='standard'/></ListItem>
-        <ListItem><TextField onChange={handleEmailChange} inputProps={{ style: { textAlign: 'center' } }} className={'textfield'} name='email' placeholder='Email' type='text' variant='standard' /></ListItem>
-        <ListItem><TextField onChange={handlePasswordChange} inputProps={{ style: { textAlign: 'center' } }} className={'textfield'} name='password' placeholder='Password' type='text' variant='standard'/></ListItem>
-        <ListItem><TextField onChange={handleConfirmChange} inputProps={{ style: { textAlign: 'center' } }} className={'textfield'} name='confirm' placeholder='Confirm Password' type='text' variant='standard'/></ListItem>
+        <ListItem>
+          <Input
+            onChange={handleNameChange}
+            inputProps={{ style: { textAlign: 'left' } }}
+            className={'textfield'}
+            name='username'
+            placeholder='Username '
+            type='text'
+            variant='standard' />
+        </ListItem>
+        <ListItem>
+          <Input
+            onChange={handleEmailChange}
+            inputProps={{ style: { textAlign: 'left' } }}
+            className={'textfield'}
+            name='email'
+            placeholder='Email'
+            type='text'
+            variant='standard' />
+        </ListItem>
+        <ListItem>
+          <Input
+            onChange={handlePasswordChange}
+            inputProps={{ style: { textAlign: 'left' } }}
+            className={'textfield'}
+            name='password'          
+            placeholder='Password'
+            type={password.showPassword ? 'text' : 'password'}
+            variant='standard'
+            endAdornment={
+              <InputAdornment position='end'>
+                <IconButton
+                  aria-label='toggle password visibility'
+                  onClick={handleClickShowPassword}
+                  onMouseDown={handleMouseDownPressed}
+                  edge='end'
+                >
+                  {password.showPassword ? <Visibility /> : <VisibilityOff />}
+                </IconButton>
+              </InputAdornment>
+            }
+          />
+        </ListItem>
+        <ListItem>
+          <Input
+            onChange={handleConfirmChange}
+            inputProps={{ style: { textAlign: 'left' } }}
+            className={'textfield'}
+            name='confirm'
+            placeholder='Confirm Password'
+            type={confirm.showConfirm ? 'text' : 'password'}
+            variant='standard'
+            endAdornment={
+              <InputAdornment position='end'>
+                <IconButton
+                  aria-label='toggle password visibility'
+                  onClick={handleClickShowPassword}
+                  onMouseDown={handleMouseDownPressed}
+                  edge='end'
+                >
+                  {confirm.showConfirm ? <Visibility /> : <VisibilityOff />}
+                </IconButton>
+              </InputAdornment>
+            }
+          />
+        </ListItem>
         <ListItem>&nbsp;</ListItem>
-        <ListItem style={{ justifyContent: 'center' }}><Button LinkButton={true} href='/Verification' onClick={handleSubmit} variant='outlined'>Confirm</Button>
-          &nbsp;&nbsp;<Button LinkButton={true} href='/' variant='outlined'>Cancel</Button></ListItem>
+        <ListItem
+          style={{ justifyContent: 'center' }}>
+          <Button
+            LinkButton={true}
+            href='/Verification'
+            onClick={handleSubmit}
+            variant='outlined'>Confirm</Button>
+          &nbsp;&nbsp;
+          <Button LinkButton={true}
+            href='/'
+            variant='outlined'>Cancel</Button>
+        </ListItem>
       </List>
     </div>
   )

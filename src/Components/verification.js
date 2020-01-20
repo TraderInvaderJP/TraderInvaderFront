@@ -1,5 +1,5 @@
 import React, { Component, PreventDefault, useImperativeHandle, useState } from 'react';
-import { TextField, Container, Button, List, ListItem, Toolbar, AppBar, Link, LinkButton } from '@material-ui/core'
+import { TextField, Container, Button, List, ListItem, Toolbar, AppBar, Link, LinkButton, Input } from '@material-ui/core'
 import Authentication from './Authentication';
 import '../App.css'
 import axios from 'axios'
@@ -36,11 +36,31 @@ function Verification() {
         </Toolbar>
       </AppBar>
       <List>
-        <ListItem><TextField onChange={handleVerificationChange} inputProps={{ style: { textAlign: 'center' } }} className={'textfield'} name='verification' placeholder='Verification Code' type='text' variant='standard'/></ListItem>
+        <ListItem>
+          <Input
+            onChange={handleVerificationChange}
+            inputProps={{ style: { textAlign: 'left' } }}
+            className={'textfield'}
+            name='verification'
+            placeholder='Verification Code'
+            type='text'
+            variant='standard' />
+        </ListItem>
         <ListItem>&nbsp;</ListItem>
-        <ListItem style={{ justifyContent: 'center' }}><Button variant='outlined' onClick={handleSubmit}>Confirm</Button>&nbsp;&nbsp;
-          <Button LinkButton={true} href='/' variant='outlined'>Cancel</Button></ListItem>
-        <ListItem style={{ justifyContent: 'center' }}><Link href='#'>Resend Code</Link></ListItem>
+        <ListItem
+          style={{ justifyContent: 'center' }}>
+          <Button variant='outlined'
+            onClick={handleSubmit}>Confirm</Button>
+          &nbsp;&nbsp;
+          <Button
+            LinkButton={true}
+            href='/'
+            variant='outlined'>Cancel</Button>
+        </ListItem>
+        <ListItem
+          style={{ justifyContent: 'center' }}>
+          <Link href='#'>Resend Code</Link>
+        </ListItem>
       </List>
     </div>
   )

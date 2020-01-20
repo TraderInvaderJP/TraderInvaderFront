@@ -1,6 +1,7 @@
 /* Home page, it is the login page */
 import React, { Component, PreventDefault, useState } from 'react';
-import { TextField, Button, List, ListItem, Toolbar, AppBar, Link, LinkButton } from '@material-ui/core'
+import { TextField, Button, List, ListItem, Toolbar, AppBar, Link, LinkButton, IconButton, InputAdornment, Input } from '@material-ui/core'
+import { VisibilityOff, Visibility } from '@material-ui/icons'
 import '../App.css'
 import templogo from '../templogo.png';
 
@@ -14,13 +15,21 @@ function Home() {
   }
 
   /* sets user values */
-  const handleNameChange = (event) => {
+  const handleNameChange = prop => event => {
     setUsername(event.target.value)
   }
 
   /* sets password values */
-  const handlePasswordChange = (event) => {
+  const handlePasswordChange = prop => event => {
     setPassword(event.target.value)
+  }
+
+  const handleClickShowPassword = () => {
+    setPassword({ password, showPassword: !password.showPassword })
+  }
+
+  const handleMouseDownPressed = event => {
+    event.preventDefault()
   }
 
   //render login page
@@ -32,12 +41,51 @@ function Home() {
         </Toolbar>
       </AppBar>
       <List>
-        <ListItem><TextField onChange={handleNameChange} inputProps={{ style: { textAlign: 'center', margin: 'normal' } }} className={'textfield'} name='username' placeholder='Username ' type='text' variant='standard' /></ListItem>
-        <ListItem><TextField onChange={handlePasswordChange} inputProps={{ style: { textAlign: 'center' } }} className={'textfield'} name='password' placeholder='Password' type='text' variant='standard' /></ListItem>
+        <ListItem>
+          <Input
+            onChange={handleNameChange}
+            inputProps={{ style: { textAlign: 'left', margin: 'normal' } }}
+            className={'textfield'}
+            name='username'
+            placeholder='Username '
+            type='text'
+            variant='standard' />
+        </ListItem>
+        <ListItem>
+          <Input
+            htmlFor='outlined-adornment-password'
+            id='standard-adorment-password'
+            onChange={handlePasswordChange}
+            inputProps={{ style: { textAlign: 'left' } }}
+            className={'textfield'}
+            name='password'
+            placeholder='Password'
+            type={password.showPassword ? 'text' : 'password'}
+            variant='standard'
+            endAdornment={
+              <InputAdornment position='end'>
+                <IconButton
+                  aria-label='toggle password visibility'
+                  onClick={handleClickShowPassword}
+                  onMouseDown={handleMouseDownPressed}
+                  edge='end'
+                >
+                  {password.showPassword ? <Visibility /> : <VisibilityOff />}
+                </IconButton>
+              </InputAdornment>
+            }
+          />
+        </ListItem>
         <ListItem>&nbsp;</ListItem>
-        <ListItem style={{ justifyContent: 'center' }} display='flex' display='flex'><Button LinkButton={true} onClick={handleSubmit} href='/userhome' variant='outlined' >Confirm</Button></ListItem>
-        <ListItem style={{ justifyContent: 'center' }}><Link underline='none' href='#'>Forget Password?</Link></ListItem>
-        <ListItem style={{ justifyContent: 'center' }}><Link underline='none' href='/create' onClick={PreventDefault}>Create New Account</Link></ListItem>
+        <ListItem style={{ justifyContent: 'center' }} display='flex' display='flex'>
+          <Button LinkButton={true} onClick={handleSubmit} href='/userhome' variant='outlined' >Confirm</Button>
+        </ListItem>
+        <ListItem style={{ justifyContent: 'center' }}>
+          <Link underline='none' href='#'>Forget Password?</Link>
+        </ListItem>
+        <ListItem style={{ justifyContent: 'center' }}>
+          <Link underline='none' href='/create' onClick={PreventDefault}>Create New Account</Link>
+        </ListItem>
       </List >
     </div>
   )
