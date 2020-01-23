@@ -1,39 +1,60 @@
-// import React, { useState } from 'react'
-// import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-// import Login from './Components/Login.js'
-// import Create from './Components/Create.js'
-// import Verification from './Components/Verification.js'
-// import userhome from './Components/userhome.js'
-// import UserHome from './Components/userhome.js';
+import React, { useState } from 'react'
+import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import Login from './Login.js'
+import Create from './Create.js'
+import Verification from './Verification.js'
+import UserHome from './UserHome.js';
+import Forget from './Forget'
 
+function Authentication(props) {
+    const [username, setUsername] = useState('')
+    const [password, setPassword] = useState('')
+    const [confirm, setConfirm] = useState('')
+    const [email, setEmail] = useState('')
+    const [verification, setVerification] = useState('')
 
-// const Authentication = () => {
-//     (
-//         <Router>
-//             <Switch>
-//                 <Route exact path='/' component={Login}></Route>
-//                 <Route path='/create' component={Create} ></Route>
-//                 <Route path='/verification' component={Verification}></Route>
-//                 <Route path='/userhome' component={UserHome}></Route>
-//             </Switch>
-//         </Router>
-//     )
+    return (
+        <div>
+            < Router >
+                <Route exact path='/'>
+                    <Login
+                        setUsername={setUsername}
+                        setPassword={setPassword}
+                        username={username}
+                        password={password}
+                    />
+                </Route>
+                <Route path='/create'>
+                    <Create
+                        setUsername={setUsername}
+                        setPassword={setPassword}
+                        setConfirm={setConfirm}
+                        setEmail={setEmail}
+                        username={username}
+                        password={password}
+                        email={email}
+                        confirm={confirm}
+                    />
+                </Route>
+                <Route path='/verification'>
+                    <Verification
+                        username={username}
+                        setVerification={setVerification}
+                        verification={verification}
+                    />
+                </Route>
+                <Route path='/userhome'>
+                    <UserHome/>
+                </Route>
+                <Route path='/forget'>
+                    <Forget
+                    />
+                </Route>
 
-//     const [username, setUsername] = useState('')
-//     const [password, setPassword] = useState('')
-//     const [confirm, setConfirm] = useState('')
-//     const [email, setEmail] = useState('')
-//     const [verification, setVerification] = useState('')
-//     console.log(username)
-//     console.log(password)
-//     console.log(email)
-//     return (
-//         <div>
-//             <Login setUsername={setUsername} setPassword={setPassword} />
-//             <Create setUsername={setUsername} setPassword={setPassword} setConfirm={setConfirm} setEmail={setEmail} />
-//             <Verification username={username} setVerification={setVerification} />
-//         </div>
-//     )
-// }
+            </Router>
+        </div>
+    )
+}
 
-// export default Authentication
+export default Authentication

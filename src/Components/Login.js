@@ -1,50 +1,35 @@
 /* Home page, it is the login page */
-import React, { Component, PreventDefault, useState } from 'react';
-import { TextField, Button, List, ListItem, Toolbar, AppBar, Link, LinkButton, IconButton, InputAdornment, Input } from '@material-ui/core'
+import React, { PreventDefault} from 'react';
+import { Button, List, ListItem, Toolbar, AppBar, IconButton, InputAdornment, Input } from '@material-ui/core'
 import { VisibilityOff, Visibility } from '@material-ui/icons'
 import '../App.css'
+import { Link } from 'react-router-dom';
 import templogo from '../templogo.png';
 
-function Home() {
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
+function Home(props) {
+  const [values, setValues] = React.useState({
+    showPassword: false,    
+  })
 
   const handleSubmit = () => {
-    console.log(username)
-    console.log(password)
-  }
 
-  /* sets user values */
-  const handleNameChange = prop => event => {
-    setUsername(event.target.value)
   }
+  const handleClickShowPassword = () => { setValues({ ...values, showPassword: !values.showPassword }) }
 
-  /* sets password values */
-  const handlePasswordChange = prop => event => {
-    setPassword(event.target.value)
-  }
+  const handleMouseDownPressed = event => { event.preventDefault() }
 
-  const handleClickShowPassword = () => {
-    setPassword({ password, showPassword: !password.showPassword })
-  }
-
-  const handleMouseDownPressed = event => {
-    event.preventDefault()
-  }
-
-  //render login page
   return (
     <div className={'centered'}>
       <AppBar position='fixed' >
         <Toolbar position=' fixed' className={'toolbar'}>
-          <h1><img src={templogo} alt="Logo" height='100' /></h1>
+          <h1><img src={templogo} alt="Logo" height='120' width='100' /></h1>
         </Toolbar>
       </AppBar>
       <List>
         <ListItem>
           <Input
-            onChange={handleNameChange}
-            inputProps={{ style: { textAlign: 'left', margin: 'normal' } }}
+            onChange={e => props.setUsername(e.target.value)}
+            inputProps={{ style: { textAlign: 'left' , borderBottomColor: '#ced4da' } }}
             className={'textfield'}
             name='username'
             placeholder='Username '
@@ -54,13 +39,12 @@ function Home() {
         <ListItem>
           <Input
             htmlFor='outlined-adornment-password'
-            id='standard-adorment-password'
-            onChange={handlePasswordChange}
+            onChange={e => props.setPassword(e.target.value)}
             inputProps={{ style: { textAlign: 'left' } }}
             className={'textfield'}
             name='password'
             placeholder='Password'
-            type={password.showPassword ? 'text' : 'password'}
+            type={values.showConfirmPassword ? 'text' : 'password'}
             variant='standard'
             endAdornment={
               <InputAdornment position='end'>
@@ -68,23 +52,31 @@ function Home() {
                   aria-label='toggle password visibility'
                   onClick={handleClickShowPassword}
                   onMouseDown={handleMouseDownPressed}
-                  edge='end'
-                >
-                  {password.showPassword ? <Visibility /> : <VisibilityOff />}
+                  edge='end'>
+                  {values.showConfirmPassword ? <Visibility /> : <VisibilityOff />}
                 </IconButton>
-              </InputAdornment>
-            }
-          />
+              </InputAdornment>} />
         </ListItem>
         <ListItem>&nbsp;</ListItem>
-        <ListItem style={{ justifyContent: 'center' }} display='flex' display='flex'>
-          <Button LinkButton={true} onClick={handleSubmit} href='/userhome' variant='outlined' >Confirm</Button>
+        <ListItem
+          style={{ justifyContent: 'center' }}
+          display='flex'>
+          <Link to='/userhome' style={{textDecoration:'none'}}>
+          <Button
+            onClick={handleSubmit}
+            variant='outlined'>Log In</Button>
+            </Link>
         </ListItem>
-        <ListItem style={{ justifyContent: 'center' }}>
-          <Link underline='none' href='#'>Forget Password?</Link>
+        <ListItem
+          style={{ justifyContent: 'center' }}>
+          <Link            
+            to='/Forget'>Forget Password?</Link>
         </ListItem>
-        <ListItem style={{ justifyContent: 'center' }}>
-          <Link underline='none' href='/create' onClick={PreventDefault}>Create New Account</Link>
+        <ListItem
+          style={{ justifyContent: 'center' }}>
+          <Link         
+            to='/create'
+            onClick={PreventDefault}>Create New Account</Link>
         </ListItem>
       </List >
     </div>

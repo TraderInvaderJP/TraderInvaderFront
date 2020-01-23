@@ -1,29 +1,29 @@
-import React, { Component, PreventDefault, useState } from 'react';
-import { Grid, TextField, Button, List, ListItem, Toolbar, AppBar, LinkButton, Input, InputAdornment, IconButton } from '@material-ui/core'
+import React, {} from 'react';
+import { Button, List, ListItem, Toolbar, AppBar, Input, InputAdornment, IconButton } from '@material-ui/core'
 import { VisibilityOff, Visibility } from '@material-ui/icons'
-import Authentication from './Authentication';
 import '../App.css'
 import axios from 'axios'
 import templogo from '../templogo.png';
+import { Link } from 'react-router-dom';
 
 /* create user page */
-function Create() {
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
-  const [confirm, setConfirm] = useState('')
-  const [email, setEmail] = useState('')
+function Create(props) {
+  const [values, setValues] = React.useState({
+    showPassword: false,
+    showConfirmPassword: false,
+  })
 
-  /*When comfirm is clicked, this set the user values, and posts to back end*/
+  const handleClickShowPassword = () => { setValues({ ...values, showPassword: !values.showPassword }) }
+
+  const handleClickShowConfirmPassword = () => { setValues({ ...values, showConfirmPassword: !values.showConfirmPassword }) }
+
+  const handleMouseDownPassword = event => { event.preventDefault() }
+
   const handleSubmit = () => {
-    console.log(username)
-    console.log(email)
-    console.log(password)
-    console.log(confirm)
-    //post new user info to back end, which sends verification email to new user's email address
     // axios.post('https://o5gn70te7h.execute-api.us-west-2.amazonaws.com/latest/users/', {
-    //   password: password,
-    //   username: username,
-    //   email: email,
+    //   password: props.password,
+    //   username: props.username,
+    //   email: props.email,
     // })
     //   .then(function (response) {
     //     console.log(response)
@@ -32,53 +32,30 @@ function Create() {
     //   })
   }
 
-  const handleNameChange = prop => event => {
-    setUsername(event.target.value)
-  }
-
-  const handlePasswordChange = prop => event => {
-    setPassword(event.target.value)
-  }
-
-  const handleConfirmChange = prop => event => {
-    setConfirm(event.target.value)
-  }
-
-  const handleEmailChange = prop => event => {
-    setEmail(event.target.value)
-  }
-
-  const handleClickShowPassword = () => {
-    setPassword({ password, showPassword: !password.showPassword })
-    setConfirm({ confirm, showConfirm: !confirm.showConfirm })
-  }
-
-  const handleMouseDownPressed = event => {
-    event.preventDefault()
-  }
-
-  //render create user page
   return (
     <div className={'centered'}>
       <AppBar position='fixed' className={'toolbar'}>
         <Toolbar position='fixed' className={'toolbar'}>
-          <h1><img src={templogo} alt="Logo" height='100' /></h1>
+      <Link to='/'>
+          <h1><img src={templogo} alt="Logo" height='120' width='100'/></h1>
+          </Link>
         </Toolbar>
       </AppBar>
       <List>
         <ListItem>
           <Input
-            onChange={handleNameChange}
+            onChange={e => props.setUsername(e.target.value)}
             inputProps={{ style: { textAlign: 'left' } }}
             className={'textfield'}
             name='username'
             placeholder='Username '
             type='text'
-            variant='standard' />
+            variant='standard'
+            />
         </ListItem>
         <ListItem>
           <Input
-            onChange={handleEmailChange}
+            onChange={e => props.setEmail(e.target.value)}
             inputProps={{ style: { textAlign: 'left' } }}
             className={'textfield'}
             name='email'
@@ -88,22 +65,22 @@ function Create() {
         </ListItem>
         <ListItem>
           <Input
-            onChange={handlePasswordChange}
+            onChange={e => props.setPassword(e.target.value)}
             inputProps={{ style: { textAlign: 'left' } }}
             className={'textfield'}
-            name='password'          
+            name='password'
             placeholder='Password'
-            type={password.showPassword ? 'text' : 'password'}
+            type={values.showPassword ? 'text' : 'password'}
             variant='standard'
             endAdornment={
               <InputAdornment position='end'>
                 <IconButton
                   aria-label='toggle password visibility'
                   onClick={handleClickShowPassword}
-                  onMouseDown={handleMouseDownPressed}
+                  onMouseDown={handleMouseDownPassword}
                   edge='end'
                 >
-                  {password.showPassword ? <Visibility /> : <VisibilityOff />}
+                  {values.showPassword ? <Visibility /> : <VisibilityOff />}
                 </IconButton>
               </InputAdornment>
             }
@@ -111,39 +88,38 @@ function Create() {
         </ListItem>
         <ListItem>
           <Input
-            onChange={handleConfirmChange}
+            onChange={e => props.setConfirm(e.target.value)}
             inputProps={{ style: { textAlign: 'left' } }}
             className={'textfield'}
             name='confirm'
             placeholder='Confirm Password'
-            type={confirm.showConfirm ? 'text' : 'password'}
+            type={values.showConfirmPassword ? 'text' : 'password'}
             variant='standard'
             endAdornment={
               <InputAdornment position='end'>
                 <IconButton
                   aria-label='toggle password visibility'
-                  onClick={handleClickShowPassword}
-                  onMouseDown={handleMouseDownPressed}
-                  edge='end'
-                >
-                  {confirm.showConfirm ? <Visibility /> : <VisibilityOff />}
+                  onClick={handleClickShowConfirmPassword}
+                  onMouseDown={handleMouseDownPassword}
+                  edge='end'>
+                  {values.showConfirmPassword ? <Visibility /> : <VisibilityOff />}
                 </IconButton>
-              </InputAdornment>
-            }
-          />
+              </InputAdornment>} />
         </ListItem>
         <ListItem>&nbsp;</ListItem>
         <ListItem
           style={{ justifyContent: 'center' }}>
+          <Link to='/Verification' style={{textDecoration:'none'}}>
           <Button
-            LinkButton={true}
-            href='/Verification'
             onClick={handleSubmit}
             variant='outlined'>Confirm</Button>
+            </Link>
           &nbsp;&nbsp;
-          <Button LinkButton={true}
-            href='/'
+          <Link to='/' style={{textDecoration:'none'}}>
+          <Button
+            onClick={handleSubmit}
             variant='outlined'>Cancel</Button>
+            </Link>
         </ListItem>
       </List>
     </div>

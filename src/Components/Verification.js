@@ -1,20 +1,17 @@
-import React, { Component, PreventDefault, useImperativeHandle, useState } from 'react';
-import { TextField, Container, Button, List, ListItem, Toolbar, AppBar, Link, LinkButton, Input } from '@material-ui/core'
-import Authentication from './Authentication';
+import React, { } from 'react';
+import { Button, List, ListItem, Toolbar, AppBar, Input } from '@material-ui/core'
+import { Link } from 'react-router-dom';
 import '../App.css'
 import axios from 'axios'
 import templogo from '../templogo.png';
 
-/* Comfirmation page*/
-function Verification() {
-  const [verification, setVerification] = useState('')
+function Verification(props) {
 
   const handleSubmit = () => {
-    console.log(verification)
-    //let url = `https://o5gn70te7h.execute-api.us-west-2.amazonaws.com/latest/users/${username}/verification`
-    //console.log(url)
-    // axios.put(`https://o5gn70te7h.execute-api.us-west-2.amazonaws.com/latest/users/${username}/verification`, {
-    //   confirmation_code: verification_code
+
+    let url = `https://o5gn70te7h.execute-api.us-west-2.amazonaws.com/latest/users/${props.username}/verification`
+    // axios.put(url, {
+    //   confirmation_code: props.verification
     // })
     //   .then(function (response) {
     //     console.log(response)
@@ -23,18 +20,17 @@ function Verification() {
     //   })
   }
 
-  /* console log input and sets verification value */
-  const handleVerificationChange = (event) => {
-    setVerification(event.target.value)
-  }
-  //render Verification page
+  const handleVerificationChange = event => { props.setVerification(event.target.value) }
   return (
     <div className={'centered'}>
       <AppBar position='fixed' className={'toolbar'}>
         <Toolbar position='fixed' className={'toolbar'}>
-          <h1><img src={templogo} alt="Logo" height='100' /></h1>
+          <Link to='/'>
+            <h1><img src={templogo} alt="Logo" height='120' width='100' /></h1>
+          </Link>
         </Toolbar>
       </AppBar>
+
       <List>
         <ListItem>
           <Input
@@ -44,16 +40,19 @@ function Verification() {
             name='verification'
             placeholder='Verification Code'
             type='text'
-            variant='standard' />
+            variant='standard'
+          />
         </ListItem>
         <ListItem>&nbsp;</ListItem>
         <ListItem
           style={{ justifyContent: 'center' }}>
-          <Button variant='outlined'
-            onClick={handleSubmit}>Confirm</Button>
+          <Link to='/Create' style={{ textDecoration: 'none' }}>
+            <Button
+              onClick={handleSubmit}
+              variant='outlined'>Confirm</Button>
+          </Link>
           &nbsp;&nbsp;
           <Button
-            LinkButton={true}
             href='/'
             variant='outlined'>Cancel</Button>
         </ListItem>
