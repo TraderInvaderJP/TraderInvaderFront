@@ -1,11 +1,12 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { BrowserRouter } from 'react-router-dom';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
 import Login from './Login.js'
 import Create from './Create.js'
 import Verification from './Verification.js'
-import UserHome from './UserHome.js';
+import Home from './UserHome.js';
 import Forget from './Forget'
+import axios from 'axios'
 
 function Authentication(props) {
     const [username, setUsername] = useState('')
@@ -13,16 +14,42 @@ function Authentication(props) {
     const [confirm, setConfirm] = useState('')
     const [email, setEmail] = useState('')
     const [verification, setVerification] = useState('')
+    const [authorized, setAuthorized] = useState('')
+
+    // useEffect(() => {
+    //     let token = localStorage.getItem('token')
+    //     if (token) {
+    //         axios
+    //             .put('https://o5gn70te7h.execute-api.us-west-2.amazonaws.com/latest/users/token/', {
+    //                 refresh_token: token
+    //             })
+    //             .then(res => {
+    //                 localStorage.setItem('token', res.data)
+    //                 setAuthorized(true)
+    //             })
+    //             .catch(err => console.log(err))
+    //     }
+    // })
 
     return (
-        <div>
-            < Router >
+        < Router >
+            <div>
+                {authorized && <Redirect to='/userhome' />}
+                <Route path='/userhome'>
+                    <Home
+                        setAuthorized={setAuthorized}
+                        username={username}
+                        authorized={authorized}
+                    />
+                </Route>
                 <Route exact path='/'>
                     <Login
                         setUsername={setUsername}
                         setPassword={setPassword}
+                        setAuthorized={setAuthorized}
                         username={username}
                         password={password}
+                        authorized={authorized}
                     />
                 </Route>
                 <Route path='/create'>
@@ -39,21 +66,18 @@ function Authentication(props) {
                 </Route>
                 <Route path='/verification'>
                     <Verification
-                        username={username}
                         setVerification={setVerification}
+                        username={username}
                         verification={verification}
                     />
-                </Route>
-                <Route path='/userhome'>
-                    <UserHome/>
                 </Route>
                 <Route path='/forget'>
                     <Forget
                     />
                 </Route>
 
-            </Router>
-        </div>
+            </div>
+        </Router>
     )
 }
 
