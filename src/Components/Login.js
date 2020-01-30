@@ -42,7 +42,7 @@ function Home(props) {
   })
   const classes = useStyles();
 
-  const handleSubmit = () => {
+  const LoginAttempt = () => {
     try {
       const { data } = axios.post('https://o5gn70te7h.execute-api.us-west-2.amazonaws.com/latest/users/token/', {
         password: props.password,
@@ -55,6 +55,17 @@ function Home(props) {
       return false
     }
   }
+
+  const handleSubmit = () => {
+    if (props.username && props.password !== '') {
+      let accept = LoginAttempt(props.username, props.password)
+      if (!accept) props.setLogin(true)
+      return accept
+    } else {
+      return false
+    }
+  }
+
 
   const handleClickShowPassword = () => { setValues({ ...values, showPassword: !values.showPassword }) }
 

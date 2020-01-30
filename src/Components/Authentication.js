@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { BrowserRouter } from 'react-router-dom';
-import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Redirect, } from 'react-router-dom';
+import PrivateRoute from 'react-private-route'
 import Login from './Login.js'
 import Create from './Create.js'
 import Verification from './Verification.js'
-import Home from './UserHome.js';
+import UserHome from './UserHome.js';
 import Forget from './Forget'
 import axios from 'axios'
 
@@ -15,6 +16,7 @@ function Authentication(props) {
     const [email, setEmail] = useState('')
     const [verification, setVerification] = useState('')
     const [authorized, setAuthorized] = useState('')
+    const [login, setLogin] = useState('')
 
     // useEffect(() => {
     //     let token = localStorage.getItem('token')
@@ -34,10 +36,12 @@ function Authentication(props) {
     return (
         < Router >
             <div>
-                {authorized && <Redirect to='/userhome' />}
+                {authorized && <Redirect to='/userhome'/>}
                 <Route path='/userhome'>
-                    <Home
+                    <UserHome
                         setAuthorized={setAuthorized}
+                        setUsername={setUsername}
+                        setPassword={setPassword}
                         username={username}
                         authorized={authorized}
                     />
@@ -47,9 +51,11 @@ function Authentication(props) {
                         setUsername={setUsername}
                         setPassword={setPassword}
                         setAuthorized={setAuthorized}
+                        setLogin={setLogin}
                         username={username}
                         password={password}
                         authorized={authorized}
+                        login={login}
                     />
                 </Route>
                 <Route path='/create'>
@@ -77,7 +83,7 @@ function Authentication(props) {
                 </Route>
 
             </div>
-        </Router>
+        </Router >
     )
 }
 
