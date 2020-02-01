@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { BrowserRouter } from 'react-router-dom';
 import { BrowserRouter as Router, Route, Redirect, } from 'react-router-dom';
-import PrivateRoute from 'react-private-route'
 import Login from './Login.js'
 import Create from './Create.js'
 import Verification from './Verification.js'
@@ -36,6 +34,7 @@ function Authentication(props) {
     return (
         < Router >
             <div>
+                
                 {authorized && <Redirect to='/userhome'/>}
                 <Route path='/userhome'>
                     <UserHome

@@ -1,4 +1,3 @@
-/* Home page, it is the login page */
 import React, { PreventDefault } from 'react';
 import { Button, List, ListItem, Toolbar, AppBar, IconButton, InputAdornment, Input } from '@material-ui/core'
 import { VisibilityOff, Visibility } from '@material-ui/icons'

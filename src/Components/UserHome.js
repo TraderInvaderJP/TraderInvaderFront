@@ -201,20 +201,7 @@ function UserHome(props) {
                 {sideList('left')}
             </Drawer>
             <div>
-                <Grid container
-                    style={{ marginTop: '100px' }}
-                    direction='row'
-                    justify='center'
-                    alignItems='center'>
-                    <Grid item style={{ marginRight: '15px' }}>
-                        <Table className={classes.table} />
-                        <TableHead />
-                    </Grid>
-                    <Grid item >
-                        <Table className={classes.table} />
-                        <TableHead />
-                    </Grid>
-                </Grid>
+                
             </div>
 
 

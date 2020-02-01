@@ -8,6 +8,14 @@ import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
+  root: {
+    flexGrow: 1,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#9DAF96',
+    height: '100vh'
+  },
   button: {
     background: '#53E121',
     "&:hover": {
@@ -20,16 +28,14 @@ const useStyles = makeStyles({
   text: {
     standard: {
       borderWidth: '2px',
-      width: '40vh',
+
     },
     '&:before': {
       borderWidth: '2px',
-      width: '35vh',
       borderColor: 'black',
     },
     '&:after': {
       borderWidth: '2px',
-      width: '35vh',
       borderColor: '#53E121',
     }
   }
@@ -38,12 +44,9 @@ const useStyles = makeStyles({
 function Create(props) {
   const [values, setValues] = React.useState({
     showPassword: false,
-    showConfirmPassword: false,
   })
   const classes = useStyles();
   const handleClickShowPassword = () => { setValues({ ...values, showPassword: !values.showPassword }) }
-
-  const handleClickShowConfirmPassword = () => { setValues({ ...values, showConfirmPassword: !values.showConfirmPassword }) }
 
   const handleMouseDownPassword = event => { event.preventDefault() }
 
@@ -61,7 +64,7 @@ function Create(props) {
   }
 
   return (
-    <div className={'centered'}>
+    <div className={classes.root}>
       <AppBar position='fixed' className={'toolbar'}>
         <Toolbar position='fixed' className={'toolbar'}>
           <Link to='/'>
@@ -70,67 +73,60 @@ function Create(props) {
         </Toolbar>
       </AppBar>
       <List>
-        <ListItem style={{ marginTop: '50px' }}>
-          <Input
-            onChange={e => props.setUsername(e.target.value)}
-            inputProps={{ style: { textAlign: 'left' } }}
-            className={classes.text}
-            name='username'
-            placeholder='Username '
-            type='text'
-            autoComplete='off'
-          />
-        </ListItem>
-        <ListItem style={{ marginTop: '10px' }}>
-          <Input
-            onChange={e => props.setEmail(e.target.value)}
-            inputProps={{ style: { textAlign: 'left' } }}
-            className={classes.text}
-            name='email'
-            placeholder='Email'
-            type='text'
-            autoComplete='off'
-          />
-        </ListItem>
-        <ListItem style={{ marginTop: '10px' }}>
-          <Input
-            onChange={e => props.setPassword(e.target.value)}
-            inputProps={{ style: { textAlign: 'left' } }}
-            className={classes.text}
-            name='password'
-            placeholder='Password'
-            type={values.showPassword ? 'text' : 'password'}
-            endAdornment={
-              <InputAdornment position='end'>
-                <IconButton
-                  aria-label='toggle password visibility'
-                  onClick={handleClickShowPassword}
-                  onMouseDown={handleMouseDownPassword}
-                  edge='end'
-                >
-                  {values.showPassword ? <Visibility /> : <VisibilityOff />}
-                </IconButton>
-              </InputAdornment>} />
-        </ListItem>
-        <ListItem style={{ marginTop: '10px' }}>
-          <Input
-            onChange={e => props.setConfirm(e.target.value)}
-            inputProps={{ style: { textAlign: 'left' } }}
-            className={classes.text}
-            name='confirm'
-            placeholder='Confirm Password'
-            type={values.showConfirmPassword ? 'text' : 'password'}
-            endAdornment={
-              <InputAdornment position='end'>
-                <IconButton
-                  aria-label='toggle password visibility'
-                  onClick={handleClickShowConfirmPassword}
-                  onMouseDown={handleMouseDownPassword}
-                  edge='end'>
-                  {values.showConfirmPassword ? <Visibility /> : <VisibilityOff />}
-                </IconButton>
-              </InputAdornment>} />
-        </ListItem>
+        <List style={{ marginRight: '-40px' }} >
+          <ListItem style={{ marginTop: '50px' }}>
+            <Input
+              onChange={e => props.setUsername(e.target.value)}
+              className={classes.text}
+              name='username'
+              placeholder='Username '
+              type='text'
+              autoComplete='off' />
+          </ListItem>
+          <ListItem style={{ marginTop: '10px' }}>
+            <Input
+              onChange={e => props.setEmail(e.target.value)}
+              className={classes.text}
+              name='email'
+              placeholder='Email'
+              type='text'
+              autoComplete='off' />
+          </ListItem>
+          <ListItem style={{ marginTop: '10px' }}>
+            <Input
+              onChange={e => props.setPassword(e.target.value)}
+              className={classes.text}
+              name='password'
+              placeholder='Password'
+              type={values.showPassword ? 'text' : 'password'} />
+            <InputAdornment position='end'>
+              <IconButton
+                aria-label='toggle password visibility'
+                onClick={handleClickShowPassword}
+                onMouseDown={handleMouseDownPassword}
+                edge='end'>
+                {values.showPassword ? <Visibility /> : <VisibilityOff />}
+              </IconButton>
+            </InputAdornment>
+          </ListItem>
+          <ListItem style={{ marginTop: '10px' }}>
+            <Input
+              onChange={e => props.setConfirm(e.target.value)}
+              className={classes.text}
+              name='confirm'
+              placeholder='Confirm Password'
+              type={values.showPassword ? 'text' : 'password'} />
+            <InputAdornment position='end'>
+              <IconButton
+                aria-label='toggle password visibility'
+                onClick={handleClickShowPassword}
+                onMouseDown={handleMouseDownPassword}
+                edge='end'>
+                {values.showPassword ? <Visibility /> : <VisibilityOff />}
+              </IconButton>
+            </InputAdornment>
+          </ListItem>
+        </List>
         <ListItem
           style={{ justifyContent: 'center', marginTop: '30px' }}>
           <Link to='/Verification' style={{ textDecoration: 'none' }}>

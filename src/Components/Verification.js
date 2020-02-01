@@ -7,6 +7,14 @@ import templogo from '../templogo.png';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
+  root: {
+    flexGrow: 1,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#9DAF96',
+    height: '100vh'
+  },
   button: {
     background: '#53E121',
     "&:hover": {
@@ -19,16 +27,13 @@ const useStyles = makeStyles({
   text: {
     standard: {
       borderWidth: '2px',
-      width: '40vh',
     },
     '&:before': {
       borderWidth: '2px',
-      width: '35vh',
       borderColor: 'black',
     },
     '&:after': {
       borderWidth: '2px',
-      width: '35vh',
       borderColor: '#53E121',
     }
   }
@@ -36,7 +41,7 @@ const useStyles = makeStyles({
 
 function Verification(props) {
   const classes = useStyles()
-  
+
   const handleVerificationChange = event => { props.setVerification(event.target.value) }
 
   const handleSubmit = () => {
@@ -53,40 +58,36 @@ function Verification(props) {
   }
 
   return (
-    <div className={'centered'}>
-      <AppBar position='fixed' className={'toolbar'}>
+    <div className={classes.root}>
+      <AppBar position='fixed' >
         <Toolbar position='fixed' className={'toolbar'}>
           <Link to='/'>
             <h1><img src={templogo} alt="Logo" height='120' width='100' /></h1>
           </Link>
         </Toolbar>
       </AppBar>
-
       <List>
-        <ListItem style={{ justifyContent: 'center', marginTop: '10px', marginLeft: '-20px' }}>
+        <ListItem style={{ marginTop: '10px' }}>
           <Input
             onChange={handleVerificationChange}
-            inputProps={{ style: { textAlign: 'left' } }}
             className={classes.text}
             name='verification'
             placeholder='Verification Code'
-            type='text'
-            variant='standard'
-          />
+            type='text' />
         </ListItem>
-        <ListItem
-          style={{ justifyContent: 'center', marginTop: '30px' }}>
-          <Link to='/Login' style={{ textDecoration: 'none' }}>
-            <Fab className={classes.button}
-              onClick={handleSubmit}
-              variant='extended'>Confirm</Fab>
-          </Link>
-        </ListItem>
-        <ListItem
-          style={{ justifyContent: 'center', marginTop: '10px' }}>
-          <Link to='#'>
-            Didn't Receive Code?</Link>
-        </ListItem>
+        <List >
+          <ListItem style={{ justifyContent: 'center', marginTop: '50px' }}>
+            <Link to='/Login' style={{ textDecoration: 'none' }}>
+              <Fab className={classes.button}
+                onClick={handleSubmit}
+                variant='extended'>Submit</Fab>
+            </Link>
+          </ListItem>
+          <ListItem style={{ justifyContent: 'center', marginTop: '5px' }}>
+            <Link to='#'>
+              Didn't Receive Code?</Link>
+          </ListItem>
+        </List>
       </List>
     </div>
   )

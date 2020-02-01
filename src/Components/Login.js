@@ -1,4 +1,3 @@
-/* Home page, it is the login page */
 import React, { PreventDefault } from 'react';
 import { List, ListItem, Toolbar, AppBar, IconButton, InputAdornment, Input, Fab } from '@material-ui/core'
 import { VisibilityOff, Visibility } from '@material-ui/icons'
@@ -9,6 +8,14 @@ import { makeStyles } from '@material-ui/core/styles';
 import axios from 'axios'
 
 const useStyles = makeStyles({
+  root: {
+    flexGrow: 1,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#9DAF96',
+    height: '100vh',
+  },
   button: {
     background: '#53E121',
     "&:hover": {
@@ -21,16 +28,13 @@ const useStyles = makeStyles({
   text: {
     standard: {
       borderWidth: '2px',
-      width: '40vh',
     },
     '&:before': {
       borderWidth: '2px',
-      width: '35vh',
       borderColor: 'black',
     },
     '&:after': {
       borderWidth: '2px',
-      width: '35vh',
       borderColor: '#53E121',
     }
   }
@@ -44,12 +48,18 @@ function Home(props) {
 
   const LoginAttempt = () => {
     try {
-      const { data } = axios.post('https://o5gn70te7h.execute-api.us-west-2.amazonaws.com/latest/users/token/', {
+      axios.post('/users/token', {
         password: props.password,
         username: props.username,
       })
-      localStorage.setItem('token', data)
-      props.setAuthorized(true)
+        .then(function (response) {
+          console.log(response)
+          localStorage.setItem('token', response.data)
+          if (response.data.success === true)
+            props.setAuthorized(true)
+        }).catch(function (error) {
+          console.log(error);
+        })
       return true
     } catch (err) {
       return false
@@ -66,66 +76,59 @@ function Home(props) {
     }
   }
 
-
   const handleClickShowPassword = () => { setValues({ ...values, showPassword: !values.showPassword }) }
 
   const handleMouseDownPressed = event => { event.preventDefault() }
 
   return (
-    <div className={'centered'}>
+    <div className={classes.root}>
       <AppBar position='fixed' >
-        <Toolbar position=' fixed' className={'toolbar'}>
+        <Toolbar position=' fixed' className={'toolbar'} >
           <h1><img src={templogo} alt="Logo" height='120' width='100' /></h1>
         </Toolbar>
       </AppBar>
       <List>
-        <ListItem style={{ marginTop: '50px' }}>
-          <Input
-            onChange={e => props.setUsername(e.target.value)}
-            inputProps={{ style: { textAlign: 'left', borderBottomColor: '#ced4da' } }}
-            className={classes.text}
-            name='username'
-            placeholder='Username '
-            type='text'
-            autoComplete='off' />
-        </ListItem >
-        <ListItem style={{ marginTop: '10px' }}>
-          <Input
-            htmlFor='outlined-adornment-password'
-            onChange={e => props.setPassword(e.target.value)}
-            inputProps={{ style: { textAlign: 'left' } }}
-            className={classes.text}
-            name='password'
-            placeholder='Password'
-            autoComplete='off'
-            type={values.showPassword ? 'text' : 'password'}
-            endAdornment={
-              <InputAdornment position='end'>
-                <IconButton
-                  aria-label='toggle password visibility'
-                  onClick={handleClickShowPassword}
-                  onMouseDown={handleMouseDownPressed}
-                  edge='end'>
-                  {values.showPassword ? <Visibility /> : <VisibilityOff />}
-                </IconButton>
-              </InputAdornment>} />
-        </ListItem>
-        <ListItem
-          style={{ justifyContent: 'center', marginTop: '30px' }}
-          display='flex'>
-          <Link to='/userhome' style={{ textDecoration: 'none' }}>
+        <List style={{ marginTop: '30px', marginRight: '-40px' }}>
+          <ListItem>
+            <Input
+              onChange={e => props.setUsername(e.target.value)}
+              className={classes.text}
+              name='username'
+              placeholder='Username '
+              type='text'
+              autoComplete='off' />
+          </ListItem >
+          <ListItem >
+            <Input
+              onChange={e => props.setPassword(e.target.value)}
+              className={classes.text}
+              name='password'
+              placeholder='Password'
+              position='fixed'
+              autoComplete='off'
+              type={values.showPassword ? 'text' : 'password'} />
+            <InputAdornment>
+              <IconButton
+                aria-label='toggle password visibility'
+                onClick={handleClickShowPassword}
+                onMouseDown={handleMouseDownPressed}>
+                {values.showPassword ? <Visibility /> : <VisibilityOff />}
+              </IconButton>
+            </InputAdornment>
+          </ListItem>
+        </List>
+        <ListItem style={{ justifyContent: 'center', marginTop: '10px' }}>
+          <Link to='/' style={{ textDecoration: 'none' }}>
             <Fab className={classes.button}
               onClick={handleSubmit}
               variant='extended'>Login</Fab>
           </Link>
         </ListItem>
-        <ListItem
-          style={{ justifyContent: 'center', marginTop: '10px' }}>
+        <ListItem style={{ justifyContent: 'center', marginTop: '30px' }}>
           <Link
             to='/Forget'>Forget Password?</Link>
         </ListItem>
-        <ListItem
-          style={{ justifyContent: 'center', marginTop: '0px' }}>
+        <ListItem style={{ justifyContent: 'center', marginTop: '5px' }}>
           <Link
             to='/create'
             onClick={PreventDefault}>Create New Account</Link>
