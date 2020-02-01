@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import { BrowserRouter as Router, Route, Redirect, } from 'react-router-dom';
 import Login from './Login.js'
 import Create from './Create.js'
 import Verification from './Verification.js'
 import UserHome from './UserHome.js';
 import Forget from './Forget'
-import axios from 'axios'
 
 function Authentication(props) {
     const [username, setUsername] = useState('')
@@ -15,27 +14,14 @@ function Authentication(props) {
     const [verification, setVerification] = useState('')
     const [authorized, setAuthorized] = useState('')
     const [login, setLogin] = useState('')
-
-    // useEffect(() => {
-    //     let token = localStorage.getItem('token')
-    //     if (token) {
-    //         axios
-    //             .put('https://o5gn70te7h.execute-api.us-west-2.amazonaws.com/latest/users/token/', {
-    //                 refresh_token: token
-    //             })
-    //             .then(res => {
-    //                 localStorage.setItem('token', res.data)
-    //                 setAuthorized(true)
-    //             })
-    //             .catch(err => console.log(err))
-    //     }
-    // })
+    const [create, setCreate] = useState('')
+    const [didCreate, setDidCreate] = useState('')
 
     return (
         < Router >
             <div>
-                
-                {authorized && <Redirect to='/userhome'/>}
+
+                {authorized && <Redirect to='/userhome' />}
                 <Route path='/userhome'>
                     <UserHome
                         setAuthorized={setAuthorized}
@@ -63,12 +49,17 @@ function Authentication(props) {
                         setPassword={setPassword}
                         setConfirm={setConfirm}
                         setEmail={setEmail}
+                        setCreate={setCreate}
+                        setDidCreate={setDidCreate}
                         username={username}
                         password={password}
                         email={email}
                         confirm={confirm}
+                        create={create}
+                        didCreate={didCreate}
                     />
                 </Route>
+                {create && <Redirect to='/verification' />}
                 <Route path='/verification'>
                     <Verification
                         setVerification={setVerification}

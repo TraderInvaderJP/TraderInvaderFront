@@ -1,5 +1,5 @@
 import React, { } from 'react';
-import { Button, List, ListItem, Toolbar, AppBar, Input, Fab } from '@material-ui/core'
+import { List, ListItem, Toolbar, AppBar, TextField, Fab } from '@material-ui/core'
 import { Link } from 'react-router-dom';
 import '../App.css'
 import axios from 'axios'
@@ -25,15 +25,15 @@ const useStyles = makeStyles({
     fontSize: 17,
   },
   text: {
-    standard: {
-      borderWidth: '2px',
+    underline: {
+      borderWidth: '3px',
     },
     '&:before': {
-      borderWidth: '2px',
+      borderWidth: '3px',
       borderColor: 'black',
     },
     '&:after': {
-      borderWidth: '2px',
+      borderWidth: '3px',
       borderColor: '#53E121',
     }
   }
@@ -68,8 +68,9 @@ function Verification(props) {
       </AppBar>
       <List>
         <ListItem style={{ marginTop: '10px' }}>
-          <Input
+          <TextField
             onChange={handleVerificationChange}
+            InputProps={{ classes: { underline: classes.text } }}
             className={classes.text}
             name='verification'
             placeholder='Verification Code'
@@ -77,7 +78,7 @@ function Verification(props) {
         </ListItem>
         <List >
           <ListItem style={{ justifyContent: 'center', marginTop: '50px' }}>
-            <Link to='/Login' style={{ textDecoration: 'none' }}>
+            <Link to='/' style={{ textDecoration: 'none' }}>
               <Fab className={classes.button}
                 onClick={handleSubmit}
                 variant='extended'>Submit</Fab>

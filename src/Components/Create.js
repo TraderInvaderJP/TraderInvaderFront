@@ -1,5 +1,5 @@
 import React, { } from 'react';
-import { List, ListItem, Toolbar, AppBar, Input, InputAdornment, IconButton, Fab } from '@material-ui/core'
+import { List, ListItem, Toolbar, AppBar, TextField, InputAdornment, IconButton, Fab, Typography } from '@material-ui/core'
 import { VisibilityOff, Visibility } from '@material-ui/icons'
 import '../App.css'
 import axios from 'axios'
@@ -26,8 +26,8 @@ const useStyles = makeStyles({
     fontSize: 17,
   },
   text: {
-    standard: {
-      borderWidth: '2px',
+    outline: {
+      borderWidth: '2px', //change this, add error stuff into each textfield, change input to textfield, check is comfirm === password and character requirements
 
     },
     '&:before': {
@@ -50,17 +50,24 @@ function Create(props) {
 
   const handleMouseDownPassword = event => { event.preventDefault() }
 
-  const handleSubmit = () => {
+  const TryCreate = () => {
     axios.post('https://o5gn70te7h.execute-api.us-west-2.amazonaws.com/latest/users/', {
       password: props.password,
       username: props.username,
       email: props.email,
     })
       .then(function (response) {
+        if (response.data.success === true) //some of this is dumb but works
+          props.setDidCreate(true)
         console.log(response)
       }).catch(function (error) {
         console.log(error);
       })
+  }
+
+  const handleSubmit = () => {
+    props.setCreate(true)
+    TryCreate(props.username, props.password, props.email)
   }
 
   return (
@@ -75,27 +82,37 @@ function Create(props) {
       <List>
         <List style={{ marginRight: '-40px' }} >
           <ListItem style={{ marginTop: '50px' }}>
-            <Input
+            <TextField
               onChange={e => props.setUsername(e.target.value)}
-              className={classes.text}
+              InputProps={{ classes: { underline: classes.text } }}
+              error={
+                (props.create && props.username === '')
+              }
               name='username'
               placeholder='Username '
               type='text'
               autoComplete='off' />
           </ListItem>
           <ListItem style={{ marginTop: '10px' }}>
-            <Input
+            <TextField
               onChange={e => props.setEmail(e.target.value)}
-              className={classes.text}
+              InputProps={{ classes: { underline: classes.text } }}
+              error={
+                (props.create && props.email === '')
+              }
               name='email'
               placeholder='Email'
               type='text'
               autoComplete='off' />
           </ListItem>
           <ListItem style={{ marginTop: '10px' }}>
-            <Input
+            <TextField
               onChange={e => props.setPassword(e.target.value)}
-              className={classes.text}
+              InputProps={{ classes: { underline: classes.text } }}
+              error={
+                (props.create && props.password === '') ||
+                (props.create && props.password !== props.confirm)
+              }
               name='password'
               placeholder='Password'
               type={values.showPassword ? 'text' : 'password'} />
@@ -110,9 +127,13 @@ function Create(props) {
             </InputAdornment>
           </ListItem>
           <ListItem style={{ marginTop: '10px' }}>
-            <Input
+            <TextField
               onChange={e => props.setConfirm(e.target.value)}
-              className={classes.text}
+              InputProps={{ classes: { underline: classes.text } }}
+              error={
+                (props.create && props.confirm === '') ||
+                (props.create && props.password !== props.confirm)
+              }
               name='confirm'
               placeholder='Confirm Password'
               type={values.showPassword ? 'text' : 'password'} />
@@ -126,10 +147,18 @@ function Create(props) {
               </IconButton>
             </InputAdornment>
           </ListItem>
+          {props.create && (
+            <ListItem>
+              <Typography
+                style={{ fontSize: 12, color: 'red' }} >
+                information entered is incomplete
+              </Typography>
+            </ListItem>
+          )}
         </List>
         <ListItem
           style={{ justifyContent: 'center', marginTop: '30px' }}>
-          <Link to='/Verification' style={{ textDecoration: 'none' }}>
+          <Link to='/create' style={{ textDecoration: 'none' }}>
             <Fab className={classes.button}
               onClick={handleSubmit}
               variant='extended'>Confirm</Fab>

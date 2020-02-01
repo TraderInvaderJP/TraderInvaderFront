@@ -1,5 +1,5 @@
 import React, { PreventDefault } from 'react';
-import { List, ListItem, Toolbar, AppBar, IconButton, InputAdornment, Input, Fab } from '@material-ui/core'
+import { List, ListItem, Toolbar, AppBar, IconButton, InputAdornment, Typography, Fab, TextField } from '@material-ui/core'
 import { VisibilityOff, Visibility } from '@material-ui/icons'
 import '../App.css'
 import { Link } from 'react-router-dom';
@@ -26,15 +26,15 @@ const useStyles = makeStyles({
     fontSize: 17,
   },
   text: {
-    standard: {
-      borderWidth: '2px',
+    underline: {
+      borderWidth: '3px',
     },
     '&:before': {
-      borderWidth: '2px',
+      borderWidth: '3px',
       borderColor: 'black',
     },
     '&:after': {
-      borderWidth: '2px',
+      borderWidth: '3px',
       borderColor: '#53E121',
     }
   }
@@ -47,29 +47,24 @@ function Home(props) {
   const classes = useStyles();
 
   const LoginAttempt = () => {
-    try {
-      axios.post('/users/token', {
-        password: props.password,
-        username: props.username,
+    axios.post('/users/token', {
+      password: props.password,
+      username: props.username,
+    })
+      .then(function (response) {
+        console.log(response)
+        localStorage.setItem('token', response.data)
+        if (response.data.success === true)
+          props.setAuthorized(true)
+      }).catch(function (error) {
+        console.log(error);
       })
-        .then(function (response) {
-          console.log(response)
-          localStorage.setItem('token', response.data)
-          if (response.data.success === true)
-            props.setAuthorized(true)
-        }).catch(function (error) {
-          console.log(error);
-        })
-      return true
-    } catch (err) {
-      return false
-    }
   }
 
   const handleSubmit = () => {
+    props.setLogin(true)
     if (props.username && props.password !== '') {
-      let accept = LoginAttempt(props.username, props.password)
-      if (!accept) props.setLogin(true)
+      let accept = LoginAttempt(props.username, props.password) //most of this is useless
       return accept
     } else {
       return false
@@ -90,18 +85,26 @@ function Home(props) {
       <List>
         <List style={{ marginTop: '30px', marginRight: '-40px' }}>
           <ListItem>
-            <Input
+            <TextField
               onChange={e => props.setUsername(e.target.value)}
-              className={classes.text}
+              InputProps={{ classes: { underline: classes.text } }}
+              error={
+                (props.login && props.username === '') ||
+                (props.login && !props.authorized)
+              }
               name='username'
               placeholder='Username '
               type='text'
               autoComplete='off' />
           </ListItem >
           <ListItem >
-            <Input
+            <TextField
               onChange={e => props.setPassword(e.target.value)}
-              className={classes.text}
+              InputProps={{ classes: { underline: classes.text } }}
+              error={
+                (props.login && props.password === '') ||
+                (props.login && !props.authorized)
+              }
               name='password'
               placeholder='Password'
               position='fixed'
@@ -116,6 +119,14 @@ function Home(props) {
               </IconButton>
             </InputAdornment>
           </ListItem>
+          {props.login && (
+            <ListItem>
+              <Typography
+                style={{ fontSize: 12, color: 'red' }} >
+                incorrect username or password
+              </Typography>
+            </ListItem>
+          )}
         </List>
         <ListItem style={{ justifyContent: 'center', marginTop: '10px' }}>
           <Link to='/' style={{ textDecoration: 'none' }}>
