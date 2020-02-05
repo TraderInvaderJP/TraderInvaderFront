@@ -121,6 +121,7 @@ function UserHome(props) {
         props.setAuthorized(false)
         props.setUsername('')
         props.setPassword('')
+        props.setLogin(false)
     }
 
     const toggleDrawer = (side, open) => event => {

@@ -158,7 +158,7 @@ function Create(props) {
         </List>
         <ListItem
           style={{ justifyContent: 'center', marginTop: '30px' }}>
-          <Link to='/create' style={{ textDecoration: 'none' }}>
+          <Link to='/verification' style={{ textDecoration: 'none' }}>
             <Fab className={classes.button}
               onClick={handleSubmit}
               variant='extended'>Confirm</Fab>

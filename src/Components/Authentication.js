@@ -14,7 +14,7 @@ function Authentication(props) {
     const [verification, setVerification] = useState('')
     const [authorized, setAuthorized] = useState('')
     const [login, setLogin] = useState('')
-    const [create, setCreate] = useState('')
+    const [createAuth, setCreateAuth] = useState('')
     const [didCreate, setDidCreate] = useState('')
 
     return (
@@ -27,8 +27,10 @@ function Authentication(props) {
                         setAuthorized={setAuthorized}
                         setUsername={setUsername}
                         setPassword={setPassword}
+                        setLogin={setLogin}
                         username={username}
                         authorized={authorized}
+                        login={login}
                     />
                 </Route>
                 <Route exact path='/'>
@@ -49,17 +51,17 @@ function Authentication(props) {
                         setPassword={setPassword}
                         setConfirm={setConfirm}
                         setEmail={setEmail}
-                        setCreate={setCreate}
+                        setCreateAuth={setCreateAuth}
                         setDidCreate={setDidCreate}
                         username={username}
                         password={password}
                         email={email}
                         confirm={confirm}
-                        create={create}
+                        createAuth={createAuth}
                         didCreate={didCreate}
                     />
                 </Route>
-                {create && <Redirect to='/verification' />}
+                {createAuth &&<Redirect to='/verification' />}
                 <Route path='/verification'>
                     <Verification
                         setVerification={setVerification}
