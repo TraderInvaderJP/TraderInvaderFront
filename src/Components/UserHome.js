@@ -2,12 +2,13 @@
 import React, { PreventDefault, GridItem } from 'react';
 import { Fab, List, ListItem, Toolbar, AppBar, IconButton, Divider, ListItemIcon, ListItemText, Drawer, Grid } from '@material-ui/core'
 import { VisibilityOff, Visibility } from '@material-ui/icons'
-import InboxIcon from '@material-ui/icons/MoveToInbox';
+/* import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail'
 import MenuIcon from '@material-ui/icons/Menu'
 import TvIcon from '@material-ui/icons/Tv';
 import SettingsIcon from '@material-ui/icons/Settings';
-import PersonIcon from '@material-ui/icons/Person';
+import PersonIcon from '@material-ui/icons/Person'; */
+import { Inbox, Mail, Menu, Tv, Settings, Person } from '@material-ui/icons';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -142,7 +143,7 @@ function UserHome(props) {
             <List>
                 {['Profile', 'Inbox', 'Friends', 'placeholder'].map((text, index) => (
                     <ListItem button key={text}>
-                        <ListItemIcon>{index % 2 === 0 ? <PersonIcon /> : <MailIcon />}</ListItemIcon>
+                        <ListItemIcon>{index % 2 === 0 ? <Person /> : <Mail />}</ListItemIcon>
                         <ListItemText primary={text} />
                     </ListItem>
                 ))}
@@ -151,7 +152,7 @@ function UserHome(props) {
             <List>
                 {['placeholder', 'Settings'].map((text, index) => (
                     <ListItem button key={text}>
-                        <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <SettingsIcon />}</ListItemIcon>
+                        <ListItemIcon>{index % 2 === 0 ? <Inbox /> : <Settings />}</ListItemIcon>
                         <ListItemText primary={text} />
                     </ListItem>
                 ))}
@@ -165,17 +166,11 @@ function UserHome(props) {
                 <Toolbar
                     position=' fixed'
                     className={classes.toolbar}>
-                    <IconButton>
-                        <MenuIcon
-                            className={classes.menuIcon}
-                            onClick={toggleDrawer('left', true)}>
-                            >
-                    </MenuIcon>
+                    <IconButton onClick={toggleDrawer('left', true)}>
+                        <Menu className={classes.menuIcon} />
                     </IconButton>
                     <IconButton>
-                        <TvIcon
-                            className={classes.menuIcon}>
-                        </TvIcon>
+                        <Tv className={classes.menuIcon}/>
                     </IconButton>
                     <div className={classes.logoHorizontallyCenter}>
                         <Link to='/'>
