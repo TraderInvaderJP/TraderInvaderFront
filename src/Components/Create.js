@@ -27,7 +27,7 @@ const useStyles = makeStyles({
   },
   text: {
     outline: {
-      borderWidth: '2px', //change this, add error stuff into each textfield, change input to textfield, check is comfirm === password and character requirements
+      borderWidth: '2px',
 
     },
     '&:before': {
@@ -66,7 +66,7 @@ function Create(props) {
   }
 
   const handleSubmit = () => {
-    props.setCreate(true)
+    props.setDidCreate(true)
     TryCreate(props.username, props.password, props.email)
   }
 
@@ -86,8 +86,7 @@ function Create(props) {
               onChange={e => props.setUsername(e.target.value)}
               InputProps={{ classes: { underline: classes.text } }}
               error={
-                (props.create && props.username === '')
-              }
+                (props.create && props.username === '')}
               name='username'
               placeholder='Username '
               type='text'
@@ -98,8 +97,7 @@ function Create(props) {
               onChange={e => props.setEmail(e.target.value)}
               InputProps={{ classes: { underline: classes.text } }}
               error={
-                (props.create && props.email === '')
-              }
+                (props.create && props.email === '')}
               name='email'
               placeholder='Email'
               type='text'
@@ -111,8 +109,7 @@ function Create(props) {
               InputProps={{ classes: { underline: classes.text } }}
               error={
                 (props.create && props.password === '') ||
-                (props.create && props.password !== props.confirm)
-              }
+                (props.create && props.password !== props.confirm)}
               name='password'
               placeholder='Password'
               type={values.showPassword ? 'text' : 'password'} />
@@ -132,8 +129,7 @@ function Create(props) {
               InputProps={{ classes: { underline: classes.text } }}
               error={
                 (props.create && props.confirm === '') ||
-                (props.create && props.password !== props.confirm)
-              }
+                (props.create && props.password !== props.confirm)}
               name='confirm'
               placeholder='Confirm Password'
               type={values.showPassword ? 'text' : 'password'} />
@@ -153,8 +149,7 @@ function Create(props) {
                 style={{ fontSize: 12, color: 'red' }} >
                 information entered is incomplete
               </Typography>
-            </ListItem>
-          )}
+            </ListItem>)}
         </List>
         <ListItem
           style={{ justifyContent: 'center', marginTop: '30px' }}>

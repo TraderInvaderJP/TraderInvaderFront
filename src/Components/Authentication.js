@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Redirect, } from 'react-router-dom';
 import Login from './Login.js'
 import Create from './Create.js'
 import Verification from './Verification.js'
-import UserHome from './UserHome.js';
+import UserHome from './UserHome.js'
 import Forget from './Forget'
 
 function Authentication(props) {
@@ -30,7 +30,7 @@ function Authentication(props) {
                         setLogin={setLogin}
                         username={username}
                         authorized={authorized}
-                        login={login}
+                        login={login}                       
                     />
                 </Route>
                 <Route exact path='/'>

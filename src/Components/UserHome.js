@@ -1,31 +1,22 @@
-/* Home page, it is the login page */
-import React, { PreventDefault, GridItem } from 'react';
-import { Fab, List, ListItem, Toolbar, AppBar, IconButton, Divider, ListItemIcon, ListItemText, Drawer, Grid } from '@material-ui/core'
-import { VisibilityOff, Visibility } from '@material-ui/icons'
-/* import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail'
-import MenuIcon from '@material-ui/icons/Menu'
-import TvIcon from '@material-ui/icons/Tv';
-import SettingsIcon from '@material-ui/icons/Settings';
-import PersonIcon from '@material-ui/icons/Person'; */
-import { Inbox, Mail, Menu, Tv, Settings, Person } from '@material-ui/icons';
-import Table from '@material-ui/core/Table';
-import TableBody from '@material-ui/core/TableBody';
-import TableCell from '@material-ui/core/TableCell';
-import TableContainer from '@material-ui/core/TableContainer';
-import TableHead from '@material-ui/core/TableHead';
-import TableRow from '@material-ui/core/TableRow';
+import React, { } from 'react';
+import {
+    Fab, List, ListItem, Toolbar, AppBar, IconButton, Divider, ListItemIcon, ListItemText, Drawer} from '@material-ui/core'
+import { People, Equalizer, Menu, Tv, Settings, Person, Help } from '@material-ui/icons';
 import '../App.css'
 import { Link } from 'react-router-dom';
 import templogo from '../templogo.png';
 import { makeStyles } from '@material-ui/core/styles';
+import GameTable from './GameTable'
 
 const useStyles = makeStyles({
-    table: {
-        width: '55vh',
-        height: '70vh',
-        background: '#43AA1F',
-        color: '#0A0708'
+    root: {
+        flexGrow: 1,
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: '#9DAF96',
+        height: '100vh',
+        width: '100%'
     },
     logoutHorizontallyCenter: {
         position: 'absolute',
@@ -47,7 +38,6 @@ const useStyles = makeStyles({
         background: '#9DAF96',
         height: '100vh',
         width: '25vh'
-
     },
     logo: {
         margin: 'auto',
@@ -100,22 +90,15 @@ const useStyles = makeStyles({
     }
 });
 
-
 function UserHome(props) {
-    const [values, setValues] = React.useState({
-        showPassword: false,
-    })
+    const classes = useStyles()
     const [state, setState] = React.useState({
         left: false,
-    });
+    })
 
-    const classes = useStyles()
     const handleSubmit = () => {
-
+        //yes, stuff will go here
     }
-    const handleClickShowPassword = () => { setValues({ ...values, showPassword: !values.showPassword }) }
-
-    const handleMouseDownPressed = event => { event.preventDefault() }
 
     const Logout = () => {
         localStorage.removeItem('token')
@@ -128,9 +111,7 @@ function UserHome(props) {
     const toggleDrawer = (side, open) => event => {
         if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
             return;
-        }
-
-        setState({ ...state, [side]: open });
+        } setState({ ...state, [side]: open });
     };
 
     const sideList = side => (
@@ -138,21 +119,32 @@ function UserHome(props) {
             className={classes.list}
             role="presentation"
             onClick={toggleDrawer(side, false)}
-            onKeyDown={toggleDrawer(side, false)}
-        >
+            onKeyDown={toggleDrawer(side, false)}>
             <List>
-                {['Profile', 'Inbox', 'Friends', 'placeholder'].map((text, index) => (
-                    <ListItem button key={text}>
-                        <ListItemIcon>{index % 2 === 0 ? <Person /> : <Mail />}</ListItemIcon>
-                        <ListItemText primary={text} />
-                    </ListItem>
-                ))}
+                <ListItem button>
+                    <ListItemIcon>
+                        <Person />
+                    </ListItemIcon>
+                    <ListItemText primary={'Profile'} />
+                </ListItem>
+                <ListItem button>
+                    <ListItemIcon>
+                        <People />
+                    </ListItemIcon>
+                    <ListItemText primary={'Friends'} />
+                </ListItem>
+                <ListItem button>
+                    <ListItemIcon>
+                        <Equalizer />
+                    </ListItemIcon>
+                    <ListItemText primary={'Statistics'} />
+                </ListItem>
             </List>
             <Divider />
             <List>
-                {['placeholder', 'Settings'].map((text, index) => (
+                {['Settings', 'Help'].map((text, index) => (
                     <ListItem button key={text}>
-                        <ListItemIcon>{index % 2 === 0 ? <Inbox /> : <Settings />}</ListItemIcon>
+                        <ListItemIcon>{index % 2 === 0 ? <Settings /> : <Help />}</ListItemIcon>
                         <ListItemText primary={text} />
                     </ListItem>
                 ))}
@@ -161,46 +153,49 @@ function UserHome(props) {
     );
 
     return (
-        <div className={'centered'}>
-            <AppBar position='fixed' >
-                <Toolbar
-                    position=' fixed'
-                    className={classes.toolbar}>
-                    <IconButton onClick={toggleDrawer('left', true)}>
-                        <Menu className={classes.menuIcon} />
-                    </IconButton>
-                    <IconButton>
-                        <Tv className={classes.menuIcon}/>
-                    </IconButton>
-                    <div className={classes.logoHorizontallyCenter}>
-                        <Link to='/'>
-                            <h1>
-                                <img
-                                    src={templogo}
-                                    alt="Logo"
-                                    className={classes.logo} />
-                            </h1>
-                        </Link>
-                    </div>
-                    <div className={classes.logoutHorizontallyCenter}>
-                        <Link to='/' style={{ textDecoration: 'none' }}>
-                            <Fab className={classes.logout}
-                                onClick={Logout}
-                                variant='extended'>Log Out</Fab>
-                        </Link>
-                    </div>
-                </Toolbar>
-            </AppBar>
-            <Drawer
-                open={state.left}
-                onClose={toggleDrawer('left', false)}>
-                {sideList('left')}
-            </Drawer>
-            <div>
-                
-            </div>
-
-
+        <div className={classes.root}>
+            <List>
+                <AppBar position='fixed' >
+                    <Toolbar
+                        position=' fixed'
+                        className={classes.toolbar}>
+                        <IconButton onClick={toggleDrawer('left', true)}>
+                            <Menu className={classes.menuIcon} />
+                        </IconButton>
+                        <IconButton>
+                            <Tv className={classes.menuIcon} />
+                        </IconButton>
+                        <div className={classes.logoHorizontallyCenter}>
+                            <Link to='/'>
+                                <h1>
+                                    <img
+                                        src={templogo}
+                                        alt="Logo"
+                                        className={classes.logo} />
+                                </h1>
+                            </Link>
+                        </div>
+                        <div className={classes.logoutHorizontallyCenter}>
+                            <Link to='/' style={{ textDecoration: 'none' }}>
+                                <Fab className={classes.logout}
+                                    onClick={Logout}
+                                    variant='extended'>Log Out</Fab>
+                            </Link>
+                        </div>
+                    </Toolbar>
+                </AppBar>
+                <Drawer
+                    open={state.left}
+                    onClose={toggleDrawer('left', false)}>
+                    {sideList('left')}
+                </Drawer>
+                <GameTable username={props.username}/> 
+                <ListItem style={{ justifyContent: 'center', marginTop: '15px' }}>
+                    <Fab className={classes.button}
+                        onClick={handleSubmit}
+                        variant='extended'>Create Game</Fab>
+                </ListItem>
+            </List>
         </div>
     )
 }
