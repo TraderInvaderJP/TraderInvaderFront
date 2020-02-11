@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import {
-    List, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow} from '@material-ui/core'
+    List, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow
+} from '@material-ui/core'
 import '../App.css'
 import { makeStyles } from '@material-ui/core/styles';
 import axios from 'axios'
@@ -35,17 +36,6 @@ const useStyles = makeStyles({
     },
 });
 
-// useEffect(() => {
-//     let url = `/${props.username}/`    
-//       axios
-//         .get(url, {        
-//         })
-//         .then(res => {
-
-//         })
-//         .catch(err => console.log(err))
-//     }
-//   )
 
 function GameTable(props) {
     const classes = useStyles()
@@ -53,7 +43,18 @@ function GameTable(props) {
 
     const handleChangePage = (event, newPage) => {
         setPage(newPage);
-    };
+    }
+    useEffect(() => {
+        
+        axios.get(`/games/${props.username}`, {
+            })
+            .then(res => {
+                console.log(res)
+            })
+            .catch(err => console.log(err))
+            console.log(props.username)
+    }
+    )
 
     const columns = [
         { id: 'name', label: 'Current Games', minWidth: 780 },
@@ -65,7 +66,7 @@ function GameTable(props) {
 
     const rows = [
         createGame('super duper game'),
-        createGame( ),
+        createGame(null),
         createGame(null),
         createGame(null),
         createGame(null),
@@ -77,13 +78,13 @@ function GameTable(props) {
     ];
 
     return (
-        <div>
+        <React.Fragment >
             <List>
                 <Paper className={classes.table} style={{ marginTop: '50px' }}>
                     <TableContainer >
-                        <Table stickyHeader aria-label="sticky table">
+                        <Table stickyHeader aria-label="sticky table" >
                             <TableHead>
-                                <TableRow>
+                                <TableRow >
                                     {columns.map(column => (
                                         <TableCell
                                             className={classes.tableheader}
@@ -95,7 +96,7 @@ function GameTable(props) {
                                     ))}
                                 </TableRow>
                             </TableHead>
-                            <TableBody >
+                            <TableBody>
                                 {rows.slice(page * 5, page * 5 + 5).map(row => {
                                     return (
                                         <TableRow style={{ height: '55px' }}
@@ -109,7 +110,7 @@ function GameTable(props) {
                                                         {column.format && typeof value === 'number' ? column.format(value) : value}
                                                     </TableCell>
                                                 );
-                                            })} </TableRow>);
+                                            })} </TableRow>)
                                 })}
                             </TableBody>
                         </Table>
@@ -123,7 +124,7 @@ function GameTable(props) {
                         onChangePage={handleChangePage} />
                 </Paper>
             </List>
-        </div>
+        </React.Fragment>
     )
 }
 export default GameTable
