@@ -71,6 +71,7 @@ function Authentication(props) {
                 </Route>
                 <Route path='/forget'>
                     <Forget
+                        setEmail={setEmail}
                     />
                 </Route>
 
