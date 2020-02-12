@@ -27,52 +27,48 @@ const useStyles = makeStyles({
 function UserDrawer(props) {
     const classes = useStyles()
 
-    const sideList = () => (
-        <div
-            className={classes.list}>
-            <List>
-                <ListItem button>
-                    <ListItemIcon>
-                        <Person />
-                    </ListItemIcon>
-                    <ListItemText primary={'Profile'} />
-                </ListItem>
-                <ListItem button>
-                    <ListItemIcon>
-                        <People />
-                    </ListItemIcon>
-                    <ListItemText primary={'Friends'} />
-                </ListItem>
-                <ListItem button>
-                    <ListItemIcon>
-                        <Equalizer />
-                    </ListItemIcon>
-                    <ListItemText primary={'Statistics'} />
-                </ListItem>
-            </List>
-            <Divider />
-            <List>
-                <ListItem button>
-                    <ListItemIcon>
-                        <Settings />
-                    </ListItemIcon>
-                    <ListItemText primary={'Settings'} />
-                </ListItem>
-                <ListItem button>
-                    <ListItemIcon>
-                        <Help />
-                    </ListItemIcon>
-                    <ListItemText primary={'Help'} />
-                </ListItem>
-            </List>
-        </div>
-    )
-
     return (
         <Drawer
             open={props.isOpen}
             onClose={ props.toggleDrawer}>
-            {sideList()}
+            <div
+                className={classes.list}>
+                <List>
+                    <ListItem button>
+                        <ListItemIcon>
+                            <Person />
+                        </ListItemIcon>
+                        <ListItemText primary={'Profile'} />
+                    </ListItem>
+                    <ListItem button>
+                        <ListItemIcon>
+                            <People />
+                        </ListItemIcon>
+                        <ListItemText primary={'Friends'} />
+                    </ListItem>
+                    <ListItem button>
+                        <ListItemIcon>
+                            <Equalizer />
+                        </ListItemIcon>
+                        <ListItemText primary={'Statistics'} />
+                    </ListItem>
+                </List>
+                <Divider />
+                <List>
+                    <ListItem button>
+                        <ListItemIcon>
+                            <Settings />
+                        </ListItemIcon>
+                        <ListItemText primary={'Settings'} />
+                    </ListItem>
+                    <ListItem button>
+                        <ListItemIcon>
+                            <Help />
+                        </ListItemIcon>
+                        <ListItemText primary={'Help'} />
+                    </ListItem>
+                </List>
+            </div>
         </Drawer>
     )
 }
