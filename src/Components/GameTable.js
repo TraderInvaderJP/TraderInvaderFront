@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react';
+import React, { useEffect } from 'react'
 import {
-    List, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TablePagination, TableRow
+    List, Paper, Table, TableBody, TableCell, TableContainer, TablePagination, TableRow, TableHead
 } from '@material-ui/core'
 import '../App.css'
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles'
 import axios from 'axios'
 
 const useStyles = makeStyles({
@@ -34,55 +34,50 @@ const useStyles = makeStyles({
         height: '100vh',
         width: '25vh'
     },
-});
+})
 
 
 function GameTable(props) {
     const classes = useStyles()
-    const [page, setPage] = React.useState(0);
+    const [page, setPage] = React.useState(0)
+
+
 
     const handleChangePage = (event, newPage) => {
-        setPage(newPage);
+        setPage(newPage)
     }
     useEffect(() => {
-        
         axios.get(`/games/${props.username}`, {
-            })
+        })
             .then(res => {
                 console.log(res)
+           
+
             })
             .catch(err => console.log(err))
-            console.log(props.username)
+
     }
     )
 
+    function createData(name) {
+        
+        return { name };
+      }
+
     const columns = [
         { id: 'name', label: 'Current Games', minWidth: 780 },
-    ];
-
-    function createGame(name) {
-        return { name };
-    }
+    ]
 
     const rows = [
-        createGame('super duper game'),
-        createGame(null),
-        createGame(null),
-        createGame(null),
-        createGame(null),
-        createGame(null),
-        createGame(null),
-        createGame(null),
-        createGame(null),
-        createGame(null),
-    ];
+      
+    ]
 
     return (
         <React.Fragment >
             <List>
                 <Paper className={classes.table} style={{ marginTop: '50px' }}>
                     <TableContainer >
-                        <Table stickyHeader aria-label="sticky table" >
+                        <Table>
                             <TableHead>
                                 <TableRow >
                                     {columns.map(column => (
@@ -90,7 +85,7 @@ function GameTable(props) {
                                             className={classes.tableheader}
                                             key={column.id}
                                             align={column.align}
-                                            style={{ minWidth: column.minWidth, alignItems: 'center', textAlign: 'center' }}>
+                                            style={{ minWidth: column.minWidth, textAlign: 'center' }}>
                                             {column.label}
                                         </TableCell>
                                     ))}
@@ -104,19 +99,19 @@ function GameTable(props) {
                                             tabIndex={-1}
                                             key={row.code}>
                                             {columns.map(column => {
-                                                const value = row[column.id];
+                                                const value = row[column.id]
                                                 return (
                                                     <TableCell key={column.id} align={column.align} >
                                                         {column.format && typeof value === 'number' ? column.format(value) : value}
                                                     </TableCell>
-                                                );
+                                                )
                                             })} </TableRow>)
                                 })}
                             </TableBody>
                         </Table>
                     </TableContainer>
                     <TablePagination
-                        rowsPerPageOptions={[1]} //lol
+                        rowsPerPageOptions={[5]} //lol
                         component="div"
                         count={rows.length}
                         rowsPerPage={5}

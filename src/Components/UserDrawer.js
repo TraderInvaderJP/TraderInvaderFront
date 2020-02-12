@@ -29,7 +29,7 @@ const useStyles = makeStyles({
 function UserDrawer(props) {
     const classes = useStyles()
     const [state, setState] = React.useState({
-        left: false,
+        
     })
 
     const sideList = side => (
@@ -76,12 +76,11 @@ function UserDrawer(props) {
         </div>
     )
 
-    
     return (
         <Drawer
             open={state.left}
-            onClose={ () => props.toggleDrawer('left', false)}>
-            {sideList('left')}
+            onClose={ () => props.toggleDrawer(props.left, false)}>
+            {sideList(props.left)}
         </Drawer>
     )
 }

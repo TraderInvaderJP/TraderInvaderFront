@@ -148,7 +148,7 @@ function UserHome(props) {
                         </div>
                     </Toolbar>
                 </AppBar>
-                <UserDrawer toggleDrawer={toggleDrawer}/>
+                <UserDrawer toggleDrawer={toggleDrawer} left={left}/>
                 <GameTable username={props.username} />
                 <ListItem style={{ justifyContent: 'center', marginTop: '15px' }}>
                     <Fab className={classes.button}
