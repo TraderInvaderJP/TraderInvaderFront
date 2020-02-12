@@ -4,7 +4,7 @@ import Login from './Login.js'
 import Create from './Create.js'
 import Verification from './Verification.js'
 import UserHome from './UserHome.js'
-import Forget from './Forget'
+import Forgot from './Forgot'
 
 function Authentication(props) {
     const [username, setUsername] = useState('')
@@ -70,8 +70,8 @@ function Authentication(props) {
                         verification={verification}
                     />
                 </Route>
-                <Route path='/forget'>
-                    <Forget
+                <Route path='/forgot'>
+                    <Forgot
                         setEmail={setEmail}
                     />
                 </Route>

@@ -1,13 +1,11 @@
 import React, { } from 'react';
 import {
-    Fab, List, ListItem, Toolbar, AppBar, IconButton, Divider, ListItemIcon, ListItemText, Drawer
+    List, ListItem, Divider, ListItemIcon, ListItemText, Drawer
 } from '@material-ui/core'
 import { People, Equalizer, Menu, Tv, Settings, Person, Help } from '@material-ui/icons';
 import '../App.css'
-import { Link } from 'react-router-dom';
-import templogo from '../templogo.png';
 import { makeStyles } from '@material-ui/core/styles';
-import GameTable from './GameTable'
+
 
 const useStyles = makeStyles({
     root: {
@@ -28,16 +26,10 @@ const useStyles = makeStyles({
 
 function UserDrawer(props) {
     const classes = useStyles()
-    const [state, setState] = React.useState({
-        
-    })
 
     const sideList = side => (
         <div
-            className={classes.list}
-            role="presentation"
-            onClick={ () =>props.toggleDrawer(side, false)}
-            onKeyDown={ () =>props.toggleDrawer(side, false)}>
+            className={classes.list}>
             <List>
                 <ListItem button>
                     <ListItemIcon>
@@ -78,12 +70,11 @@ function UserDrawer(props) {
 
     return (
         <Drawer
-            open={state.left}
-            onClose={ () => props.toggleDrawer(props.left, false)}>
-            {sideList(props.left)}
+            open={props.isOpen}
+            onClose={ props.toggleDrawer}>
+            {sideList('left')}
         </Drawer>
     )
 }
-
 
 export default UserDrawer

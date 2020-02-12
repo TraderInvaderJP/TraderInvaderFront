@@ -1,4 +1,4 @@
-import React, { } from 'react';
+import React, { useState } from 'react';
 import {
     Fab, List, ListItem, Toolbar, AppBar, IconButton, Divider, ListItemIcon, ListItemText, Drawer
 } from '@material-ui/core'
@@ -94,9 +94,9 @@ const useStyles = makeStyles({
 
 function UserHome(props) {
     const classes = useStyles()
-    const [state, setState] = React.useState({
-        left: false,
-    })
+    const [isOpen, setIsOpen] = useState(false)
+        
+    
 
     const handleSubmit = () => {
         //yes, stuff will go here
@@ -110,10 +110,8 @@ function UserHome(props) {
         props.setLogin(false)
     }
 
-    const toggleDrawer = (side, open) => event => {
-        if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
-            return;
-        } setState({ ...state, [side]: open });
+    const toggleDrawer = () => {
+        setIsOpen(!isOpen)
     }
 
     return (
@@ -123,7 +121,7 @@ function UserHome(props) {
                     <Toolbar
                         position=' fixed'
                         className={classes.toolbar}>
-                        <IconButton onClick={toggleDrawer('left', true)}>
+                        <IconButton onClick={toggleDrawer}>
                             <Menu className={classes.menuIcon} />
                         </IconButton>
                         <IconButton>
@@ -148,7 +146,7 @@ function UserHome(props) {
                         </div>
                     </Toolbar>
                 </AppBar>
-                <UserDrawer toggleDrawer={toggleDrawer} left={left}/>
+                <UserDrawer toggleDrawer={toggleDrawer} isOpen={isOpen}/>
                 <GameTable username={props.username} />
                 <ListItem style={{ justifyContent: 'center', marginTop: '15px' }}>
                     <Fab className={classes.button}

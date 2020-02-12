@@ -137,7 +137,7 @@ function Home(props) {
         </ListItem>
         <ListItem style={{ justifyContent: 'center', marginTop: '30px' }}>
           <Link
-            to='/Forget'>Forget Password?</Link>
+            to='/Forgot'>Forgot Password?</Link>
         </ListItem>
         <ListItem style={{ justifyContent: 'center', marginTop: '5px' }}>
           <Link
