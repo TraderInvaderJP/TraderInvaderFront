@@ -30,7 +30,7 @@ export default function App() {
                 console.log(err)
             }
         }
-    })
+    }, [auth])
 
     return (
         <div>
