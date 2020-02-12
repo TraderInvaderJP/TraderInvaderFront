@@ -39,7 +39,7 @@ const useStyles = makeStyles({
     }
   });
 
-function Forget(props) {
+function Forgot(props) {
     const classes = useStyles();
 
     const handleSubmit = () => { }
@@ -84,4 +84,4 @@ function Forget(props) {
     </div>
     )
 }
-export default Forget
+export default Forgot
