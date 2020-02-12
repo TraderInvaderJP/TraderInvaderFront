@@ -27,7 +27,7 @@ const useStyles = makeStyles({
 function UserDrawer(props) {
     const classes = useStyles()
 
-    const sideList = side => (
+    const sideList = () => (
         <div
             className={classes.list}>
             <List>
@@ -72,7 +72,7 @@ function UserDrawer(props) {
         <Drawer
             open={props.isOpen}
             onClose={ props.toggleDrawer}>
-            {sideList('left')}
+            {sideList()}
         </Drawer>
     )
 }
