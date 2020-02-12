@@ -1,12 +1,14 @@
 import React, { } from 'react';
 import {
-    Fab, List, ListItem, Toolbar, AppBar, IconButton, Divider, ListItemIcon, ListItemText, Drawer} from '@material-ui/core'
+    Fab, List, ListItem, Toolbar, AppBar, IconButton, Divider, ListItemIcon, ListItemText, Drawer
+} from '@material-ui/core'
 import { People, Equalizer, Menu, Tv, Settings, Person, Help } from '@material-ui/icons';
 import '../App.css'
 import { Link } from 'react-router-dom';
 import templogo from '../templogo.png';
 import { makeStyles } from '@material-ui/core/styles';
 import GameTable from './GameTable'
+import UserDrawer from './UserDrawer'
 
 const useStyles = makeStyles({
     root: {
@@ -112,45 +114,7 @@ function UserHome(props) {
         if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
             return;
         } setState({ ...state, [side]: open });
-    };
-
-    const sideList = side => (
-        <div
-            className={classes.list}
-            role="presentation"
-            onClick={toggleDrawer(side, false)}
-            onKeyDown={toggleDrawer(side, false)}>
-            <List>
-                <ListItem button>
-                    <ListItemIcon>
-                        <Person />
-                    </ListItemIcon>
-                    <ListItemText primary={'Profile'} />
-                </ListItem>
-                <ListItem button>
-                    <ListItemIcon>
-                        <People />
-                    </ListItemIcon>
-                    <ListItemText primary={'Friends'} />
-                </ListItem>
-                <ListItem button>
-                    <ListItemIcon>
-                        <Equalizer />
-                    </ListItemIcon>
-                    <ListItemText primary={'Statistics'} />
-                </ListItem>
-            </List>
-            <Divider />
-            <List>
-                {['Settings', 'Help'].map((text, index) => (
-                    <ListItem button key={text}>
-                        <ListItemIcon>{index % 2 === 0 ? <Settings /> : <Help />}</ListItemIcon>
-                        <ListItemText primary={text} />
-                    </ListItem>
-                ))}
-            </List>
-        </div>
-    );
+    }
 
     return (
         <div className={classes.root}>
@@ -184,12 +148,8 @@ function UserHome(props) {
                         </div>
                     </Toolbar>
                 </AppBar>
-                <Drawer
-                    open={state.left}
-                    onClose={toggleDrawer('left', false)}>
-                    {sideList('left')}
-                </Drawer>
-                <GameTable username={props.username}/> 
+                <UserDrawer toggleDrawer={toggleDrawer}/>
+                <GameTable username={props.username} />
                 <ListItem style={{ justifyContent: 'center', marginTop: '15px' }}>
                     <Fab className={classes.button}
                         onClick={handleSubmit}
