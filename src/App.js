@@ -10,26 +10,28 @@ import Create from './Components/Create'
 export default function App() {
     const [auth, setAuth] = useState(true)
 
-    useEffect(async () => {
-        const token = localStorage.getItem('token');
+    useEffect(() => {
+        (async () => {
+            const token = localStorage.getItem('token');
 
-        if(token)
-        {
-            try{
-                const refresh_token = localStorage.getItem('refresh')
-            
-                let res = await axios.put('/users/token', { refresh_token })
+            if(token)
+            {
+                try{
+                    const refresh_token = localStorage.getItem('refresh')
+                
+                    let res = await axios.put('/users/token', { refresh_token })
 
-                if(res.success)
-                {
-                    localStorage.setItem('token', res.data.access_token)
-                    setAuth(true);
+                    if(res.success)
+                    {
+                        localStorage.setItem('token', res.data.access_token)
+                        setAuth(true);
+                    }
+                }
+                catch(err) {
+                    console.log(err)
                 }
             }
-            catch(err) {
-                console.log(err)
-            }
-        }
+        })()
     }, [auth])
 
     return (
