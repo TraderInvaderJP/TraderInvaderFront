@@ -3,7 +3,7 @@ import { Fab, List, ListItem
 } from '@material-ui/core'
 import '../App.css'
 import { makeStyles } from '@material-ui/core/styles';
-import GameTable from './GameTable'
+import Content from './Content'
 import UserDrawer from './UserDrawer'
 import ToolBar from './ToolBar'
 
@@ -71,12 +71,7 @@ function UserHome(props) {
             <List>  
                 <ToolBar Logout={Logout} toggleDrawer={toggleDrawer}/>  
                 <UserDrawer toggleDrawer={toggleDrawer} isOpen={isOpen}/>
-                <GameTable username={props.username} />
-                <ListItem style={{ justifyContent: 'center', marginTop: '15px' }}>
-                    <Fab className={classes.button}
-                        onClick={handleSubmit}
-                        variant='extended'>Create Game</Fab>
-                </ListItem>
+                <Content username={props.username} />
             </List>
         </div>
     )

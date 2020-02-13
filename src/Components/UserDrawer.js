@@ -30,7 +30,7 @@ function UserDrawer(props) {
     return (
         <Drawer
             open={props.isOpen}
-            onClose={ props.toggleDrawer}>
+            onClose={props.toggleDrawer}>
             <div
                 className={classes.list}>
                 <List>

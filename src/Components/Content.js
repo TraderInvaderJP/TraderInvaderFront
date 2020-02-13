@@ -1,10 +1,12 @@
 import React from 'react'
+import { Route } from 'react-router-dom'
+import Games from './Games'
 
-export default function Content() {
+export default function Content(props) {
     return (
         <div>
             <Route path='/app/' exact>
-
+                <Games username={props.username} />
             </Route>
             <Route path='/app/profile'>
 
