@@ -64,14 +64,7 @@ function GameTable(props) {
     ]
 
     const rows = [
-createData(''),
-createData(''),
-createData(''),
-createData(''),
-createData(''),
-createData(''),
-createData(''),
-createData('')
+
     ]
 
     return (
