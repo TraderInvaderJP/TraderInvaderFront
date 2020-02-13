@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import {
     List, Paper, Table, TableBody, TableCell, TableContainer, TablePagination, TableRow, TableHead
 } from '@material-ui/core'
@@ -41,20 +41,23 @@ const useStyles = makeStyles({
 
 function GameTable(props) {
     const classes = useStyles()
+    
 
     useEffect(() => {
         axios.get(`/games/${props.username}`, {
         })
             .then(res => {
                 console.log(res)
-
+                rows.slice().push(createGameRow('test'))
 
             })
             .catch(err => console.log(err))
+            rows.slice().push(createGameRow('test'))
+            
     }
     )
 
-    function createData(name) {
+    function createGameRow(name) {
 
         return { name };
     }
@@ -64,7 +67,6 @@ function GameTable(props) {
     ]
 
     const rows = [
-
     ]
 
     return (

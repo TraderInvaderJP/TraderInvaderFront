@@ -1,5 +1,5 @@
 import React, { } from 'react';
-import { List, ListItem, Toolbar, AppBar, TextField, Fab } from '@material-ui/core'
+import { List, ListItem, Toolbar, AppBar, TextField, Button } from '@material-ui/core'
 import { Link } from 'react-router-dom';
 import '../App.css'
 import axios from 'axios'
@@ -23,6 +23,9 @@ const useStyles = makeStyles({
     color: 'black',
     padding: '0 30px',
     fontSize: 17,
+    borderRadius: 25,
+    height: 50,
+    width: 150
   },
   text: {
     underline: {
@@ -79,9 +82,9 @@ function Verification(props) {
         <List >
           <ListItem style={{ justifyContent: 'center', marginTop: '50px' }}>
             <Link to='/' style={{ textDecoration: 'none' }}>
-              <Fab className={classes.button}
+              <Button className={classes.button}
                 onClick={handleSubmit}
-                variant='extended'>Submit</Fab>
+                variant='text'>Submit</Button>
             </Link>
           </ListItem>
           <ListItem style={{ justifyContent: 'center', marginTop: '5px' }}>

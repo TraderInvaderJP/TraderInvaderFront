@@ -1,5 +1,5 @@
 import React, { PreventDefault } from 'react';
-import { List, ListItem, Toolbar, AppBar, IconButton, InputAdornment, Typography, Fab, TextField } from '@material-ui/core'
+import { List, ListItem, Toolbar, AppBar, IconButton, InputAdornment, Typography, Button, TextField } from '@material-ui/core'
 import { VisibilityOff, Visibility } from '@material-ui/icons'
 import '../App.css'
 import { Link } from 'react-router-dom';
@@ -24,6 +24,9 @@ const useStyles = makeStyles({
     color: 'black',
     padding: '0 30px',
     fontSize: 17,
+    borderRadius: 25,
+    height: 50,
+    width: 150
   },
   text: {
     underline: {
@@ -131,9 +134,9 @@ function Home(props) {
         </List>
         <ListItem style={{ justifyContent: 'center', marginTop: '10px' }}>
           <Link to='/' style={{ textDecoration: 'none' }}>
-            <Fab className={classes.button}
+            <Button className={classes.button}
               onClick={handleSubmit}
-              variant='extended'>Login</Fab>
+              variant='text'>Login</Button>
           </Link>
         </ListItem>
         <ListItem style={{ justifyContent: 'center', marginTop: '30px' }}>
