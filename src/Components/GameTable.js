@@ -17,9 +17,11 @@ const useStyles = makeStyles({
         width: '100%'
     },
     table: {
-        height: '200',
+        height: 330,
         background: '#43AA1F',
         color: '#0A0708',
+        overflow: 'auto'
+
 
     },
     tableheader: {
@@ -39,13 +41,7 @@ const useStyles = makeStyles({
 
 function GameTable(props) {
     const classes = useStyles()
-    const [page, setPage] = React.useState(0)
 
-
-
-    const handleChangePage = (event, newPage) => {
-        setPage(newPage)
-    }
     useEffect(() => {
         axios.get(`/games/${props.username}`, {
         })
@@ -68,53 +64,57 @@ function GameTable(props) {
     ]
 
     const rows = [
-
+createData(''),
+createData(''),
+createData(''),
+createData(''),
+createData(''),
+createData(''),
+createData(''),
+createData('')
     ]
 
     return (
-            <Paper className={classes.table} style={{ marginTop: '50px' }}>
-                <TableContainer >
-                    <Table>
-                        <TableHead>
-                            <TableRow >
-                                {columns.map(column => (
-                                    <TableCell
-                                        className={classes.tableheader}
-                                        key={column.id}
-                                        align={column.align}
-                                        style={{ minWidth: column.minWidth, textAlign: 'center' }}>
-                                        {column.label}
-                                    </TableCell>
-                                ))}
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {rows.slice(page * 5, page * 5 + 5).map(row => {
-                                return (
-                                    <TableRow style={{ height: '55px' }}
-                                        hover role="checkbox"
-                                        tabIndex={-1}
-                                        key={row.code}>
-                                        {columns.map(column => {
-                                            const value = row[column.id]
-                                            return (
-                                                <TableCell key={column.id} align={column.align} >
-                                                    {column.format && typeof value === 'number' ? column.format(value) : value}
-                                                </TableCell>
-                                            )
-                                        })} </TableRow>)
-                            })}
-                        </TableBody>
-                    </Table>
-                </TableContainer>
-                <TablePagination
-                    rowsPerPageOptions={[5]} //lol
-                    component="div"
-                    count={rows.length}
-                    rowsPerPage={5}
-                    page={page}
-                    onChangePage={handleChangePage} />
-            </Paper>
+        <Paper style={{ marginTop: '100px' }}>
+            <TableContainer >
+                <Table>
+                    <TableHead>
+                        <TableRow >
+                            {columns.map(column => (
+                                <TableCell
+                                    className={classes.tableheader}
+                                    key={column.id}
+                                    align={column.align}
+                                    style={{ minWidth: column.minWidth, textAlign: 'center' }}>
+                                    {column.label}
+                                </TableCell>
+                            ))}
+                        </TableRow>
+                    </TableHead>
+                </Table>
+            </TableContainer>
+            <TableContainer className={classes.table}>
+                <Table>
+                    <TableBody>
+                        {rows.slice().map(row => {
+                            return (
+                                <TableRow style={{ height: '55px' }}
+                                    hover role="checkbox"
+                                    tabIndex={-1}
+                                    key={row.code}>
+                                    {columns.map(column => {
+                                        const value = row[column.id]
+                                        return (
+                                            <TableCell key={column.id} align={column.align} >
+                                                {column.format && typeof value === 'number' ? column.format(value) : value}
+                                            </TableCell>
+                                        )
+                                    })} </TableRow>)
+                        })}
+                    </TableBody>
+                </Table>
+            </TableContainer>
+        </Paper>
     )
 }
 export default GameTable
