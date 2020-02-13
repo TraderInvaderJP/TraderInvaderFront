@@ -8,13 +8,12 @@ import Verification from './Components/Verification'
 import Create from './Components/Create'
 
 export default function App() {
-    const [auth, setAuth] = useState(true)
+    const [auth, setAuth] = useState(false)
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const [confirm, setConfirm] = useState('')
     const [email, setEmail] = useState('')
     const [verification, setVerification] = useState('')
-    const [authorized, setAuthorized] = useState('')
     const [login, setLogin] = useState('')
     const [createAuth, setCreateAuth] = useState('')
     const [didCreate, setDidCreate] = useState('')
@@ -45,16 +44,15 @@ export default function App() {
 
     return (
         <div>
-            { auth && <Redirect to='/userhome' /> }
+            { auth && <Redirect to='/app' /> }
             <Route path='/' exact>
                 <Login 
                 setUsername={setUsername}
                 setPassword={setPassword}
-                setAuthorized={setAuthorized}
+                setAuth={setAuth}
                 setLogin={setLogin}
                 username={username}
                 password={password}
-                authorized={authorized}
                 login={login}/>
             </Route>
             <Route path='/verification'>
@@ -83,14 +81,13 @@ export default function App() {
                 didCreate={didCreate}/>
             </Route>
             <Route path='/app'>
-                <UserHome auth={auth} 
-                setAuthorized={setAuthorized}
-                setUsername={setUsername}
-                setPassword={setPassword}
-                setLogin={setLogin}
-                username={username}
-                authorized={authorized}
-                login={login} />
+                <UserHome 
+                    auth={auth} 
+                    setUsername={setUsername}
+                    setPassword={setPassword}
+                    setLogin={setLogin}
+                    username={username}
+                    login={login} />
             </Route>
         </div>
     )
