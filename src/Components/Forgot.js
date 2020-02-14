@@ -1,5 +1,5 @@
 import React, { } from 'react';
-import { List, ListItem, Toolbar, AppBar, TextField, Fab, Typography } from '@material-ui/core'
+import { List, ListItem, Toolbar, AppBar, TextField, Button, Typography } from '@material-ui/core'
 import '../App.css'
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
@@ -22,6 +22,9 @@ const useStyles = makeStyles({
       color: 'black',
       padding: '0 30px',
       fontSize: 17,
+      borderRadius: 25,
+      height: 50,
+      width: 150
     },
     text: {
       outline: {
@@ -75,9 +78,9 @@ function Forgot(props) {
                 <ListItem
                 style={{ justifyContent: 'center', marginTop: '30px' }}>
                     <Link to='/verification' style={{ textDecoration: 'none' }}>
-                        <Fab className={classes.button}
+                        <Button className={classes.button}
                         onClick={handleSubmit}
-                        variant='extended'>Check For Email</Fab>
+                        variant='text'>Submit</Button>
                     </Link>
                 </ListItem>
             </List>

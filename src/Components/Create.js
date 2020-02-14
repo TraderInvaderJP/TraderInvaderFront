@@ -1,5 +1,5 @@
 import React, { } from 'react';
-import { List, ListItem, Toolbar, AppBar, TextField, InputAdornment, IconButton, Fab, Typography } from '@material-ui/core'
+import { List, ListItem, Toolbar, AppBar, TextField, InputAdornment, IconButton, Button, Typography } from '@material-ui/core'
 import { VisibilityOff, Visibility } from '@material-ui/icons'
 import '../App.css'
 import axios from 'axios'
@@ -24,6 +24,9 @@ const useStyles = makeStyles({
     color: 'black',
     padding: '0 30px',
     fontSize: 17,
+    borderRadius: 25,
+    height: 50,
+    width: 150
   },
   text: {
     outline: {
@@ -154,9 +157,9 @@ function Create(props) {
         <ListItem
           style={{ justifyContent: 'center', marginTop: '30px' }}>
           <Link to='/verification' style={{ textDecoration: 'none' }}>
-            <Fab className={classes.button}
+            <Button className={classes.button}
               onClick={handleSubmit}
-              variant='extended'>Confirm</Fab>
+              variant='text'>Confirm</Button>
           </Link>
         </ListItem>
       </List>

@@ -55,7 +55,7 @@ function UserHome(props) {
 
     const Logout = () => {
         localStorage.removeItem('token')
-        props.setAuthorized(false)
+        props.setAuth(false)
         props.setUsername('')
         props.setPassword('')
         props.setLogin(false)

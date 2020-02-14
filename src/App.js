@@ -82,6 +82,7 @@ export default function App() {
             </Route>
             <Route path='/app'>
                 <UserHome 
+                    setAuth={setAuth}
                     auth={auth} 
                     setUsername={setUsername}
                     setPassword={setPassword}
