@@ -40,7 +40,24 @@ const useStyles = makeStyles({
       borderWidth: '2px',
       borderColor: '#53E121',
     }
-  }
+  },
+  toolbar: {
+    background: '#0A0708',
+    flexFlow: 1,
+    height: '150px',
+  },
+  logo: {
+    margin: 'auto',
+    textAlign: 'center',
+    width: '100px',
+    height: '120px',
+  },
+  logoHorizontallyCenter: {
+    position: 'absolute',
+    left: '50%',
+    top: '50%',
+    transform: 'translate(-50%, -50%)'
+  },
 });
 
 function Create(props) {
@@ -74,10 +91,12 @@ function Create(props) {
 
   return (
     <div className={classes.root}>
-      <AppBar position='fixed' className={'toolbar'}>
-        <Toolbar position='fixed' className={'toolbar'}>
+      <AppBar position='fixed'>
+        <Toolbar position='fixed' className={classes.toolbar}>
           <Link to='/'>
-            <h1><img src={templogo} alt="Logo" height='120' width='100' /></h1>
+            <div className={classes.logoHorizontallyCenter}>
+              <img src={templogo} className={classes.logo} alt="Logo" />
+            </div>
           </Link>
         </Toolbar>
       </AppBar>

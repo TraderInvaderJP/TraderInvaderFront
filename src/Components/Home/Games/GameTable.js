@@ -45,11 +45,13 @@ function GameTable(props) {
         })
             .then(res => {
                 console.log(res)
-                rows.slice().push(createGameRow('test'))
+                const {data} = res.data
+                console.log(data)
+                
 
             })
             .catch(err => console.log(err))
-            rows.slice().push('test')
+            
             
     }
     )

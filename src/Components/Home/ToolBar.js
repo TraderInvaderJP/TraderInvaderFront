@@ -73,7 +73,7 @@ function ToolBar(props) {
                     <Tv className={classes.menuIcon} />
                 </IconButton>
                 <div className={classes.logoHorizontallyCenter}>
-                    <Link to='/'>
+                    <Link to='/app'>
                         <h1>
                             <img
                                 src={templogo}
