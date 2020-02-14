@@ -77,12 +77,13 @@ function Home(props) {
         if (response.data.success === true)
           props.setAuth(true)
       }).catch(function (error) {
-        console.log(error);
+        console.log(error)
+        props.setLogin(true)
       })
   }
 
   const handleSubmit = () => {
-    props.setLogin(true)
+    
     if (props.username && props.password !== '') {
       let accept = LoginAttempt(props.username, props.password) //most of this is useless
       return accept
@@ -112,7 +113,7 @@ function Home(props) {
               InputProps={{ classes: { underline: classes.text } }}
               error={
                 (props.login && props.username === '') ||
-                (props.login && !props.authorized)
+                (props.login && !props.auth)
               }
               name='username'
               placeholder='Username '
@@ -125,7 +126,7 @@ function Home(props) {
               InputProps={{ classes: { underline: classes.text } }}
               error={
                 (props.login && props.password === '') ||
-                (props.login && !props.authorized)
+                (props.login && !props.auth)
               }
               name='password'
               placeholder='Password'

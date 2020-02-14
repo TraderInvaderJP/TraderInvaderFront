@@ -80,7 +80,8 @@ function Create(props) {
           props.setDidCreate(true)
         console.log(response)
       }).catch(function (error) {
-        console.log(error);
+        console.log(error)
+        
       })
   }
 
