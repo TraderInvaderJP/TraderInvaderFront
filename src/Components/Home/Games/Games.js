@@ -1,5 +1,5 @@
 import React from 'react'
-import { ListItem, Fab, makeStyles } from '@material-ui/core'
+import { ListItem, Button, makeStyles } from '@material-ui/core'
 import GameTable from './GameTable'
 
 const useStyles = makeStyles({
@@ -11,6 +11,9 @@ const useStyles = makeStyles({
         color: 'black',
         padding: '0 30px',
         fontSize: 17,
+        borderRadius: 25,
+        height: 50,
+        width: 150
     }
 })
 
@@ -21,8 +24,7 @@ export default function Games(props) {
         <div>
             <GameTable username={props.username} />
                 <ListItem style={{ justifyContent: 'center', marginTop: '15px' }}>
-                    <Fab className={classes.button}
-                        variant='extended'>Create Game</Fab>
+                    
                 </ListItem>
         </div>
     )
