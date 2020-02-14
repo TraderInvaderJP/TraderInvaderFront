@@ -71,9 +71,12 @@ function Home(props) {
       username: props.username,
     })
       .then(function (response) {
-        console.log(response)
-        localStorage.setItem('token', response.data.data.access_token)
-        localStorage.setItem('refresh', response.data.data.refresh_token)
+        console.log(response.data)
+        const { data } = response.data
+
+        localStorage.setItem('token', data.access_token)
+        localStorage.setItem('refresh', data.refresh_token)
+
         if (response.data.success === true)
           props.setAuth(true)
       }).catch(function (error) {
