@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import {
-    List, Paper, Table, TableBody, TableCell, TableContainer, TablePagination, TableRow, TableHead
+    Paper, Table, TableBody, TableCell, TableContainer, TableRow, TableHead
 } from '@material-ui/core'
 import '../App.css'
 import { makeStyles } from '@material-ui/core/styles'
@@ -29,7 +29,6 @@ const useStyles = makeStyles({
         background: 'black',
         color: '#53E121',
         fontSize: '16pt',
-
     },
     list: {
         background: '#9DAF96',
@@ -42,7 +41,6 @@ const useStyles = makeStyles({
 function GameTable(props) {
     const classes = useStyles()
     
-
     useEffect(() => {
         axios.get(`/games/${props.username}`, {
         })
@@ -52,7 +50,7 @@ function GameTable(props) {
 
             })
             .catch(err => console.log(err))
-            rows.slice().push(createGameRow('test'))
+            rows.slice().push('test')
             
     }
     )
@@ -67,6 +65,7 @@ function GameTable(props) {
     ]
 
     const rows = [
+        createGameRow('asdasd'),
     ]
 
     return (
