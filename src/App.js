@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { Redirect, Route } from 'react-router-dom'
 import axios from 'axios'
-import Login from './Components/Login'
-import UserHome from './Components/UserHome'
-import Forgot from './Components/Forgot'
-import Verification from './Components/Verification'
-import Create from './Components/Create'
+import Login from './Components/Authentication/Login'
+import UserHome from './Components/Home/UserHome'
+import Forgot from './Components/Authentication/Forgot'
+import Verification from './Components/Authentication/Verification'
+import Create from './Components/Authentication/Create'
 
 export default function App() {
     const [auth, setAuth] = useState(false)

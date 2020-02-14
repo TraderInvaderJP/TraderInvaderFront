@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'
 import { List } from '@material-ui/core'
-import '../App.css'
-import { makeStyles } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles'
 import Content from './Content'
 import UserDrawer from './UserDrawer'
 import ToolBar from './ToolBar'

@@ -1,9 +1,8 @@
 import React, { } from 'react';
 import { List, ListItem, Toolbar, AppBar, TextField, Button, Typography } from '@material-ui/core'
-import '../App.css'
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
-import templogo from '../templogo.png';
+import templogo from '../../templogo.png';
 
 const useStyles = makeStyles({
     root: {

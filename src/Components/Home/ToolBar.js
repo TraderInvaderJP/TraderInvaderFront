@@ -2,9 +2,8 @@ import React, { useState } from 'react';
 import { Fab, Toolbar, AppBar, IconButton
 } from '@material-ui/core'
 import { Menu, Tv } from '@material-ui/icons';
-import '../App.css'
 import { Link } from 'react-router-dom';
-import templogo from '../templogo.png';
+import templogo from '../../templogo.png';
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles({

@@ -3,7 +3,6 @@ import {
     List, ListItem, Divider, ListItemIcon, ListItemText, Drawer
 } from '@material-ui/core'
 import { People, Equalizer, Settings, Person, Help } from '@material-ui/icons';
-import '../App.css'
 import { makeStyles } from '@material-ui/core/styles';
 
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Route } from 'react-router-dom'
-import Games from './Games'
+import Games from './Games/Games'
 
 export default function Content(props) {
     return (
