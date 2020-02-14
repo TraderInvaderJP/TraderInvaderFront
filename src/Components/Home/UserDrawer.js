@@ -2,7 +2,8 @@ import React, { } from 'react';
 import {
     List, ListItem, Divider, ListItemIcon, ListItemText, Drawer
 } from '@material-ui/core'
-import { People, Equalizer, Settings, Person, Help } from '@material-ui/icons';
+import { Link } from 'react-router-dom'
+import { People, Equalizer, Settings, Person, Help, Home } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/core/styles';
 
 
@@ -33,24 +34,38 @@ function UserDrawer(props) {
             <div
                 className={classes.list}>
                 <List>
-                    <ListItem button>
-                        <ListItemIcon>
-                            <Person />
-                        </ListItemIcon>
-                        <ListItemText primary={'Profile'} />
-                    </ListItem>
-                    <ListItem button>
-                        <ListItemIcon>
-                            <People />
-                        </ListItemIcon>
-                        <ListItemText primary={'Friends'} />
-                    </ListItem>
-                    <ListItem button>
-                        <ListItemIcon>
-                            <Equalizer />
-                        </ListItemIcon>
-                        <ListItemText primary={'Statistics'} />
-                    </ListItem>
+                    <Link to='/app' style={{color: 'black', textDecoration: 'none'}}>
+                        <ListItem button>
+                            <ListItemIcon>
+                                <Home />
+                            </ListItemIcon>
+                            <ListItemText primary={'Home'} />
+                        </ListItem> 
+                    </Link>
+                    <Link to='/app/profile' style={{color: 'black', textDecoration: 'none'}}>
+                        <ListItem button>
+                            <ListItemIcon>
+                                <Person />
+                            </ListItemIcon>
+                            <ListItemText primary={'Profile'} />
+                        </ListItem> 
+                    </Link>
+                    <Link to='/app/friends' style={{color: 'black', textDecoration: 'none'}}>
+                        <ListItem button>
+                            <ListItemIcon>
+                                <People />
+                            </ListItemIcon>
+                            <ListItemText primary={'Friends'} />
+                        </ListItem>
+                    </Link>
+                    <Link to='/app/statistics' style={{color: 'black', textDecoration: 'none'}}>
+                        <ListItem button>
+                            <ListItemIcon>
+                                <Equalizer />
+                            </ListItemIcon>
+                            <ListItemText primary={'Statistics'} />
+                        </ListItem>
+                    </Link>
                 </List>
                 <Divider />
                 <List>

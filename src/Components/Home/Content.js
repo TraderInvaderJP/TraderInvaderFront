@@ -1,6 +1,9 @@
 import React from 'react'
 import { Route } from 'react-router-dom'
 import Games from './Games/Games'
+import Profile from './Profile/Profile'
+import Friends from './Friends/Friends'
+import Statistics from './Statistics/Statistics'
 
 export default function Content(props) {
     return (
@@ -9,15 +12,18 @@ export default function Content(props) {
                 <Games username={props.username} />
             </Route>
             <Route path='/app/profile'>
-
+                <Profile />
             </Route>
             <Route path='/app/friends'>
-
+                <Friends />
             </Route>
             <Route path='/app/statistics'>
-
+                <Statistics />
             </Route>
             <Route path='/app/game'>
+                
+            </Route>
+            <Route path='/app/creategame'>
                 
             </Route>
         </div>
