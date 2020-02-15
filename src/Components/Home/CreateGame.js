@@ -1,5 +1,5 @@
 import React, { } from 'react';
-import { List, ListItem, TextField, Button } from '@material-ui/core'
+import { List, ListItem, TextField, Button, Select, MenuItem, InputLabel, FormControl } from '@material-ui/core'
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -23,6 +23,16 @@ const useStyles = makeStyles({
         borderRadius: 25,
         height: 50,
         width: 150
+    },
+    dropmenu: {
+        outlined: {
+            borderWidth: '3px',
+            background: 'transparent'
+        },
+        '&$:selected': {
+            borderWidth: '3px',
+            borderColor: '#53E121',
+        }
     },
     text: {
         underline: {
@@ -56,15 +66,6 @@ const useStyles = makeStyles({
     },
 })
 
-const winConditions = [
-
-]
-
-const wallets = [
-
-    
-]
-
 export default function CreateGame() {
     const classes = useStyles();
 
@@ -95,12 +96,21 @@ export default function CreateGame() {
                         autoComplete='off' />
                 </ListItem>
                 <ListItem style={{ marginTop: '50px' }}>
-                    <TextField style={{ marginRight: '15px' }}
-                        InputProps={{ classes: { underline: classes.text } }}
-                        name='username'
-                        placeholder='Win Condition'
-                        type='text'
-                        autoComplete='off' />
+                    <FormControl>
+                        <InputLabel id="win condition">Win Condition</InputLabel>
+                        <Select style={{ marginRight: '15px', width: '190px' }}
+                            className={classes.dropmenu}
+                            name='username'
+                            type='text'
+                            autoComplete='off' >
+                            <MenuItem value="" label='Win Condition'>
+                                <em>None</em>
+                            </MenuItem>
+                            <MenuItem value={10}>Ten</MenuItem>
+                            <MenuItem value={20}>Twenty</MenuItem>
+                            <MenuItem value={30}>Thirty</MenuItem>
+                        </Select>
+                    </FormControl>
                     <TextField
                         style={{ marginLeft: '15px' }}
                         InputProps={{ classes: { underline: classes.text } }}

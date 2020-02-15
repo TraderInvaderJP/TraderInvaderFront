@@ -79,14 +79,16 @@ function Home(props) {
 
         if (response.data.success === true)
           props.setAuth(true)
+        else
+          props.setLogin(true)
+
       }).catch(function (error) {
         console.log(error)
-        props.setLogin(true)
       })
   }
 
   const handleSubmit = () => {
-    
+
     if (props.username && props.password !== '') {
       let accept = LoginAttempt(props.username, props.password) //most of this is useless
       return accept
