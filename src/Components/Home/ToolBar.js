@@ -35,8 +35,8 @@ const useStyles = makeStyles({
     logo: {
         margin: 'auto',
         textAlign: 'center',
-        width: '50px',
-        height: '60px',
+        width: '55px',
+        height: '70px',
     },
     logoHorizontallyCenter: {
         position: 'absolute',
@@ -54,7 +54,7 @@ const useStyles = makeStyles({
     toolbar: {
         background: '#0A0708',
         flexFlow: 1,
-        height: '100px'
+        height: '120px'
     },
 })
 

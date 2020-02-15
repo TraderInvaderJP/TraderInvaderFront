@@ -46,8 +46,8 @@ function GameTable(props) {
             .then(res => {
                 console.log(res)
                 const {data} = res.data
-                console.log(data)
-                
+                rows.slice().map = data.slice().map
+                console.log(rows)
 
             })
             .catch(err => console.log(err))
@@ -66,7 +66,7 @@ function GameTable(props) {
     ]
 
     const rows = [
-        createGameRow('asdasd'),
+        
     ]
 
     return (
@@ -110,6 +110,7 @@ function GameTable(props) {
                 </Table>
             </TableContainer>
         </Paper>
+        
     )
 }
 export default GameTable

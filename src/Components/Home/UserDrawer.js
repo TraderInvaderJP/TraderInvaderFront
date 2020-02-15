@@ -3,7 +3,7 @@ import {
     List, ListItem, Divider, ListItemIcon, ListItemText, Drawer
 } from '@material-ui/core'
 import { Link } from 'react-router-dom'
-import { People, Equalizer, Settings, Person, Help, Home } from '@material-ui/icons';
+import { People, Equalizer, Settings, Person, Help, Home, GroupAdd, Create } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/core/styles';
 
 
@@ -20,7 +20,7 @@ const useStyles = makeStyles({
     list: {
         background: '#9DAF96',
         height: '100vh',
-        width: '25vh'
+        width: '30vh'
     }
 })
 
@@ -34,23 +34,23 @@ function UserDrawer(props) {
             <div
                 className={classes.list}>
                 <List>
-                    <Link to='/app' style={{color: 'black', textDecoration: 'none'}}>
+                    <Link to='/app' style={{ color: 'black', textDecoration: 'none' }}>
                         <ListItem button>
                             <ListItemIcon>
                                 <Home />
                             </ListItemIcon>
                             <ListItemText primary={'Home'} />
-                        </ListItem> 
+                        </ListItem>
                     </Link>
-                    <Link to='/app/profile' style={{color: 'black', textDecoration: 'none'}}>
+                    <Link to='/app/profile' style={{ color: 'black', textDecoration: 'none' }}>
                         <ListItem button>
                             <ListItemIcon>
                                 <Person />
                             </ListItemIcon>
                             <ListItemText primary={'Profile'} />
-                        </ListItem> 
+                        </ListItem>
                     </Link>
-                    <Link to='/app/friends' style={{color: 'black', textDecoration: 'none'}}>
+                    <Link to='/app/friends' style={{ color: 'black', textDecoration: 'none' }}>
                         <ListItem button>
                             <ListItemIcon>
                                 <People />
@@ -58,7 +58,7 @@ function UserDrawer(props) {
                             <ListItemText primary={'Friends'} />
                         </ListItem>
                     </Link>
-                    <Link to='/app/statistics' style={{color: 'black', textDecoration: 'none'}}>
+                    <Link to='/app/statistics' style={{ color: 'black', textDecoration: 'none' }}>
                         <ListItem button>
                             <ListItemIcon>
                                 <Equalizer />
@@ -66,6 +66,25 @@ function UserDrawer(props) {
                             <ListItemText primary={'Statistics'} />
                         </ListItem>
                     </Link>
+                    <Divider />
+                    <List>
+                        <Link to='/app/creategame' style={{ color: 'black', textDecoration: 'none' }}>
+                            <ListItem button>
+                                <ListItemIcon>
+                                    <Create />
+                                </ListItemIcon>
+                                <ListItemText primary={'New Game'} />
+                            </ListItem>
+                        </Link>
+                        <Link to='/app/joingame' style={{ color: 'black', textDecoration: 'none' }}>
+                            <ListItem button>
+                                <ListItemIcon>
+                                    <GroupAdd />
+                                </ListItemIcon>
+                                <ListItemText primary={'Join Game'} />
+                            </ListItem>
+                        </Link>
+                    </List>
                 </List>
                 <Divider />
                 <List>

@@ -4,11 +4,13 @@ import Games from './Games/Games'
 import Profile from './Profile/Profile'
 import Friends from './Friends/Friends'
 import Statistics from './Statistics/Statistics'
+import CreateGame from './CreateGame'
+import JoinGame from './JoinGame'
 
 export default function Content(props) {
     return (
         <div>
-            <Route path='/app/' exact>
+            <Route path='/app' exact>
                 <Games username={props.username} />
             </Route>
             <Route path='/app/profile'>
@@ -24,7 +26,10 @@ export default function Content(props) {
                 
             </Route>
             <Route path='/app/creategame'>
-                
+                <CreateGame/>
+            </Route>
+            <Route path='/app/joingame'>
+                <JoinGame/>
             </Route>
         </div>
     )
