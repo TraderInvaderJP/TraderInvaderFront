@@ -25,18 +25,24 @@ const useStyles = makeStyles({
         width: 150
     },
     dropmenu: {
-        outlined: {
+        underline: {
             borderWidth: '3px',
-            background: 'transparent'
         },
-        '&$:selected': {
+        '&:before': {
+            borderWidth: '3px',
+            borderColor: 'black',
+        },
+        '&:after': {
             borderWidth: '3px',
             borderColor: '#53E121',
+            background: 'transparent'
+            
         }
     },
     text: {
         underline: {
             borderWidth: '3px',
+            background: '#9DAF96'
         },
         '&:before': {
             borderWidth: '3px',
@@ -96,28 +102,33 @@ export default function CreateGame() {
                         autoComplete='off' />
                 </ListItem>
                 <ListItem style={{ marginTop: '50px' }}>
-                    <FormControl>
-                        <InputLabel id="win condition">Win Condition</InputLabel>
-                        <Select style={{ marginRight: '15px', width: '190px' }}
+                    <FormControl style={{ background: '#9DAF96'}}>
+                        <InputLabel id="win condition" style={{ color: 'black', opacity: '40%'}} >Win Condition</InputLabel>
+                        <Select style={{ width: '195px' }}
                             className={classes.dropmenu}
-                            name='username'
+                            name='wincondition'
                             type='text'
                             autoComplete='off' >
-                            <MenuItem value="" label='Win Condition'>
-                                <em>None</em>
-                            </MenuItem>
-                            <MenuItem value={10}>Ten</MenuItem>
-                            <MenuItem value={20}>Twenty</MenuItem>
-                            <MenuItem value={30}>Thirty</MenuItem>
+                            <MenuItem value={10} >Profit Ratio</MenuItem>
+                            <MenuItem value={20} >Total Profit</MenuItem>
+                            <MenuItem value={30} >Biggest Looser</MenuItem>
                         </Select>
                     </FormControl>
-                    <TextField
-                        style={{ marginLeft: '15px' }}
-                        InputProps={{ classes: { underline: classes.text } }}
-                        name='username'
-                        placeholder='Wallet '
-                        type='text'
-                        autoComplete='off' />
+                    <FormControl style={{ background: '#9DAF96', marginLeft: '30px'}}>
+                        <InputLabel id="win condition" style={{ color: 'black', opacity: '40%'}} >Starting Wallet</InputLabel>
+                        <Select style={{ width: '195px' }}
+                            className={classes.dropmenu}
+                            name='wallet'
+                            type='text'
+                            autoComplete='off' >
+                            <MenuItem value={1000} >$1000</MenuItem>
+                            <MenuItem value={10000} >$10000</MenuItem>
+                            <MenuItem value={50000} >$50000</MenuItem>
+                            <MenuItem value={100000} >$100000</MenuItem>
+                            <MenuItem value={500000} >$500000</MenuItem>
+                            <MenuItem value={1000000} >$1000000</MenuItem>
+                        </Select>
+                    </FormControl>
                 </ListItem>
                 <ListItem style={{ justifyContent: 'center', marginTop: '50px' }}>
                     <Link to='/' style={{ textDecoration: 'none' }}>
