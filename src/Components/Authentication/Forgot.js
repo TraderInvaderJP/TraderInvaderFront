@@ -1,8 +1,10 @@
-import React, { } from 'react';
-import { List, ListItem, Toolbar, AppBar, TextField, Button, Typography } from '@material-ui/core'
+import React, { PreventDefault } from 'react';
+import { List, ListItem, Toolbar, AppBar, IconButton, InputAdornment, Typography, Button, TextField } from '@material-ui/core'
+import { VisibilityOff, Visibility } from '@material-ui/icons'
 import { Link } from 'react-router-dom';
-import { makeStyles } from '@material-ui/core/styles';
 import templogo from '../../templogo.png';
+import { makeStyles } from '@material-ui/core/styles';
+import axios from 'axios'
 
 const useStyles = makeStyles({
   root: {
@@ -62,7 +64,6 @@ function Forgot(props) {
   const classes = useStyles();
 
   const handleSubmit = () => {
-    sessionStorage.setItem("pagename", "forgetpass"); 
    }
 
   return (
@@ -77,17 +78,17 @@ function Forgot(props) {
         </Toolbar>
       </AppBar>
       <List>
-        <ListItem style={{ marginTop: '10px' }}>
-          <TextField
-            onChange={e => props.setEmail(e.target.value)}
-            InputProps={{ classes: { underline: classes.text } }}
-            error={
-              (props.create && props.email === '')}
-            name='email'
-            placeholder='Email'
-            type='text'
-            autoComplete='off' />
-        </ListItem>
+        <ListItem style={{ marginTop: '50px' }}>
+            <TextField
+              onChange={e => props.setUsername(e.target.value)}
+              InputProps={{ classes: { underline: classes.text } }}
+              error={
+                (props.create && props.username === '')}
+              name='username'
+              placeholder='Username '
+              type='text'
+              autoComplete='off' />
+          </ListItem>
         {props.create && (
           <ListItem>
             <Typography

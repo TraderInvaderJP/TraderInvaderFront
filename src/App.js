@@ -71,7 +71,7 @@ export default function App() {
             </Route>
             <Route path='/forgot'>
                 <Forgot 
-                setEmail={setEmail}/>
+                setUsername={setUsername}/>
             </Route>
             <Route path='/create'>
                 <Create 
