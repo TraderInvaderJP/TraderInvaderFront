@@ -69,6 +69,9 @@ const useStyles = makeStyles({
     
       const handleMouseDownPassword = event => { event.preventDefault() }
 
+      const handleSubmit = () => {
+      }
+
       return (
         <div className={classes.root}>
           <AppBar position='fixed'>

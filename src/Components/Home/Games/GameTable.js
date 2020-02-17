@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import {
-    Paper, Table, TableBody, TableCell, TableContainer, TableRow, TableHead, IconButton, Container
+    Paper, Table, TableBody, TableCell, TableContainer, TableRow, TableHead, IconButton
 } from '@material-ui/core'
 import { ArrowForward } from '@material-ui/icons'
 import { makeStyles } from '@material-ui/core/styles'
@@ -46,19 +46,14 @@ function GameTable(props) {
                 SetGames(data)
             })
             .catch(err => console.log(err))       
-    })
-
-    function createGameRow(name) {
-
-        return { name };
-    }
+    }, [props.username, SetGames])
 
     const columns = [
         { id: 'name', label: 'Current Games', minWidth: 780 },
     ]
 
     return (
-        <Paper style={{ marginTop: '100px' }}>
+        <Paper>
             <TableContainer >
                 <Table style={{width: '100%'}}>
                     <TableHead>

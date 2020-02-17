@@ -10,7 +10,7 @@ import { Container } from '@material-ui/core'
 
 export default function Content(props) {
     return (
-        <Container style={{width: '100%'}}>
+        <Container style={{width: '100%', marginTop: '130px', marginBottom: '10px'}}>
             <Route path='/app' exact>
                 <Games username={props.username} />
             </Route>
