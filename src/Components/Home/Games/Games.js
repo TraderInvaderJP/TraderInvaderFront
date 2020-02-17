@@ -27,7 +27,6 @@ export default function Games(props) {
     return (
         <div>
             <GameTable username={props.username} />
-      
         </div>
     )
 }

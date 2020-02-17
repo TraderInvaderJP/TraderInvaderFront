@@ -6,10 +6,11 @@ import Friends from './Friends/Friends'
 import Statistics from './Statistics/Statistics'
 import CreateGame from './CreateGame'
 import JoinGame from './JoinGame'
+import { Container } from '@material-ui/core'
 
 export default function Content(props) {
     return (
-        <div>
+        <Container style={{width: '100%'}}>
             <Route path='/app' exact>
                 <Games username={props.username} />
             </Route>
@@ -31,6 +32,6 @@ export default function Content(props) {
             <Route path='/app/joingame'>
                 <JoinGame/>
             </Route>
-        </div>
+        </Container>
     )
 }

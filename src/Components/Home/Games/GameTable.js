@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import {
-    Paper, Table, TableBody, TableCell, TableContainer, TableRow, TableHead
+    Paper, Table, TableBody, TableCell, TableContainer, TableRow, TableHead, IconButton, Container
 } from '@material-ui/core'
+import { ArrowForward } from '@material-ui/icons'
 import { makeStyles } from '@material-ui/core/styles'
 import axios from 'axios'
 
@@ -16,12 +17,8 @@ const useStyles = makeStyles({
         width: '100%'
     },
     table: {
-        height: 330,
         background: '#43AA1F',
-        color: '#0A0708',
-        overflow: 'auto'
-
-
+        color: '#0A0708'
     },
     tableheader: {
         alignItems: 'center',
@@ -39,22 +36,17 @@ const useStyles = makeStyles({
 
 function GameTable(props) {
     const classes = useStyles()
+    const [games, SetGames] = useState([])
     
     useEffect(() => {
         axios.get(`/games/${props.username}`, {
         })
             .then(res => {
-                console.log(res)
                 const {data} = res.data
-                rows.slice().map = data.slice().map
-                console.log(rows)
-
+                SetGames(data)
             })
-            .catch(err => console.log(err))
-            
-            
-    }
-    )
+            .catch(err => console.log(err))       
+    })
 
     function createGameRow(name) {
 
@@ -65,14 +57,10 @@ function GameTable(props) {
         { id: 'name', label: 'Current Games', minWidth: 780 },
     ]
 
-    const rows = [
-        
-    ]
-
     return (
         <Paper style={{ marginTop: '100px' }}>
             <TableContainer >
-                <Table>
+                <Table style={{width: '100%'}}>
                     <TableHead>
                         <TableRow >
                             {columns.map(column => (
@@ -80,7 +68,7 @@ function GameTable(props) {
                                     className={classes.tableheader}
                                     key={column.id}
                                     align={column.align}
-                                    style={{ minWidth: column.minWidth, textAlign: 'center' }}>
+                                    style={{textAlign: 'center' }}>
                                     {column.label}
                                 </TableCell>
                             ))}
@@ -91,26 +79,20 @@ function GameTable(props) {
             <TableContainer className={classes.table}>
                 <Table>
                     <TableBody>
-                        {rows.slice().map(row => {
+                        {games.map((game, id) => {
                             return (
-                                <TableRow style={{ height: '55px' }}
+                                <TableRow style={{ height: '55px', border: '0 0 1px 0 solid white' }}
                                     hover role="checkbox"
                                     tabIndex={-1}
-                                    key={row.code}>
-                                    {columns.map(column => {
-                                        const value = row[column.id]
-                                        return (
-                                            <TableCell key={column.id} align={column.align} >
-                                                {column.format && typeof value === 'number' ? column.format(value) : value}
-                                            </TableCell>
-                                        )
-                                    })} </TableRow>)
+                                    key={id}>
+                                        <TableCell>{game}</TableCell>
+                                        <IconButton><ArrowForward /></IconButton>
+                                </TableRow>)
                         })}
                     </TableBody>
                 </Table>
             </TableContainer>
         </Paper>
-        
     )
 }
 export default GameTable
