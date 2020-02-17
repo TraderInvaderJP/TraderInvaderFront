@@ -61,7 +61,9 @@ const useStyles = makeStyles({
 function Forgot(props) {
   const classes = useStyles();
 
-  const handleSubmit = () => { }
+  const handleSubmit = () => {
+    sessionStorage.setItem("pagename", "forgetpass"); 
+   }
 
   return (
     <div className={classes.root}>
