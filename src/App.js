@@ -6,6 +6,7 @@ import UserHome from './Components/Home/UserHome'
 import Forgot from './Components/Authentication/Forgot'
 import Verification from './Components/Authentication/Verification'
 import Create from './Components/Authentication/Create'
+import Change from './Components/Authentication/ChangePass'
 
 export default function App() {
     const [auth, setAuth] = useState(false)
@@ -86,6 +87,13 @@ export default function App() {
                 confirm={confirm}
                 createAuth={createAuth}
                 didCreate={didCreate}/>
+            </Route>
+            <Route path='/changepass'>
+                <Change
+                setPassword={setPassword}
+                setConfirm={setConfirm}
+                password={password}
+                confirm={confirm}/>
             </Route>
             <Route path='/app'>
                 <UserHome 
