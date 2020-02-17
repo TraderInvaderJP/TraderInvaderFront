@@ -12,7 +12,6 @@ const useStyles = makeStyles({
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: '#9DAF96',
-        height: '100vh',
         width: '100%'
     },
     button: {
@@ -65,7 +64,7 @@ function UserHome(props) {
     }
 
     return (
-        <div className={classes.root} style={{width: '100%'}}> 
+        <div className={classes.root} style={{width: '100%', height: '100%'}}> 
             <ToolBar Logout={Logout} toggleDrawer={toggleDrawer}/>  
             <UserDrawer toggleDrawer={toggleDrawer} isOpen={isOpen}/>
             <Content username={props.username} />

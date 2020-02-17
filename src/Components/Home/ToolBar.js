@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Fab, Toolbar, AppBar, IconButton
 } from '@material-ui/core'
 import { Menu, Tv } from '@material-ui/icons';
@@ -64,7 +64,7 @@ function ToolBar(props) {
     return (
         <AppBar position='fixed' >
             <Toolbar
-                position=' fixed'
+                position='fixed'
                 className={classes.toolbar}>
                 <IconButton onClick={props.toggleDrawer}>
                     <Menu className={classes.menuIcon} />

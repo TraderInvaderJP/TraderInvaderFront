@@ -47,10 +47,10 @@ export default function App() {
                 }
             }
         })()
-    }, [auth])
+    }, [auth, username])
 
     return (
-        <div>
+        <div id='root' style={{backgroundColor: '#9DAF96', height: '100%'}}>
             { auth && <Redirect to='/app' /> }
             <Route path='/' exact>
                 <Login 
