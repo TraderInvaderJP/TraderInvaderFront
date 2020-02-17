@@ -76,17 +76,6 @@ function Verification(props) {
       })
   }
 
-  var previous = sessionStorage.getItem('pagename');
-
-  if(previous == "forgetpass")
-  {
-    console.log("Previous page was forget");
-  }
-  else if(previous == "create")
-  {
-    console.log("Previous page was create");
-  }
-
   return (
     <div className={classes.root}>
       <AppBar position='fixed' >

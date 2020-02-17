@@ -1,5 +1,5 @@
 import React, { } from 'react';
-import { List, ListItem, TextField, Button, Select, MenuItem, InputLabel, FormControl } from '@material-ui/core'
+import { TextField, Button, Select, MenuItem, InputLabel, FormControl, Grid } from '@material-ui/core'
 import { Link } from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -36,7 +36,7 @@ const useStyles = makeStyles({
             borderWidth: '3px',
             borderColor: '#53E121',
             background: 'transparent'
-            
+
         }
     },
     text: {
@@ -77,33 +77,34 @@ export default function CreateGame() {
 
     return (
         <div>
-            <List >
-                <ListItem style={{ justifyContent: 'center', marginTop: '50px' }}>
-                    <TextField style={{ marginRight: '15px' }}
+            <Grid container style={{ justifyContent: 'center', marginTop: '25px' }} direction='column' justify='center' alignItems='center' spacing={2}>
+                <Grid item style={{ marginTop: '50px' }}>
+                    <TextField 
                         InputProps={{ classes: { underline: classes.text } }}
                         name='username'
                         placeholder='Game Name '
                         type='text'
                         autoComplete='off' />
-                </ListItem>
-                <ListItem style={{ marginTop: '50px' }}>
-                    <TextField style={{ marginRight: '15px' }}
+                </Grid>
+                <Grid item style={{justifyContent: 'center', marginTop: '10px' }}>
+                    <TextField 
                         InputProps={{ classes: { underline: classes.text } }}
                         name='username'
                         placeholder='Start Date '
                         type='text'
                         autoComplete='off' />
+                </Grid>
+                <Grid item style={{ justifyContent: 'center', marginTop: '10px' }}>
                     <TextField
-                        style={{ marginLeft: '15px' }}
                         InputProps={{ classes: { underline: classes.text } }}
                         name='username'
                         placeholder='End Date '
                         type='text'
                         autoComplete='off' />
-                </ListItem>
-                <ListItem style={{ marginTop: '50px' }}>
-                    <FormControl style={{ background: '#9DAF96'}}>
-                        <InputLabel id="win condition" style={{ color: 'black', opacity: '40%'}} >Win Condition</InputLabel>
+                </Grid>
+                <Grid item style={{ justifyContent: 'center' }}>
+                    <FormControl style={{ background: '#9DAF96' }}>
+                        <InputLabel id="win condition" style={{ color: 'black', opacity: '40%' }} >Win Condition</InputLabel>
                         <Select style={{ width: '195px' }}
                             className={classes.dropmenu}
                             name='wincondition'
@@ -114,8 +115,10 @@ export default function CreateGame() {
                             <MenuItem value={30} >Biggest Looser</MenuItem>
                         </Select>
                     </FormControl>
-                    <FormControl style={{ background: '#9DAF96', marginLeft: '30px'}}>
-                        <InputLabel id="win condition" style={{ color: 'black', opacity: '40%'}} >Starting Wallet</InputLabel>
+                </Grid>
+                <Grid item style={{ justifyContent: 'center' }}>
+                    <FormControl style={{ background: '#9DAF96'}}>
+                        <InputLabel id="win condition" style={{ color: 'black', opacity: '40%' }} >Starting Wallet</InputLabel>
                         <Select style={{ width: '195px' }}
                             className={classes.dropmenu}
                             name='wallet'
@@ -129,15 +132,15 @@ export default function CreateGame() {
                             <MenuItem value={1000000} >$1000000</MenuItem>
                         </Select>
                     </FormControl>
-                </ListItem>
-                <ListItem style={{ justifyContent: 'center', marginTop: '50px' }}>
+                </Grid>
+                <Grid item style={{  marginTop: '25px', justifyContent: 'center' }}>
                     <Link to='/' style={{ textDecoration: 'none' }}>
                         <Button className={classes.button}
                             variant='text'>Submit</Button>
                     </Link>
-                </ListItem>
+                </Grid>
 
-            </List>
+            </Grid>
         </div>
     )
 }
