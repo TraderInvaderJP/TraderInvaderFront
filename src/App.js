@@ -71,7 +71,7 @@ export default function App() {
             </Route>
             <Route path='/forgot'>
                 <Forgot 
-                setEmail={setEmail}/>
+                setUsername={setUsername}/>
             </Route>
             <Route path='/create'>
                 <Create 
@@ -94,6 +94,12 @@ export default function App() {
                 setConfirm={setConfirm}
                 password={password}
                 confirm={confirm}/>
+            </Route>
+            <Route path='/newpassverification'>
+                <Verification 
+                setVerification={setVerification}
+                username={username}
+                verification={verification}/>
             </Route>
             <Route path='/app'>
                 <UserHome 

@@ -65,7 +65,7 @@ function Verification(props) {
 
   const handleSubmit = () => {
 
-    let url = `https://o5gn70te7h.execute-api.us-west-2.amazonaws.com/latest/users/${props.username}/verification`
+    /*let url = `https://o5gn70te7h.execute-api.us-west-2.amazonaws.com/latest/users/${props.username}/verification`
     axios.put(url, {
       confirmation_code: props.verification
     })
@@ -73,7 +73,7 @@ function Verification(props) {
         console.log(response)
       }).catch(function (error) {
         console.log(error);
-      })
+      })*/
   }
 
   return (
@@ -99,7 +99,7 @@ function Verification(props) {
         </ListItem>
         <List >
           <ListItem style={{ justifyContent: 'center', marginTop: '50px' }}>
-            <Link to='/' style={{ textDecoration: 'none' }}>
+            <Link to='/changepass' style={{ textDecoration: 'none' }}>
               <Button className={classes.button}
                 onClick={handleSubmit}
                 variant='text'>Submit</Button>

@@ -87,7 +87,6 @@ function Create(props) {
 
   const handleSubmit = () => {
     props.setDidCreate(true)
-    sessionStorage.setItem("pagename", "create"); 
     TryCreate(props.username, props.password, props.email)
   }
 
