@@ -44,12 +44,6 @@ const useStyles = makeStyles({
 function UserHome(props) {
     const classes = useStyles()
     const [isOpen, setIsOpen] = useState(false)
-        
-    
-
-    const handleSubmit = () => {
-        //yes, stuff will go here
-    }
 
     const Logout = () => {
         localStorage.removeItem('token')

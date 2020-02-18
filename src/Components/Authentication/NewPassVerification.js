@@ -1,7 +1,6 @@
 import React, { } from 'react';
 import { List, ListItem, Toolbar, AppBar, TextField, Button } from '@material-ui/core'
 import { Link } from 'react-router-dom';
-import axios from 'axios'
 import templogo from '../../templogo.png';
 import { makeStyles } from '@material-ui/core/styles';
 
@@ -64,16 +63,6 @@ function NewPassVerification(props) {
   const handleVerificationChange = event => { props.setVerification(event.target.value) }
 
   const handleSubmit = () => {
-
-    /*let url = `https://o5gn70te7h.execute-api.us-west-2.amazonaws.com/latest/users/${props.username}/verification`
-    axios.put(url, {
-      confirmation_code: props.verification
-    })
-      .then(function (response) {
-        console.log(response)
-      }).catch(function (error) {
-        console.log(error);
-      })*/
   }
 
   return (
