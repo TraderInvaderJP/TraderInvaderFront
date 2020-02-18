@@ -76,12 +76,14 @@ function GameTable(props) {
                     <TableBody>
                         {games.map((game, id) => {
                             return (
-                                <TableRow style={{ height: '55px', border: '0 0 1px 0 solid white' }}
+                                <TableRow style={{ height: '55px', border: '0 0 1px 0 solid white', display: 'flex' }}
                                     hover role="checkbox"
                                     tabIndex={-1}
                                     key={id}>
-                                        <TableCell>{game}</TableCell>
-                                        <IconButton><ArrowForward /></IconButton>
+                                        <TableCell style={{flex: 5}}>{game}</TableCell>
+                                        <TableCell style={{flex: 1}}>
+                                            <IconButton style={{padding: 0}}><ArrowForward /></IconButton>
+                                        </TableCell>
                                 </TableRow>)
                         })}
                     </TableBody>
