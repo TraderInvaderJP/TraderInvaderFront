@@ -98,7 +98,7 @@ function Forgot(props) {
           </ListItem>)}
         <ListItem
           style={{ justifyContent: 'center', marginTop: '30px' }}>
-          <Link to='/verification' style={{ textDecoration: 'none' }}>
+          <Link to='/newpassverification' style={{ textDecoration: 'none' }}>
             <Button className={classes.button}
               onClick={handleSubmit}
               variant='text'>Submit</Button>

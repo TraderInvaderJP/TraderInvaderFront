@@ -58,7 +58,7 @@ const useStyles = makeStyles({
   },
 });
 
-function Verification(props) {
+function NewPassVerification(props) {
   const classes = useStyles()
 
   const handleVerificationChange = event => { props.setVerification(event.target.value) }
@@ -115,4 +115,4 @@ function Verification(props) {
   )
 }
 
-export default Verification 
+export default NewPassVerification

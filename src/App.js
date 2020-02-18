@@ -7,6 +7,7 @@ import Forgot from './Components/Authentication/Forgot'
 import Verification from './Components/Authentication/Verification'
 import Create from './Components/Authentication/Create'
 import Change from './Components/Authentication/ChangePass'
+import NewPassVerification from './Components/Authentication/NewPassVerification'
 
 export default function App() {
     const [auth, setAuth] = useState(false)
@@ -96,7 +97,7 @@ export default function App() {
                 confirm={confirm}/>
             </Route>
             <Route path='/newpassverification'>
-                <Verification 
+                <NewPassVerification
                 setVerification={setVerification}
                 username={username}
                 verification={verification}/>
