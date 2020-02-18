@@ -95,6 +95,12 @@ export default function App() {
                 password={password}
                 confirm={confirm}/>
             </Route>
+            <Route path='/newpassverification'>
+                <Verification 
+                setVerification={setVerification}
+                username={username}
+                verification={verification}/>
+            </Route>
             <Route path='/app'>
                 <UserHome 
                     setAuth={setAuth}
