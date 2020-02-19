@@ -1,6 +1,5 @@
 import React from 'react';
-import { Fab, Toolbar, AppBar, IconButton
-} from '@material-ui/core'
+import { Fab, Toolbar, AppBar, IconButton } from '@material-ui/core'
 import { Menu, Tv } from '@material-ui/icons';
 import { Link } from 'react-router-dom';
 import templogo from '../../templogo.png';

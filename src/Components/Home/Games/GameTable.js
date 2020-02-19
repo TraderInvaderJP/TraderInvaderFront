@@ -31,6 +31,11 @@ const useStyles = makeStyles({
         height: '100vh',
         width: '25vh'
     },
+    tablerow: {
+        height: '55px', 
+        border: '0 0 1px 0 solid white', 
+        display: 'flex'
+    }
 })
 
 
@@ -76,7 +81,7 @@ function GameTable(props) {
                     <TableBody>
                         {games.map((game, id) => {
                             return (
-                                <TableRow style={{ height: '55px', border: '0 0 1px 0 solid white', display: 'flex' }}
+                                <TableRow className={classes.tablerow}
                                     hover role="checkbox"
                                     tabIndex={-1}
                                     key={id}>

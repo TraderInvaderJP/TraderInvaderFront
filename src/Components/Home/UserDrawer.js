@@ -1,7 +1,5 @@
 import React, { } from 'react';
-import {
-    List, ListItem, Divider, ListItemIcon, ListItemText, Drawer
-} from '@material-ui/core'
+import { List, ListItem, Divider, ListItemIcon, ListItemText, Drawer } from '@material-ui/core'
 import { Link } from 'react-router-dom'
 import { People, Equalizer, Settings, Person, Help, Home, GroupAdd, Create } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/core/styles';

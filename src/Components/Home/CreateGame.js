@@ -53,6 +53,9 @@ const useStyles = makeStyles({
             borderColor: '#53E121',
         }
     },
+    grid: {
+
+    }
 })
 
 export default function CreateGame(props) {
@@ -86,16 +89,20 @@ export default function CreateGame(props) {
         axios.put(`/games/${gameid}/users/${props.username}`, {
             initial_amount: wallet,
         })
-        .then(function (response) {
-            console.log(response)
-        }).catch(function (error) {
-            console.log(error)
-        })
+            .then(function (response) {
+                console.log(response)
+            }).catch(function (error) {
+                console.log(error)
+            })
     }
 
     return (
         <div>
-            <Grid container style={{ justifyContent: 'center', marginTop: '25px' }} direction='column' justify='center' alignItems='center' spacing={2}>
+            <Grid container style={{ justifyContent: 'center', marginTop: '25px' }}
+                direction='column'
+                justify='center'
+                alignItems='center'
+                spacing={2}>
                 <Grid item style={{ marginTop: '50px' }}>
                     <TextField
                         InputProps={{ classes: { underline: classes.text } }}
@@ -147,7 +154,7 @@ export default function CreateGame(props) {
                             className={classes.dropmenu}
                             name='wallet'
                             controlled='true'
-                            value={wallet} 
+                            value={wallet}
                             type='text'
                             autoComplete='off' >
                             <MenuItem value={'1000'}>$1000</MenuItem>
