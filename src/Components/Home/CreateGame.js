@@ -81,8 +81,16 @@ export default function CreateGame(props) {
                 console.log(response)
             }).catch(function (error) {
                 console.log(error)
-
             })
+
+        axios.put(`/games/${gameid}/users/${props.username}`, {
+            initial_amount: wallet,
+        })
+        .then(function (response) {
+            console.log(response)
+        }).catch(function (error) {
+            console.log(error)
+        })
     }
 
     return (
