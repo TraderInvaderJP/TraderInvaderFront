@@ -3,6 +3,9 @@ import { TextField, Button, Select, MenuItem, InputLabel, FormControl, Grid } fr
 import { Link } from 'react-router-dom';
 import axios from 'axios'
 import { makeStyles } from '@material-ui/core/styles'
+import 'date-fns'
+import DateFnsUtils from '@date-io/date-fns'
+import { MuiPickersUtilsProvider,KeyboardDatePicker } from '@material-ui/pickers' //these last 3 imports are for the date pickers
 
 const useStyles = makeStyles({
     root: {
@@ -61,7 +64,7 @@ const useStyles = makeStyles({
 export default function CreateGame(props) {
     const classes = useStyles()
     const [gameid, SetGameID] = useState('')
-    const [startDate, SetStartDate] = useState('')
+    const [startDate, SetStartDate] = useState(new Date(''))
     const [endDate, SetEndDate] = useState('')
     const [winCondition, SetWinCondition] = useState('')
     const [wallet, SetWallet] = useState('')
@@ -69,7 +72,6 @@ export default function CreateGame(props) {
     const handleSubmit = () => {
         const gameJSON = [
             "startTime:", startDate,
-            "endTime:", endDate,
             "winCondition:", winCondition,
             "wallet:", wallet,
             "username:", props.username]
@@ -79,6 +81,7 @@ export default function CreateGame(props) {
         axios.post(`/games/${gameid}`, {
             GameID: gameid,
             game_data: gameJSON,
+            end_time: endDate
         })
             .then(function (response) {
                 console.log(response)
@@ -178,4 +181,4 @@ export default function CreateGame(props) {
     )
 }
 
-//removed link from button temporarly
+        //removed link from button temporarly
