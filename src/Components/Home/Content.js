@@ -27,7 +27,7 @@ export default function Content(props) {
                 
             </Route>
             <Route path='/app/creategame'>
-                <CreateGame/>
+                <CreateGame username={props.username}/>
             </Route>
             <Route path='/app/joingame'>
                 <JoinGame/>
