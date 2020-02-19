@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'
 import { TextField, Button, Select, MenuItem, InputLabel, FormControl, Grid } from '@material-ui/core'
-import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'
 import axios from 'axios'
 import { makeStyles } from '@material-ui/core/styles'
 import 'date-fns'
 import DateFnsUtils from '@date-io/date-fns'
-import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/pickers' //these last 3 imports are for the date pickers
+import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/pickers' 
 
 const useStyles = makeStyles({
     root: {
@@ -75,10 +75,12 @@ export default function CreateGame(props) {
             "username:", props.username]
 
         console.log(JSON.stringify(gameJSON))
-
+        endDate.setUTCHours(23)
+        endDate.setUTCMinutes(59)
+        
         axios.post(`/games/${gameid}`, {
             game_data: gameJSON,
-            end_time: endDate
+            end_time: (endDate.getTime() / 1000)
         })
             .then(function (response) {
                 console.log(response)
