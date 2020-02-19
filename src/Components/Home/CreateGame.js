@@ -5,7 +5,7 @@ import axios from 'axios'
 import { makeStyles } from '@material-ui/core/styles'
 import 'date-fns'
 import DateFnsUtils from '@date-io/date-fns'
-import { MuiPickersUtilsProvider,KeyboardDatePicker } from '@material-ui/pickers' //these last 3 imports are for the date pickers
+import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/pickers' //these last 3 imports are for the date pickers
 
 const useStyles = makeStyles({
     root: {
@@ -64,14 +64,12 @@ const useStyles = makeStyles({
 export default function CreateGame(props) {
     const classes = useStyles()
     const [gameid, SetGameID] = useState('')
-    const [startDate, SetStartDate] = useState(new Date(''))
-    const [endDate, SetEndDate] = useState('')
+    const [endDate, SetEndDate] = useState(new Date())
     const [winCondition, SetWinCondition] = useState('')
     const [wallet, SetWallet] = useState('')
 
     const handleSubmit = () => {
         const gameJSON = [
-            "startTime:", startDate,
             "winCondition:", winCondition,
             "wallet:", wallet,
             "username:", props.username]
@@ -79,7 +77,6 @@ export default function CreateGame(props) {
         console.log(JSON.stringify(gameJSON))
 
         axios.post(`/games/${gameid}`, {
-            GameID: gameid,
             game_data: gameJSON,
             end_time: endDate
         })
@@ -115,23 +112,19 @@ export default function CreateGame(props) {
                         type='text'
                         autoComplete='off' />
                 </Grid>
-                <Grid item style={{ justifyContent: 'center', marginTop: '10px' }}>
-                    <TextField
-                        InputProps={{ classes: { underline: classes.text } }}
-                        onChange={e => SetStartDate(e.target.value)}
-                        name='startdate'
-                        placeholder='Start Date '
-                        type='text'
-                        autoComplete='off' />
-                </Grid>
-                <Grid item style={{ justifyContent: 'center', marginTop: '10px' }}>
-                    <TextField
-                        InputProps={{ classes: { underline: classes.text } }}
-                        onChange={e => SetEndDate(e.target.value)}
-                        name='enddate'
-                        placeholder='End Date '
-                        type='text'
-                        autoComplete='off' />
+                <Grid item >
+                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                        <KeyboardDatePicker style={{ width: '195px' }}
+                            InputProps={{ classes: { underline: classes.text } }}
+                            disableToolbar
+                            variant="inline"
+                            format="MM/dd/yyyy"
+                            margin="normal"
+                            label='End Date'
+                            value={endDate}
+                            onChange={SetEndDate}
+                        />
+                    </MuiPickersUtilsProvider>
                 </Grid>
                 <Grid item style={{ justifyContent: 'center' }}>
                     <FormControl style={{ background: '#9DAF96' }}>
@@ -143,8 +136,7 @@ export default function CreateGame(props) {
                             value={winCondition}
                             type='text'
                             autoComplete='off' >
-                            <MenuItem value={'Profit Ratio'}>Profit Ratio</MenuItem>
-                            <MenuItem value={'Total Profit'}>Total Profit</MenuItem>
+                            <MenuItem value={'Most Profit'}>Most Profit</MenuItem>
                             <MenuItem value={'Biggest Looser'}>Biggest Looser</MenuItem>
                         </Select>
                     </FormControl>
@@ -181,4 +173,4 @@ export default function CreateGame(props) {
     )
 }
 
-        //removed link from button temporarly
+                    //removed link from button temporarly
