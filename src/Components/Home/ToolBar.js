@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Fab, Toolbar, AppBar, IconButton } from '@material-ui/core'
 import { Menu, Tv } from '@material-ui/icons'
 import { Link } from 'react-router-dom'
 import templogo from '../../templogo.png'
 import { makeStyles } from '@material-ui/core/styles'
+import axios from 'axios'
 
 const useStyles = makeStyles({
     root: {
@@ -59,6 +60,20 @@ const useStyles = makeStyles({
 
 function ToolBar(props) {
     const classes = useStyles()
+
+    const [market, SetMarket] = useState(false)
+
+    useEffect(() => {
+        (async () => {
+            try {
+                const { data } = await axios.get('/stocks/market/isopen')
+                SetMarket(data.is_open)
+            }
+            catch (err) {
+                console.log(err)
+            }
+        })()
+    }, [SetMarket])
 
     return (
         <AppBar position='fixed' >

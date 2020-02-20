@@ -73,27 +73,21 @@ export default function CreateGame(props) {
             const gameJSON = {
                 'winCondition': winCondition,
                 'wallet': wallet,
-                'username': props.username
+                'users': [props.username]
             }
-    
-            console.log(gameJSON)
     
             let temp = endDate
             temp.setUTCHours(23)
             temp.setUTCMinutes(59)
             
-            let response = await axios.post(`/games/${gameid}`, {
+            let response = await axios.post(encodeURI(`/games/${gameid}`), {
                 game_data: gameJSON,
                 end_time: (temp.getTime() / 1000)
             })
-
-            console.log(response)
     
-            response = await axios.put(`/games/${gameid}/users/${props.username}`, {
+            response = await axios.put(encodeURI(`/games/${gameid}/users/${props.username}`), {
                 initial_amount: wallet,
             })
-
-            console.log(response)
         }
         catch (err) {
             console.log(err)
