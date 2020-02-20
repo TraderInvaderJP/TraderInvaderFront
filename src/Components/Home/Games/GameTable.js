@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import {
-    Paper, Table, TableBody, TableCell, TableContainer, TableRow, TableHead, IconButton
-} from '@material-ui/core'
+import { Paper, Table, TableBody, TableCell, TableContainer, TableRow, TableHead, IconButton} from '@material-ui/core'
 import { ArrowForward } from '@material-ui/icons'
 import { makeStyles } from '@material-ui/core/styles'
 import axios from 'axios'
@@ -37,7 +35,6 @@ const useStyles = makeStyles({
         display: 'flex'
     }
 })
-
 
 function GameTable(props) {
     const classes = useStyles()

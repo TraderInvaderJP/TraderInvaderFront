@@ -1,9 +1,9 @@
 import React, { PreventDefault } from 'react';
 import { List, ListItem, Toolbar, AppBar, IconButton, InputAdornment, Typography, Button, TextField } from '@material-ui/core'
 import { VisibilityOff, Visibility } from '@material-ui/icons'
-import { Link } from 'react-router-dom';
-import templogo from '../../templogo.png';
-import { makeStyles } from '@material-ui/core/styles';
+import { Link } from 'react-router-dom'
+import templogo from '../../templogo.png'
+import { makeStyles } from '@material-ui/core/styles'
 import axios from 'axios'
 
 const useStyles = makeStyles({
@@ -90,7 +90,7 @@ function Home(props) {
   const handleSubmit = () => {
 
     if (props.username && props.password !== '') {
-      let accept = LoginAttempt(props.username, props.password) //most of this is useless
+      let accept = LoginAttempt(props.username, props.password) 
       return accept
     } else {
       return false
