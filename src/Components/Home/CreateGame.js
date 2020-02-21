@@ -70,19 +70,15 @@ export default function CreateGame(props) {
 
     const handleSubmit = async () => {
         try {
-            const gameJSON = {
-                'winCondition': winCondition,
-                'wallet': wallet,
-                'users': [props.username]
-            }
-    
             let temp = endDate
             temp.setUTCHours(23)
             temp.setUTCMinutes(59)
             
             let response = await axios.post(encodeURI(`/games/${gameid}`), {
-                game_data: gameJSON,
-                end_time: (temp.getTime() / 1000)
+                winCondition: (winCondition == 'Most Profit' ? true : false),
+                wallet: wallet,
+                users: [props.username],
+                endTime: (temp.getTime() / 1000)
             })
     
             response = await axios.put(encodeURI(`/games/${gameid}/users/${props.username}`), {
@@ -135,7 +131,7 @@ export default function CreateGame(props) {
                             type='text'
                             autoComplete='off' >
                             <MenuItem value={'Most Profit'}>Most Profit</MenuItem>
-                            <MenuItem value={'Biggest Looser'}>Biggest Looser</MenuItem>
+                            <MenuItem value={'Biggest Loser'}>Biggest Looser</MenuItem>
                         </Select>
                     </FormControl>
                 </Grid>
