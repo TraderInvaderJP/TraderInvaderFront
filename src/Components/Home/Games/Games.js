@@ -26,8 +26,8 @@ export default function Games(props) {
                             Current Games
                         </Typography>
                     </ListSubheader>
-                    { games.map(game => (
-                        <React.Fragment>
+                    { games.map((game, id) => (
+                        <React.Fragment key={id}>
                             <Divider />
                             <ListItem>
                                 <ListItemText>{game}</ListItemText>
