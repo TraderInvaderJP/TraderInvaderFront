@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Paper, Table, TableBody, TableCell, TableContainer, TableRow, TableHead, IconButton} from '@material-ui/core'
+import { Link } from 'react-router-dom'
 import { ArrowForward } from '@material-ui/icons'
 import { makeStyles } from '@material-ui/core/styles'
 import axios from 'axios'
@@ -84,7 +85,9 @@ function GameTable(props) {
                                     key={id}>
                                         <TableCell style={{flex: 5}}>{game}</TableCell>
                                         <TableCell style={{flex: 1}}>
+                                        <Link to='/app/game' style={{ textDecoration: 'none' }}>
                                             <IconButton style={{padding: 0}}><ArrowForward /></IconButton>
+                                        </Link>
                                         </TableCell>
                                 </TableRow>)
                         })}
