@@ -1,5 +1,8 @@
 import React, { useState } from 'react'
 import { AppBar, Tabs, Tab, Container } from '@material-ui/core'
+import Buy from './Buy'
+import Sell from './Sell'
+import Info from './Info'
 
 export default function Game() {
     const [value, SetValue] = useState(0)
@@ -15,13 +18,13 @@ export default function Game() {
             </AppBar>
             <Container>
                 {value === 0 &&
-                    <h1>Item One</h1>
+                    <Buy />
                 }         
                 {value === 1 &&
-                    <h1>Item Two</h1>
+                    <Sell />
                 }
                 {value === 2 &&
-                    <h1>Item Three</h1>
+                    <Info />
                 }
             </Container>
         </div>
