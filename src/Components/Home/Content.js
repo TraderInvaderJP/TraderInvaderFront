@@ -1,6 +1,6 @@
 import React from 'react'
 import { Route } from 'react-router-dom'
-import Game from './Game'
+import Game from './Game/Game'
 import Games from './Games/Games'
 import Profile from './Profile/Profile'
 import Friends from './Friends/Friends'
@@ -50,6 +50,11 @@ export default function Content(props) {
             <Route path='/app/help'>
                 <Container style={{width: '100%', marginTop: '130px', marginBottom: '10px'}}>
                     <Help />
+                </Container>
+            </Route>
+            <Route path='/app/settings'>
+                <Container style={{width: '100%', marginTop: '130px', marginBottom: '10px'}}>
+                    <Settings />
                 </Container>
             </Route>
         </React.Fragment>
