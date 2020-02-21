@@ -7,6 +7,7 @@ import Statistics from './Statistics/Statistics'
 import CreateGame from './CreateGame'
 import JoinGame from './JoinGame'
 import Help from './Help/Help'
+import Game from '.Game'
 import { Container } from '@material-ui/core'
 
 export default function Content(props) {
