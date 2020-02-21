@@ -85,12 +85,14 @@ function UserDrawer(props) {
                 </List>
                 <Divider />
                 <List>
-                    <ListItem button>
-                        <ListItemIcon>
-                            <Settings />
-                        </ListItemIcon>
-                        <ListItemText primary={'Settings'} />
-                    </ListItem>
+                    <Link to='/app/settings' style={{ color: 'black', textDecoration: 'none' }}>
+                        <ListItem button>
+                            <ListItemIcon>
+                                <Settings />
+                            </ListItemIcon>
+                            <ListItemText primary={'Settings'} />
+                        </ListItem>
+                    </Link>
                     <Link to='/app/help' style={{ color: 'black', textDecoration: 'none' }}>
                         <ListItem button>
                             <ListItemIcon>
