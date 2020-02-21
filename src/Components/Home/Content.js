@@ -8,6 +8,8 @@ import Statistics from './Statistics/Statistics'
 import CreateGame from './CreateGame'
 import JoinGame from './JoinGame'
 import Help from './Help/Help'
+import Game from './Game'
+import Settings from './Settings'
 import { Container } from '@material-ui/core'
 
 export default function Content(props) {
@@ -34,7 +36,11 @@ export default function Content(props) {
                 </Container>
             </Route>
             <Route path='/app/game'>
+<<<<<<< HEAD
                 <Game />
+=======
+                <Game username={props.username}/>
+>>>>>>> a5aaeb25f029d6e8b7d71845846eb73d7533839c
             </Route>
             <Route path='/app/creategame'>
                 <Container style={{width: '100%', marginTop: '130px', marginBottom: '10px'}}>
@@ -51,6 +57,13 @@ export default function Content(props) {
                     <Help />
                 </Container>
             </Route>
+<<<<<<< HEAD
         </React.Fragment>
+=======
+            <Route path='/app/settings'>
+                <Settings />
+                </Route>
+        </Container>
+>>>>>>> a5aaeb25f029d6e8b7d71845846eb73d7533839c
     )
 }
