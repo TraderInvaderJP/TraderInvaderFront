@@ -68,34 +68,30 @@ export default function CreateGame(props) {
     const [winCondition, SetWinCondition] = useState('')
     const [wallet, SetWallet] = useState('')
 
-    const handleSubmit = () => {
-        const gameJSON = [
-            "winCondition:", winCondition,
-            "wallet:", wallet,
-            "username:", props.username]
-
-        console.log(JSON.stringify(gameJSON))
-        endDate.setUTCHours(23)
-        endDate.setUTCMinutes(59)
-        
-        axios.post(`/games/${gameid}`, {
-            game_data: gameJSON,
-            end_time: (endDate.getTime() / 1000)
-        })
-            .then(function (response) {
-                console.log(response)
-            }).catch(function (error) {
-                console.log(error)
+    const handleSubmit = async () => {
+        try {
+            const gameJSON = {
+                'winCondition': winCondition,
+                'wallet': wallet,
+                'users': [props.username]
+            }
+    
+            let temp = endDate
+            temp.setUTCHours(23)
+            temp.setUTCMinutes(59)
+            
+            let response = await axios.post(encodeURI(`/games/${gameid}`), {
+                game_data: gameJSON,
+                end_time: (temp.getTime() / 1000)
             })
-
-        axios.put(`/games/${gameid}/users/${props.username}`, {
-            initial_amount: wallet,
-        })
-            .then(function (response) {
-                console.log(response)
-            }).catch(function (error) {
-                console.log(error)
+    
+            response = await axios.put(encodeURI(`/games/${gameid}/users/${props.username}`), {
+                initial_amount: wallet,
             })
+        }
+        catch (err) {
+            console.log(err)
+        }
     }
 
     return (

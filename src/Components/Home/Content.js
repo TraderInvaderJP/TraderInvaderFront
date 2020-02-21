@@ -6,7 +6,7 @@ import Friends from './Friends/Friends'
 import Statistics from './Statistics/Statistics'
 import CreateGame from './CreateGame'
 import JoinGame from './JoinGame'
-import Game from './Game'
+import Help from './Help/Help'
 import { Container } from '@material-ui/core'
 
 export default function Content(props) {
@@ -32,6 +32,9 @@ export default function Content(props) {
             </Route>
             <Route path='/app/joingame'>
                 <JoinGame/>
+            </Route>
+            <Route path='/app/help'>
+                <Help />
             </Route>
         </Container>
     )

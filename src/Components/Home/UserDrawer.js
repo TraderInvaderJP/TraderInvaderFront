@@ -91,12 +91,14 @@ function UserDrawer(props) {
                         </ListItemIcon>
                         <ListItemText primary={'Settings'} />
                     </ListItem>
-                    <ListItem button>
-                        <ListItemIcon>
-                            <Help />
-                        </ListItemIcon>
-                        <ListItemText primary={'Help'} />
-                    </ListItem>
+                    <Link to='/app/help' style={{ color: 'black', textDecoration: 'none' }}>
+                        <ListItem button>
+                            <ListItemIcon>
+                                <Help />
+                            </ListItemIcon>
+                            <ListItemText primary={'Help'} />
+                        </ListItem>
+                    </Link>
                 </List>
             </div>
         </Drawer>
