@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Redirect, Route } from 'react-router-dom'
+import { createMuiTheme, MuiThemeProvider } from '@material-ui/core'
 import axios from 'axios'
 import Login from './Components/Authentication/Login'
 import UserHome from './Components/Home/UserHome'
@@ -8,6 +9,13 @@ import Verification from './Components/Authentication/Verification'
 import Create from './Components/Authentication/Create'
 import Change from './Components/Authentication/ChangePass'
 import NewPassVerification from './Components/Authentication/NewPassVerification'
+
+const theme = createMuiTheme({
+    palette: {
+        primary: { main: '#43AA1F'},
+        secondary: { main: '#000' }
+    }
+})
 
 export default function App() {
     const [auth, setAuth] = useState(false)
@@ -52,66 +60,68 @@ export default function App() {
     }, [auth, username])
 
     return (
-        <div id='root' style={{backgroundColor: '#9DAF96', height: '100%'}}>
-            { auth && <Redirect to='/app' /> }
-            <Route path='/' exact>
-                <Login 
-                setUsername={setUsername}
-                setPassword={setPassword}
-                setAuth={setAuth}
-                setLogin={setLogin}
-                username={username}
-                password={password}
-                login={login}/>
-            </Route>
-            <Route path='/verification'>
-                <Verification 
-                setVerification={setVerification}
-                username={username}
-                verification={verification}/>
-            </Route>
-            <Route path='/forgot'>
-                <Forgot 
-                setUsername={setUsername}/>
-            </Route>
-            <Route path='/create'>
-                <Create 
-                setUsername={setUsername}
-                setPassword={setPassword}
-                setConfirm={setConfirm}
-                setEmail={setEmail}
-                setCreateAuth={setCreateAuth}
-                setDidCreate={setDidCreate}
-                username={username}
-                password={password}
-                email={email}
-                confirm={confirm}
-                createAuth={createAuth}
-                didCreate={didCreate}/>
-            </Route>
-            <Route path='/changepass'>
-                <Change
-                setPassword={setPassword}
-                setConfirm={setConfirm}
-                password={password}
-                confirm={confirm}/>
-            </Route>
-            <Route path='/newpassverification'>
-                <NewPassVerification
-                setVerification={setVerification}
-                username={username}
-                verification={verification}/>
-            </Route>
-            <Route path='/app'>
-                <UserHome 
-                    setAuth={setAuth}
-                    auth={auth} 
+        <MuiThemeProvider theme={theme}>
+             <div id='root' style={{backgroundColor: '#9DAF96', height: '100%'}}>
+                { auth && <Redirect to='/app' /> }
+                <Route path='/' exact>
+                    <Login 
                     setUsername={setUsername}
                     setPassword={setPassword}
+                    setAuth={setAuth}
                     setLogin={setLogin}
                     username={username}
-                    login={login} />
-            </Route>
-        </div>
+                    password={password}
+                    login={login}/>
+                </Route>
+                <Route path='/verification'>
+                    <Verification 
+                        setVerification={setVerification}
+                        username={username}
+                        verification={verification}/>
+                </Route>
+                <Route path='/forgot'>
+                    <Forgot 
+                    setUsername={setUsername}/>
+                </Route>
+                <Route path='/create'>
+                    <Create 
+                    setUsername={setUsername}
+                    setPassword={setPassword}
+                    setConfirm={setConfirm}
+                    setEmail={setEmail}
+                    setCreateAuth={setCreateAuth}
+                    setDidCreate={setDidCreate}
+                    username={username}
+                    password={password}
+                    email={email}
+                    confirm={confirm}
+                    createAuth={createAuth}
+                    didCreate={didCreate}/>
+                </Route>
+                <Route path='/changepass'>
+                    <Change
+                    setPassword={setPassword}
+                    setConfirm={setConfirm}
+                    password={password}
+                    confirm={confirm}/>
+                </Route>
+                <Route path='/newpassverification'>
+                    <NewPassVerification
+                    setVerification={setVerification}
+                    username={username}
+                    verification={verification}/>
+                </Route>
+                <Route path='/app'>
+                    <UserHome 
+                        setAuth={setAuth}
+                        auth={auth} 
+                        setUsername={setUsername}
+                        setPassword={setPassword}
+                        setLogin={setLogin}
+                        username={username}
+                        login={login} />
+                </Route>
+            </div>
+        </MuiThemeProvider>
     )
 }

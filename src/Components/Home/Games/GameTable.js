@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Paper, Table, TableBody, TableCell, TableContainer, TableRow, TableHead, IconButton} from '@material-ui/core'
 import { ArrowForward } from '@material-ui/icons'
 import { makeStyles } from '@material-ui/core/styles'
+import { Link } from 'react-router-dom'
 import axios from 'axios'
 
 const useStyles = makeStyles({
@@ -55,7 +56,7 @@ function GameTable(props) {
     ]
 
     return (
-        <Paper>
+        <Paper elevation={3}>
             <TableContainer >
                 <Table style={{width: '100%'}}>
                     <TableHead>
@@ -84,7 +85,9 @@ function GameTable(props) {
                                     key={id}>
                                         <TableCell style={{flex: 5}}>{game}</TableCell>
                                         <TableCell style={{flex: 1}}>
-                                            <IconButton style={{padding: 0}}><ArrowForward /></IconButton>
+                                            <Link to='app/game'>
+                                                <IconButton style={{padding: 0}}><ArrowForward /></IconButton>
+                                            </Link>
                                         </TableCell>
                                 </TableRow>)
                         })}

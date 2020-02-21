@@ -1,5 +1,6 @@
 import React from 'react'
 import { Route } from 'react-router-dom'
+import Game from './Game'
 import Games from './Games/Games'
 import Profile from './Profile/Profile'
 import Friends from './Friends/Friends'
@@ -11,31 +12,45 @@ import { Container } from '@material-ui/core'
 
 export default function Content(props) {
     return (
-        <Container style={{width: '100%', marginTop: '130px', marginBottom: '10px'}}>
+        <React.Fragment>
             <Route path='/app' exact>
+            <Container style={{width: '100%', marginTop: '130px', marginBottom: '10px'}}>
                 <Games username={props.username} />
+            </Container>
             </Route>
             <Route path='/app/profile'>
-                <Profile />
+                <Container style={{width: '100%', marginTop: '130px', marginBottom: '10px'}}>
+                    <Profile />
+                </Container>
             </Route>
             <Route path='/app/friends'>
-                <Friends />
+                <Container style={{width: '100%', marginTop: '130px', marginBottom: '10px'}}>
+                    <Friends />
+                </Container>
             </Route>
             <Route path='/app/statistics'>
-                <Statistics />
+                <Container style={{width: '100%', marginTop: '130px', marginBottom: '10px'}}>
+                    <Statistics />
+                </Container>
             </Route>
             <Route path='/app/game'>
-                
+                <Game />
             </Route>
             <Route path='/app/creategame'>
-                <CreateGame username={props.username}/>
+                <Container style={{width: '100%', marginTop: '130px', marginBottom: '10px'}}>
+                    <CreateGame username={props.username}/>
+                </Container>
             </Route>
             <Route path='/app/joingame'>
-                <JoinGame/>
+                <Container style={{width: '100%', marginTop: '130px', marginBottom: '10px'}}>
+                    <JoinGame/>
+                </Container>
             </Route>
             <Route path='/app/help'>
-                <Help />
+                <Container style={{width: '100%', marginTop: '130px', marginBottom: '10px'}}>
+                    <Help />
+                </Container>
             </Route>
-        </Container>
+        </React.Fragment>
     )
 }
