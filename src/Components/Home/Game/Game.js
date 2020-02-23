@@ -10,9 +10,6 @@ const useStyles = makeStyles({
         flexGrow: 1,
         display: 'flex',
         justifyContent: 'center',
-        alignItems: 'center',
-        backgroundColor: '#9DAF96',
-        width: '100%'
     },
     container: {
             width: '100%',
@@ -34,7 +31,7 @@ export default function Game() {
                     <Tab label='Info' style={{flex: 1}}/>
                 </Tabs>
             </AppBar>
-            <Container className={classes.root} style={{width: '100%', marginTop: '130px', marginBottom: '10px'}}>
+            <Container className={classes.root} style={{width: '100%', marginTop: '20px', marginBottom: '10px'}}>
                 {value === 0 &&
                     <Buy />
                 }         

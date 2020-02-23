@@ -75,7 +75,7 @@ export default function CreateGame(props) {
             temp.setUTCMinutes(59)
             
             let response = await axios.post(encodeURI(`/games/${gameid}`), {
-                winCondition: (winCondition == 'Most Profit' ? true : false),
+                winCondition: (winCondition === 'Most Profit' ? true : false),
                 wallet: wallet,
                 users: [props.username],
                 endTime: (temp.getTime() / 1000)
