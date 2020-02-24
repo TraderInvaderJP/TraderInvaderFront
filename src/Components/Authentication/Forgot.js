@@ -67,8 +67,6 @@ function Forgot(props) {
       username: props.username,
     })
     .then(function (response) {
-      if (response.data.success === true) 
-        props.userFound(true)
       console.log(response)
     }).catch(function (error) {
       console.log(error)
@@ -77,7 +75,6 @@ function Forgot(props) {
 
   const handleSubmit = () => {   
     if (props.username !== '') {
-      props.userFound(true)
       UsernameCheck(props.username)
     }
    }

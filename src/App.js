@@ -80,7 +80,8 @@ export default function App() {
                 </Route>
                 <Route path='/forgot'>
                     <Forgot 
-                        setUsername={setUsername}/>
+                        setUsername={setUsername}
+                        username={username} />
                 </Route>
                 <Route path='/create'>
                     <Create 
