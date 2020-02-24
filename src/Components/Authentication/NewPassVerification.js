@@ -65,7 +65,7 @@ function NewPassVerification(props) {
 
   const handleSubmit = () => {
 
-    let url = `https://o5gn70te7h.execute-api.us-west-2.amazonaws.com/latest/users/${props.username}/password/update`
+    let url = `https://o5gn70te7h.execute-api.us-west-2.amazonaws.com/latest/users/${props.username}/password`
     axios.put(url, {
       confirmation_code: props.verification
     })

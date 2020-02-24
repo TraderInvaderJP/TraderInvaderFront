@@ -67,8 +67,21 @@ const useStyles = makeStyles({
       const handleClickShowPassword = () => { setValues({ ...values, showPassword: !values.showPassword }) }
     
       const handleMouseDownPassword = event => { event.preventDefault() }
+      
+      const PassChange = () => {
+        axios.put(`/users/${props.username}/password/update`, {
+          confirmation_code: props.verification,
+          new_password: props.password,
+        })
+        .then(function (response) {
+          console.log(response)
+        }).catch(function (error) {
+          console.log(error);
+        })
+      }
 
       const handleSubmit = () => {
+        
       }
 
       return (
