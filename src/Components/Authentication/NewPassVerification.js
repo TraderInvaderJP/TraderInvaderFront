@@ -65,9 +65,10 @@ function NewPassVerification(props) {
 
   const handleSubmit = () => {
 
-    let url = `https://o5gn70te7h.execute-api.us-west-2.amazonaws.com/latest/users/${props.username}/password`
+    let url = `https://o5gn70te7h.execute-api.us-west-2.amazonaws.com/latest/users/${props.username}/password/update`
     axios.put(url, {
-      confirmation_code: props.verification
+      confirmation_code: props.verification,
+      new_password: props.password,
     })
       .then(function (response) {
         console.log(response)
@@ -88,29 +89,73 @@ function NewPassVerification(props) {
         </Toolbar>
       </AppBar>
       <List>
-        <ListItem style={{ marginTop: '10px' }}>
-          <TextField
-            onChange={handleVerificationChange}
-            InputProps={{ classes: { underline: classes.text } }}
-            className={classes.text}
-            name='verification'
-            placeholder='Verification Code'
-            type='text' />
-        </ListItem>
-        <List >
-          <ListItem style={{ justifyContent: 'center', marginTop: '50px' }}>
-            <Link to='/changepass' style={{ textDecoration: 'none' }}>
-              <Button className={classes.button}
-                onClick={handleSubmit}
-                variant='text'>Submit</Button>
-            </Link>
-          </ListItem>
-          <ListItem style={{ justifyContent: 'center', marginTop: '5px' }}>
-            <Link to='#'>
-              Didn't Receive Code?</Link>
-          </ListItem>
-        </List>
-      </List>
+            <List style={{ marginRight: '-40px' }} >
+              <ListItem style={{ marginTop: '10px' }}>
+                <TextField
+                onChange={handleVerificationChange}
+                InputProps={{ classes: { underline: classes.text } }}
+                className={classes.text}
+                name='verification'
+                placeholder='Verification Code'
+                type='text' />
+              </ListItem>
+              <ListItem style={{ marginTop: '10px' }}>
+                <TextField
+                  onChange={e => props.setPassword(e.target.value)}
+                  InputProps={{ classes: { underline: classes.text } }}
+                  error={
+                    (props.create && props.password === '') ||
+                    (props.create && props.password !== props.confirm)}
+                  name='password'
+                  placeholder='New Password'
+                  type={values.showPassword ? 'text' : 'password'} />
+                <InputAdornment position='end'>
+                  <IconButton
+                    aria-label='toggle password visibility'
+                    onClick={handleClickShowPassword}
+                    onMouseDown={handleMouseDownPassword}
+                    edge='end'>
+                    {values.showPassword ? <Visibility /> : <VisibilityOff />}
+                  </IconButton>
+                </InputAdornment>
+              </ListItem>
+              <ListItem style={{ marginTop: '10px' }}>
+                <TextField
+                  onChange={e => props.setConfirm(e.target.value)}
+                  InputProps={{ classes: { underline: classes.text } }}
+                  error={
+                    (props.create && props.confirm === '') ||
+                    (props.create && props.password !== props.confirm)}
+                  name='confirm'
+                  placeholder='Confirm New Password'
+                  type={values.showPassword ? 'text' : 'password'} />
+                <InputAdornment position='end'>
+                  <IconButton
+                    aria-label='toggle password visibility'
+                    onClick={handleClickShowPassword}
+                    onMouseDown={handleMouseDownPassword}
+                    edge='end'>
+                    {values.showPassword ? <Visibility /> : <VisibilityOff />}
+                  </IconButton>
+                </InputAdornment>
+              </ListItem>
+              {props.create && (
+                <ListItem>
+                  <Typography
+                    style={{ fontSize: 12, color: 'red' }} >
+                    information entered is incomplete
+                  </Typography>
+                </ListItem>)}
+            </List>
+            <ListItem
+              style={{ justifyContent: 'center', marginTop: '30px' }}>
+              <Link to='/' style={{ textDecoration: 'none' }}>
+                <Button className={classes.button}
+                  onClick={handleSubmit}
+                  variant='text'>Confirm</Button>
+              </Link>
+            </ListItem>
+          </List>
     </div>
   )
 }
