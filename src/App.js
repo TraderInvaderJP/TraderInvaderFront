@@ -7,7 +7,6 @@ import UserHome from './Components/Home/UserHome'
 import Forgot from './Components/Authentication/Forgot'
 import Verification from './Components/Authentication/Verification'
 import Create from './Components/Authentication/Create'
-import Change from './Components/Authentication/ChangePass'
 import NewPassVerification from './Components/Authentication/NewPassVerification'
 
 const theme = createMuiTheme({
@@ -98,18 +97,15 @@ export default function App() {
                         createAuth={createAuth}
                         didCreate={didCreate}/>
                 </Route>
-                <Route path='/changepass'>
-                    <Change
-                        setPassword={setPassword}
-                        setConfirm={setConfirm}
-                        password={password}
-                        confirm={confirm}/>
-                </Route>
                 <Route path='/newpassverification'>
                     <NewPassVerification
-                        setVerification={setVerification}
-                        username={username}
-                        verification={verification}/>
+                    setVerification={setVerification}
+                    username={username}
+                    verification={verification}
+                    setPassword={setPassword}
+                    setConfirm={setConfirm}
+                    password={password}
+                    confirm={confirm}/>
                 </Route>
                 <Route path='/app'>
                     <UserHome 
