@@ -3,7 +3,6 @@ import { Paper, List, ListItem, ListItemText, IconButton, ListSubheader, Typogra
 import { ArrowForward } from '@material-ui/icons'
 import { makeStyles } from '@material-ui/core/styles'
 import { Link } from 'react-router-dom'
-import axios from 'axios'
 
 const useStyles = makeStyles({
     game: {
@@ -27,17 +26,6 @@ const useStyles = makeStyles({
 
 export default function Games(props) {
     const classes = useStyles()
-    const [games, SetGames] = useState([])
-
-    useEffect(() => {
-        axios.get(`/games/${props.username}`, {
-        })
-            .then(res => {
-                const { data } = res.data
-                SetGames(data)
-            })
-            .catch(err => console.log(err))
-    }, [props.username, SetGames])
 
     return (
         <div>
@@ -48,13 +36,13 @@ export default function Games(props) {
                             Current Games
                         </Typography>
                     </ListSubheader>
-                    {games.map((game, id) => (
+                    {props.games.map((game, id) => (
                         <React.Fragment key={id}>
                             <Divider />
                             <ListItem className={classes.row}> 
                                 <ListItemText>{game}</ListItemText>
                                 <Link to='/app/game'>
-                                    <IconButton className={classes.arrow} style={{ padding: 0, color: '#43AA1F' }}>
+                                    <IconButton className={classes.arrow} style={{ padding: 0, color: '#43AA1F' }} onClick={() => props.getGame(id)}>
                                         <ArrowForward />
                                     </IconButton>
                                 </Link>

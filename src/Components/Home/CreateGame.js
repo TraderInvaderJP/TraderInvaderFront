@@ -84,6 +84,8 @@ export default function CreateGame(props) {
             response = await axios.put(encodeURI(`/games/${gameid}/users/${props.username}`), {
                 initial_amount: wallet,
             })
+
+            props.addGame(gameid)
         }
         catch (err) {
             console.log(err)
@@ -156,7 +158,6 @@ export default function CreateGame(props) {
                     </FormControl>
                 </Grid>
                 <Grid item style={{ marginTop: '25px', justifyContent: 'center' }}>
-
                     <Button className={classes.button}
                         onClick={handleSubmit}
                         variant='text'>Submit</Button>

@@ -65,13 +65,13 @@ export default function App() {
                 { auth && <Redirect to='/app' /> }
                 <Route path='/' exact>
                     <Login 
-                    setUsername={setUsername}
-                    setPassword={setPassword}
-                    setAuth={setAuth}
-                    setLogin={setLogin}
-                    username={username}
-                    password={password}
-                    login={login}/>
+                        setUsername={setUsername}
+                        setPassword={setPassword}
+                        setAuth={setAuth}
+                        setLogin={setLogin}
+                        username={username}
+                        password={password}
+                        login={login}/>
                 </Route>
                 <Route path='/verification'>
                     <Verification 
@@ -81,35 +81,35 @@ export default function App() {
                 </Route>
                 <Route path='/forgot'>
                     <Forgot 
-                    setUsername={setUsername}/>
+                        setUsername={setUsername}/>
                 </Route>
                 <Route path='/create'>
                     <Create 
-                    setUsername={setUsername}
-                    setPassword={setPassword}
-                    setConfirm={setConfirm}
-                    setEmail={setEmail}
-                    setCreateAuth={setCreateAuth}
-                    setDidCreate={setDidCreate}
-                    username={username}
-                    password={password}
-                    email={email}
-                    confirm={confirm}
-                    createAuth={createAuth}
-                    didCreate={didCreate}/>
+                        setUsername={setUsername}
+                        setPassword={setPassword}
+                        setConfirm={setConfirm}
+                        setEmail={setEmail}
+                        setCreateAuth={setCreateAuth}
+                        setDidCreate={setDidCreate}
+                        username={username}
+                        password={password}
+                        email={email}
+                        confirm={confirm}
+                        createAuth={createAuth}
+                        didCreate={didCreate}/>
                 </Route>
                 <Route path='/changepass'>
                     <Change
-                    setPassword={setPassword}
-                    setConfirm={setConfirm}
-                    password={password}
-                    confirm={confirm}/>
+                        setPassword={setPassword}
+                        setConfirm={setConfirm}
+                        password={password}
+                        confirm={confirm}/>
                 </Route>
                 <Route path='/newpassverification'>
                     <NewPassVerification
-                    setVerification={setVerification}
-                    username={username}
-                    verification={verification}/>
+                        setVerification={setVerification}
+                        username={username}
+                        verification={verification}/>
                 </Route>
                 <Route path='/app'>
                     <UserHome 
