@@ -1,6 +1,6 @@
-import React from 'react'
-import { Grid, Paper, List, ListItem, ListItemText, IconButton, ListSubheader, Typography, Divider, TextField, Button } from '@material-ui/core'
-import { TrendingUp, TrendingDown, ArrowUpward } from '@material-ui/icons'
+import React, { useState} from 'react'
+import { Grid, Paper, List, ListItem, ListItemText, Divider, TextField, Button } from '@material-ui/core'
+import { TrendingUp, TrendingDown } from '@material-ui/icons'
 import { makeStyles } from '@material-ui/core/styles'
 
 const useStyles = makeStyles({
@@ -49,10 +49,12 @@ const useStyles = makeStyles({
       },
 })
 
-const stocks = ['goop', 'goog', 'rwar']
+const stocks = ['FASD', 'SOOD', 'GOOG', 'RWAR', 'YUPP']
 
 export default function Sell() {
     const classes = useStyles()
+    const [trending, SetTrending] = useState(false)
+    const [symbol, SetSymbol] = useState('')
 
     return (
         <div style={{ width: '100%' }}>
@@ -68,6 +70,7 @@ export default function Sell() {
                         name='stock'
                         label='Symbol'
                         type='text'
+                        onChange={SetSymbol}
                         autoComplete='off' 
                         />
                 </Grid>
@@ -86,18 +89,16 @@ export default function Sell() {
                 </Grid>
                 <Paper style={{ width: '100%', marginTop: '30px' }}>
                     <List className={classes.game}>
-                      
                         {stocks.map((stock, id) => (
                             <React.Fragment key={id}>
                                 <Divider />
                                 <ListItem className={classes.row} style={{ width: '100%' }} >
-                                    <ListItemText style={{width: '25%'}}>Symbol: {stock}</ListItemText>
-                                    <ListItemText style={{width: '25%'}}>Count: {stock}</ListItemText>
-                                    <ListItemText style={{width: '25%'}}>Current: $10.01</ListItemText>
-                                    <ListItemText style={{width: '25%'}}>Purchase: $9.45</ListItemText>
-                                    <IconButton className={classes.arrow} style={{ padding: 0, color: '#43AA1F' }}>
-                                        <ArrowUpward />
-                                    </IconButton>
+                                    <ListItemText style={{width: '45%'}}>{stock}</ListItemText>
+                                    <ListItemText style={{width: '40%'}} >50</ListItemText>
+                                    <ListItemText >
+                                        {!trending ? <TrendingDown style={{marginRight: '10px', color: 'red'}}/>
+                                        : <TrendingUp style={{marginRight: '10px', color: '#00FF25'}}/>}
+                                        $10.01</ListItemText>
                                 </ListItem>
                             </React.Fragment>))
                         }
