@@ -3,6 +3,7 @@ import { List, ListItem, Toolbar, AppBar, Typography, Button, TextField } from '
 import { Link } from 'react-router-dom';
 import templogo from '../../templogo.png';
 import { makeStyles } from '@material-ui/core/styles';
+import axios from 'axios'
 
 const useStyles = makeStyles({
   root: {
@@ -61,7 +62,24 @@ const useStyles = makeStyles({
 function Forgot(props) {
   const classes = useStyles();
 
-  const handleSubmit = () => {
+  const UsernameCheck = () => {
+    axios.put(`/users/${props.username}/password/request`, {
+      username: props.username,
+    })
+    .then(function (response) {
+      if (response.data.success === true) 
+        props.userFound(true)
+      console.log(response)
+    }).catch(function (error) {
+      console.log(error)
+    })
+  }
+
+  const handleSubmit = () => {   
+    if (props.username !== '') {
+      props.userFound(true)
+      UsernameCheck(props.username)
+    }
    }
 
   return (
