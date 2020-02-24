@@ -1,6 +1,7 @@
 import React, { } from 'react';
-import { List, ListItem, Toolbar, AppBar, TextField, Button } from '@material-ui/core'
+import { List, ListItem, Toolbar, AppBar, TextField, InputAdornment, IconButton, Button, Typography } from '@material-ui/core'
 import { Link } from 'react-router-dom';
+import { VisibilityOff, Visibility } from '@material-ui/icons'
 import templogo from '../../templogo.png';
 import { makeStyles } from '@material-ui/core/styles';
 import axios from 'axios'
@@ -60,6 +61,14 @@ const useStyles = makeStyles({
 
 function NewPassVerification(props) {
   const classes = useStyles()
+
+  const [values, setValues] = React.useState({
+    showPassword: false,
+  })
+
+  const handleClickShowPassword = () => { setValues({ ...values, showPassword: !values.showPassword }) }
+
+  const handleMouseDownPassword = event => { event.preventDefault() }
 
   const handleVerificationChange = event => { props.setVerification(event.target.value) }
 
