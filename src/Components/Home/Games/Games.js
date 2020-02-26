@@ -5,8 +5,10 @@ import { makeStyles } from '@material-ui/core/styles'
 import { Link } from 'react-router-dom'
 
 const useStyles = makeStyles({
+    paper: {
+        backgroundColor: '#0A0708'
+    },
     game: {
-        backgroundColor: '#0A0708',
         color: '#43AA1F',
     },
     row: {
@@ -29,7 +31,7 @@ export default function Games(props) {
 
     return (
         <div>
-            <Paper>
+            <Paper className={classes.paper}>
                 <List className={classes.game}>
                     <ListSubheader color='primary' align='center'>
                         <Typography variant='h5'>

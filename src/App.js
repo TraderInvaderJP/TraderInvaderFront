@@ -36,18 +36,21 @@ export default function App() {
                 try{
                     const { data } = await axios.get(`/users?access_token=${token}`)
                     
-                    setUsername(data.data.Username)
-
-                    const refresh_token = localStorage.getItem('refresh')
-                
-                    if (refresh_token)
+                    if(data.success)
                     {
-                        const { data } = await axios.put('/users/token', { refresh_token })
-                        
-                        if(data.success)
+                        setUsername(data.data.Username)
+
+                        const refresh_token = localStorage.getItem('refresh')
+                    
+                        if (refresh_token)
                         {
-                            localStorage.setItem('token', data.data.access_token)
-                            setAuth(true);
+                            const { data } = await axios.put('/users/token', { refresh_token })
+                            
+                            if(data.success)
+                            {
+                                localStorage.setItem('token', data.data.access_token)
+                                setAuth(true);
+                            }
                         }
                     }
                 }

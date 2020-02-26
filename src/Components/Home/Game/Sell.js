@@ -4,8 +4,10 @@ import { TrendingUp, TrendingDown } from '@material-ui/icons'
 import { makeStyles } from '@material-ui/core/styles'
 
 const useStyles = makeStyles({
+    paper: {
+        backgroundColor: '#0A0708'
+    },
     game: {
-        backgroundColor: '#0A0708',
         color: '#43AA1F',
     },
     row: {
@@ -87,7 +89,7 @@ export default function Sell() {
                     <Button className={classes.button}
                         variant='text'>Sell</Button>
                 </Grid>
-                <Paper style={{ width: '100%', marginTop: '30px' }}>
+                <Paper className={classes.paper} style={{ width: '100%', marginTop: '30px' }}>
                     <List className={classes.game}>
                         {stocks.map((stock, id) => (
                             <React.Fragment key={id}>

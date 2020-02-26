@@ -88,7 +88,6 @@ function Home(props) {
   }
 
   const handleSubmit = () => {
-
     if (props.username && props.password !== '') {
       let accept = LoginAttempt(props.username, props.password) 
       return accept
