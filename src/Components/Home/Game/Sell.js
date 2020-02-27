@@ -51,9 +51,13 @@ const useStyles = makeStyles({
       },
 })
 
+const handleSubmit = () => {
+    console.log()
+  }
+
 const stocks = ['FASD', 'SOOD', 'GOOG', 'RWAR', 'YUPP']
 
-export default function Sell() {
+export default function Sell(props) {
     const classes = useStyles()
     const [trending, SetTrending] = useState(false)
     const [symbol, SetSymbol] = useState('')
@@ -87,6 +91,7 @@ export default function Sell() {
                 </Grid>
                 <Grid item>
                     <Button className={classes.button}
+                    onClick={handleSubmit}
                         variant='text'>Sell</Button>
                 </Grid>
                 <Paper className={classes.paper} style={{ width: '100%', marginTop: '30px' }}>

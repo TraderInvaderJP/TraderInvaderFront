@@ -18,7 +18,7 @@ const useStyles = makeStyles({
     }
 })
 
-export default function Game() {
+export default function Game(props) {
     const classes = useStyles()
     const [value, SetValue] = useState(0)
 
