@@ -33,13 +33,13 @@ export default function Game(props) {
             </AppBar>
             <Container className={classes.root} style={{width: '100%', marginTop: '20px', marginBottom: '10px'}}>
                 {value === 0 &&
-                    <Buy />
+                    <Buy portfolio={props.portfolio}/>
                 }         
                 {value === 1 &&
-                    <Sell />
+                    <Sell portfolio={props.portfolio} />
                 }
                 {value === 2 &&
-                    <Info />
+                    <Info portfolio={props.portfolio} />
                 }
             </Container>
         </div>
