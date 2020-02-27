@@ -1,4 +1,4 @@
-import React, { useState} from 'react'
+import React, { useState, useEffect } from 'react'
 import { Grid, Paper, List, ListItem, ListItemText, Divider, TextField, Button } from '@material-ui/core'
 import { TrendingUp, TrendingDown } from '@material-ui/icons'
 import { makeStyles } from '@material-ui/core/styles'
@@ -51,16 +51,23 @@ const useStyles = makeStyles({
       },
 })
 
-const handleSubmit = () => {
-    console.log()
-  }
-
-const stocks = ['FASD', 'SOOD', 'GOOG', 'RWAR', 'YUPP']
-
 export default function Sell(props) {
     const classes = useStyles()
     const [trending, SetTrending] = useState(false)
     const [symbol, SetSymbol] = useState('')
+    const [stocks, SetStocks] = useState([])
+
+    useEffect(() => {
+        let keys = Object.keys(props.portfolio.stocks)
+        let values = Object.values(props.portfolio.stocks)
+
+        SetStocks(keys.map((item, index) => {return { symbol: item, count: values[index]}}))
+
+    }, [props.portfolio, SetStocks])
+    
+    const handleSubmit = () => {
+        console.log(props.portfolio.stocks)
+      }
 
     return (
         <div style={{ width: '100%' }}>
@@ -100,8 +107,8 @@ export default function Sell(props) {
                             <React.Fragment key={id}>
                                 <Divider />
                                 <ListItem className={classes.row} style={{ width: '100%' }} >
-                                    <ListItemText style={{width: '45%'}}>{stock}</ListItemText>
-                                    <ListItemText style={{width: '40%'}} >50</ListItemText>
+                                    <ListItemText style={{width: '45%'}}>{stock.symbol}</ListItemText>
+                                    <ListItemText style={{width: '40%'}} >{stock.count}</ListItemText>
                                     <ListItemText >
                                         {!trending ? <TrendingDown style={{marginRight: '10px', color: 'red'}}/>
                                         : <TrendingUp style={{marginRight: '10px', color: '#00FF25'}}/>}
