@@ -4,10 +4,10 @@ import { AttachMoney } from '@material-ui/icons'
 
 export default function Wallet(props) {
     return (
-        <AppBar style={{display: 'flex', backgroundColor: 'white'}}>
+        <div style={{display: 'flex', backgroundColor: 'white'}}>
             <p style={{marginLeft: '10px', flex: 10}}><b>BALANCE: </b></p>
             <AttachMoney style={{margin: '16px 0'}}/>
             <p style={{margin: '16px 10px', flex: 1}}>{Number(props.wallet).toFixed(2)}</p>
-        </AppBar>
+        </div>
     )
 }
