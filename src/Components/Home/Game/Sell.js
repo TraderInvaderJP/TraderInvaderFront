@@ -3,6 +3,7 @@ import { Grid, Paper, List, ListItem, ListItemText, Divider, TextField, Button }
 import { makeStyles } from '@material-ui/core/styles'
 import Wallet from './Wallet'
 import axios from 'axios'
+import { Link } from 'react-router-dom'
 import { AttachMoney } from '@material-ui/icons'
 
 const useStyles = makeStyles({
@@ -51,8 +52,10 @@ const useStyles = makeStyles({
 export default function Sell(props) {
     const classes = useStyles()
     const [symbol, SetSymbol] = useState('')
+    const [count, SetCount] = useState('')
     const [stocks, SetStocks] = useState([])
     const [prices, SetPrices] = useState([])
+    const [sell, SetSell] = useState('')
 
     useEffect(() => {
         let keys = Object.keys(props.portfolio.stocks)
@@ -68,10 +71,28 @@ export default function Sell(props) {
         })
 
         SetStocks(keys.map((item, index) => { return { symbol: item, count: values[index], price: prices } }))
-    }, [props.portfolio, SetStocks])
+    }, [props.portfolio, SetStocks, SetPrices])
 
     const handleSubmit = () => {
-        console.log(props.portfolio.stocks)
+        axios.get(`https://financialmodelingprep.com/api/v3/stock/real-time-price/${symbol}`)
+            .then(function (response) {
+                SetSell(response.data.price)
+            }).catch(function (error) {
+                console.log(error)
+            })
+
+        axios.put(`/games/${encodeURI('Cheese Steak Sandwich')}/portfolios/${props.username}/sell`, {
+            symbol: symbol,
+            value: sell,
+            count: count
+        })
+            .then(function (response) {
+                console.log(response)
+            }).catch(function (error) {
+                console.log(error)
+            })
+
+        props.refreshPortfolio((-count), symbol, (sell * count))
     }
 
     return (
@@ -89,7 +110,8 @@ export default function Sell(props) {
                         name='stock'
                         label='Symbol'
                         type='text'
-                        onChange={SetSymbol}
+                        value={symbol.toUpperCase()}
+                        onChange={e => SetSymbol(e.target.value.toUpperCase())}
                         autoComplete='off'
                     />
                 </Grid>
@@ -99,6 +121,8 @@ export default function Sell(props) {
                         InputProps={{ classes: { underline: classes.text } }}
                         name='amount'
                         label='Amount'
+                        value={count}
+                        onChange={e => SetCount(e.target.value)}
                         type='number'
                         autoComplete='off' />
                 </Grid>
@@ -115,7 +139,7 @@ export default function Sell(props) {
                                 <ListItem className={classes.row} style={{ width: '100%' }} >
                                     <ListItemText style={{ width: '45%' }}>{stock.symbol}</ListItemText>
                                     <ListItemText style={{ width: '40%' }} >{stock.count}</ListItemText>
-                                    <ListItemText ><AttachMoney style={{margin: '-6px 6px'}}/>{stock.price[id]}</ListItemText>
+                                    <ListItemText ><AttachMoney style={{ margin: '-6px 6px' }} />{stock.price[id]}</ListItemText>
                                 </ListItem>
                             </React.Fragment>))
                         }
