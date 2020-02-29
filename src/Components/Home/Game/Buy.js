@@ -62,13 +62,19 @@ export default function Buy(props) {
                 <Paper style={{margin: '10px 0', padding: '10px 0'}}>
                     <Container>
                         <Typography variant='h4'>
-                            {company.profile.companyName}
+                            {company.profile && company.profile.companyName}
                         </Typography>
                         <Typography variant='subtitle1'>
                             {company.symbol}
                         </Typography>
+                        <Typography variant='subtitle2'>
+                            Price: ${company.profile && company.profile.price} {company.profile && company.profile.changesPercentage}
+                        </Typography>
+                        <Typography variant='subtitle2'>
+                            Market Cap: ${company.profile && parseFloat(company.profile.mktCap).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} 
+                        </Typography>
                         <Typography variant='body1'>
-                            {company.profile.description}
+                            {company.profile && company.profile.description}
                         </Typography>
                     </Container>
                 </Paper>
