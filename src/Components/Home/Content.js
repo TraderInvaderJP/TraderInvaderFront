@@ -39,6 +39,13 @@ export default function Content(props) {
         SetGames([...games, name])
     }
 
+    const refreshPortfolio = (count, symbol, value) => {
+        let temp = portfolio
+        temp.stocks[symbol] += count
+        temp.wallet += value
+        SetPortfolio(temp)
+    }
+
     return (
         <React.Fragment>
             <Route path='/app' exact>
@@ -62,7 +69,7 @@ export default function Content(props) {
                 </Container>
             </Route>
             <Route path='/app/game'>
-                <Game username={props.username} portfolio={portfolio} />
+                <Game username={props.username} portfolio={portfolio} refreshPortfolio={refreshPortfolio}/>
             </Route>
             <Route path='/app/creategame'>
                 <Container style={{width: '100%', marginTop: '130px', marginBottom: '10px'}}>
