@@ -66,13 +66,13 @@ function Profile(props) {
             <UserDrawer toggleDrawer={toggleDrawer} isOpen={isOpen}/>
             <List>
                 <List style={{ marginTop: '30px'}}>
-                <ListItem><h1>Profile</h1></ListItem>
+                <ListItem style={{justifyContent: 'center'}}><h1>Profile</h1></ListItem>
                 <ListItem style={{marginTop: '-45px'}}><h2>Profile Name:</h2></ListItem> 
                 <ListItem style={{color: 'white', marginTop: '-45px'}}><h3>{props.username}</h3></ListItem>
                 <ListItem style={{marginTop: '-45px'}}><h2>Profile Password:</h2></ListItem> 
                 <ListItem style={{color: 'white', marginTop: '-45px'}}><h3>{props.password}</h3></ListItem>
                 <ListItem style={{ justifyContent: 'center', marginTop: '10px' }}>
-                    <Link to='/newpassverification' style={{ textDecoration: 'none' }}>
+                    <Link to='/' style={{ textDecoration: 'none' }}>
                         <Button className={classes.button}
                         onClick={handleSubmit}
                         variant='text'>Change Password</Button>
@@ -80,6 +80,8 @@ function Profile(props) {
                 </ListItem>
                 <ListItem style={{marginTop: '-25px'}}><h2>Profile E-mail Address:</h2></ListItem> 
                 <ListItem style={{color: 'white', marginTop: '-45px'}}><h3>{props.email}</h3></ListItem>
+
+                <ListItem style={{justifyContent: 'center'}}><h1>Achievements</h1></ListItem>
                 </List>
             </List>
         </div>
