@@ -55,7 +55,7 @@ export default function Content(props) {
             </Route>
             <Route path='/app/profile'>
                 <Container style={{width: '100%', marginTop: '130px', marginBottom: '10px'}}>
-                    <Profile />
+                    <Profile username={props.username} password={props.password} email={props.email} />
                 </Container>
             </Route>
             <Route path='/app/friends'>
