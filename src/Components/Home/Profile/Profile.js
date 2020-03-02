@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { List, ListItem } from '@material-ui/core'
+import { List, ListItem, Link, Button } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import Content from '../Content'
 import UserDrawer from '../UserDrawer'
@@ -57,6 +57,9 @@ function Profile(props) {
         setIsOpen(!isOpen)
     }
 
+    const handleSubmit = () => {
+    }
+
     return (
         <div className={classes.root} style={{width: '100%', height: '100%'}}> 
             <ToolBar Logout={Logout} toggleDrawer={toggleDrawer} style={{ width: '100%'}}/>  
@@ -68,7 +71,14 @@ function Profile(props) {
                 <ListItem style={{color: 'white', marginTop: '-45px'}}><h3>{props.username}</h3></ListItem>
                 <ListItem style={{marginTop: '-45px'}}><h2>Profile Password:</h2></ListItem> 
                 <ListItem style={{color: 'white', marginTop: '-45px'}}><h3>{props.password}</h3></ListItem>
-                <ListItem style={{marginTop: '-45px'}}><h2>Profile E-mail Address:</h2></ListItem> 
+                <ListItem style={{ justifyContent: 'center', marginTop: '10px' }}>
+                    <Link to='/newpassverification' style={{ textDecoration: 'none' }}>
+                        <Button className={classes.button}
+                        onClick={handleSubmit}
+                        variant='text'>Change Password</Button>
+                    </Link>
+                </ListItem>
+                <ListItem style={{marginTop: '-25px'}}><h2>Profile E-mail Address:</h2></ListItem> 
                 <ListItem style={{color: 'white', marginTop: '-45px'}}><h3>{props.email}</h3></ListItem>
                 </List>
             </List>
