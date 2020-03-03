@@ -36,7 +36,7 @@ export default function Game(props) {
                     <Buy portfolio={props.portfolio} getPortfolio={props.getPortfolio} name={props.name} username={props.username}/>
                 }         
                 {value === 1 &&
-                    <Sell portfolio={props.portfolio} username={props.username} refreshPortfolio={props.refreshPortfolio}/>
+                    <Sell portfolio={props.portfolio} getPortfolio={props.getPortfolio} name={props.name} username={props.username}/>
                 }
                 {value === 2 &&
                     <Info portfolio={props.portfolio} />

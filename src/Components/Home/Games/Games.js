@@ -6,22 +6,18 @@ import { Link } from 'react-router-dom'
 
 const useStyles = makeStyles({
     paper: {
-        backgroundColor: '#0A0708'
+        backgroundColor: 'white'
     },
     game: {
-        color: '#43AA1F',
+        color: 'black',
     },
     row: {
-        backgroundColor: '#0A0708',
-        color: '#43AA1F',
-        "&:hover": {
-            backgroundColor: '#272727',
-            color: '#43AA1F',
-        }
+        backgroundColor: 'white',
+        color: 'black'        
     },
     arrow: {
         "&:hover": {
-            backgroundColor: '#F20000',
+            backgroundColor: '#53E121',
         }
     }
 })
@@ -31,10 +27,10 @@ export default function Games(props) {
 
     return (
         <div>
-            <Paper className={classes.paper}>
+            <Paper className={classes.paper} style={{margin: '10px 0 0 0', padding: '10px 0'}}>
                 <List className={classes.game}>
                     <ListSubheader color='primary' align='center'>
-                        <Typography variant='h5'>
+                        <Typography variant='h5' style={{color: 'black', padding: '0 0 10px 0'}}>
                             Current Games
                         </Typography>
                     </ListSubheader>
@@ -44,8 +40,8 @@ export default function Games(props) {
                             <ListItem className={classes.row}> 
                                 <ListItemText>{game}</ListItemText>
                                 <Link to='/app/game'>
-                                    <IconButton className={classes.arrow} style={{ padding: 0, color: '#43AA1F' }} onClick={() => props.getGame(id)}>
-                                        <ArrowForward />
+                                    <IconButton className={classes.arrow} style={{ padding: 0 }} onClick={() => props.getGame(id)}>
+                                        <ArrowForward style={{padding: '5px 5px 5px 5px'}}/>
                                     </IconButton>
                                 </Link>
                             </ListItem>
