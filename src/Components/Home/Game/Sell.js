@@ -28,7 +28,7 @@ export default function Buy(props) {
         const makePortfolio = async() => {
             if(props.portfolio.stocks) {
                 let temp = Object.entries(props.portfolio.stocks)
-                
+                temp.sort((left, right) => (left[0] < right[0] ? -1 : 1))
                 let symbols = Object.keys(props.portfolio.stocks).join(',')
 
                 if(symbols !== "") {
