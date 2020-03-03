@@ -2,9 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { List, ListItem, InputBase, Paper, 
     IconButton, ListItemText, makeStyles, 
     Divider, Typography, Container, Table,
-    TableHead, TableBody, TableRow, TableCell,
-    Button } from '@material-ui/core'
-import { Search } from '@material-ui/icons'
+    TableHead, TableBody, TableRow, TableCell } from '@material-ui/core'
+import { Search, AddCircle } from '@material-ui/icons'
 import Wallet from './Wallet'
 import axios from 'axios'
 
@@ -31,10 +30,12 @@ export default function Buy(props) {
                 let temp = Object.entries(props.portfolio.stocks)
                 let symbols = Object.keys(props.portfolio.stocks).join(',')
 
+                temp.sort((left, right) => (left[0] < right[0] ? -1 : 1))
                 if(symbols !== "") {
                     const { data } = await axios.get(`https://financialmodelingprep.com/api/v3/stock/real-time-price/${symbols}`)
                     
                     if (data.companiesPriceList != undefined) {
+                        
                         let values = data.companiesPriceList.map(item => item.price)
                         temp = temp.map((item, index) => {
                             return {
@@ -123,6 +124,7 @@ export default function Buy(props) {
                          <TableCell>Symbol</TableCell>
                          <TableCell>Current # of Shares</TableCell>
                          <TableCell>Current Price</TableCell>
+                         <TableCell><React.Fragment /></TableCell>
                      </TableHead>
                      <TableBody>
                          {portfolio.map((stock, id) => {
@@ -130,8 +132,8 @@ export default function Buy(props) {
                                 <TableRow key={id}>
                                     <TableCell>{stock.symbol}</TableCell>
                                     <TableCell>{stock.count}</TableCell>
-                                    <TableCell>{stock.value}</TableCell>
-                                    <TableCell><Button variant='outlined' style={{padding: 0}}>Buy</Button></TableCell>
+                                    <TableCell>${stock.value}</TableCell>
+                                    <TableCell><IconButton><AddCircle /></IconButton></TableCell>
                                 </TableRow>)
                          })}
                      </TableBody>
