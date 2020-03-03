@@ -1,151 +1,131 @@
 import React, { useState, useEffect } from 'react'
-import { Grid, Paper, List, ListItem, ListItemText, Divider, TextField, Button } from '@material-ui/core'
-import { makeStyles } from '@material-ui/core/styles'
+import { List, ListItem, InputBase, Paper, 
+    IconButton, ListItemText, makeStyles, 
+    Divider, Typography, Container, Table,
+    TableHead, TableBody, TableRow, TableCell,
+    Button } from '@material-ui/core'
+import { Remove, RemoveCircle } from '@material-ui/icons'
 import Wallet from './Wallet'
 import axios from 'axios'
-import { Link } from 'react-router-dom'
-import { AttachMoney } from '@material-ui/icons'
 
 const useStyles = makeStyles({
-    paper: {
-        backgroundColor: '#0A0708'
-    },
-    game: {
-        color: '#43AA1F',
-    },
-    row: {
-        backgroundColor: '#0A0708',
-        color: '#43AA1F',
-        "&:hover": {
-            backgroundColor: '#272727',
-            color: '#43AA1F',
-        }
-    },
-    text: {
-        outline: {
-            borderWidth: '2px',
-
+    dropdown: {
+        '&:hover': {
+            backgroundColor: '#eeeeee'
         },
-        '&:before': {
-            borderWidth: '2px',
-            borderColor: 'black',
-        },
-        '&:after': {
-            borderWidth: '2px',
-            borderColor: '#53E121',
-        }
-    },
-    button: {
-        background: '#53E121',
-        "&:hover": {
-            background: '#43AA1F'
-        },
-        color: 'black',
-        padding: '0 30px',
-        fontSize: 17,
-        borderRadius: 25,
-        height: 50,
-        width: 150
-    },
+        display: 'flex',
+        padding: '10px'
+    }
 })
-
-export default function Sell(props) {
+export default function Buy(props) {
     const classes = useStyles()
-    const [symbol, SetSymbol] = useState('')
-    const [count, SetCount] = useState('')
-    const [stocks, SetStocks] = useState([])
-    const [prices, SetPrices] = useState([])
-    const [sell, SetSell] = useState('')
+    const [symbols, setSymbols] = useState([])
+    const [editing, setEditing] = useState(false)
+    const [company, setCompany] = useState(null)
+    const [portfolio, setPortfolio] = useState([])
 
     useEffect(() => {
-        let keys = Object.keys(props.portfolio.stocks)
-        let values = Object.values(props.portfolio.stocks)
+        const makePortfolio = async() => {
+            if(props.portfolio.stocks) {
+                let temp = Object.entries(props.portfolio.stocks)
+                temp.sort((left, right) => (left[0] < right[0] ? -1 : 1))
+                let symbols = Object.keys(props.portfolio.stocks).join(',')
 
-        keys.forEach(keys => {
-            let result = axios.get(`https://financialmodelingprep.com/api/v3/stock/real-time-price/${keys}`)
-                .then(function (response) {
-                    SetPrices(prices.push(response.data.price))
-                }).catch(function (error) {
-                    console.log(error)
-                })
-        })
+                if(symbols !== "") {
+                    const { data } = await axios.get(`https://financialmodelingprep.com/api/v3/stock/real-time-price/${symbols}`)
+                    
+                    if (data.companiesPriceList != undefined) {
+                        let values = data.companiesPriceList.map(item => item.price)
+                        temp = temp.map((item, index) => {
+                            return {
+                                symbol: item[0],
+                                count: item[1],
+                                value: values[index]
+                            }
+                        })
+                    }
+                    else {
+                        temp = [{
+                            symbol: temp[0][0],
+                            count: temp[0][1],
+                            value: data.price
+                        }]
+                    }
+                    
+                    temp = temp.filter(item => item.count != 0)
+                    setPortfolio(temp)
+                }
+            }
+        }
+        makePortfolio()
+    }, [props.portfolio, setPortfolio])
 
-        SetStocks(keys.map((item, index) => { return { symbol: item, count: values[index], price: prices } }))
-    }, [props.portfolio, SetStocks, SetPrices])
 
-    const handleSubmit = () => {
-        axios.get(`https://financialmodelingprep.com/api/v3/stock/real-time-price/${symbol}`)
-            .then(function (response) {
-                SetSell(response.data.price)
-            }).catch(function (error) {
-                console.log(error)
-            })
 
-        axios.put(`/games/${encodeURI('Cheese Steak Sandwich')}/portfolios/${props.username}/sell`, {
-            symbol: symbol,
-            value: sell,
-            count: count
-        })
-            .then(function (response) {
-                console.log(response)
-            }).catch(function (error) {
-                console.log(error)
-            })
+    const onSelectStock = async (symbol) => {
+        setEditing(false)
 
-        props.refreshPortfolio((-count), symbol, (sell * count))
+        let { data } = await axios.get(`https://financialmodelingprep.com/api/v3/company/profile/${symbol}`)
+
+        setCompany(data)
     }
 
     return (
-        <div style={{ width: '100%' }}>
+        <div style={{width: '100%'}}>
             <Wallet wallet={props.portfolio.wallet} />
-            <Grid container
-                style={{ marginTop: '30px' }}
-                direction='row'
-                justify='center'
-                alignItems='center'
-                spacing={2}>
-                <Grid item >
-                    <TextField
-                        InputProps={{ classes: { underline: classes.text } }}
-                        name='stock'
-                        label='Symbol'
-                        type='text'
-                        value={symbol.toUpperCase()}
-                        onChange={e => SetSymbol(e.target.value.toUpperCase())}
-                        autoComplete='off'
-                    />
-                </Grid>
-                <Grid item>
-                    <TextField
-                        style={{ width: '100px' }}
-                        InputProps={{ classes: { underline: classes.text } }}
-                        name='amount'
-                        label='Amount'
-                        value={count}
-                        onChange={e => SetCount(e.target.value)}
-                        type='number'
-                        autoComplete='off' />
-                </Grid>
-                <Grid item>
-                    <Button className={classes.button}
-                        onClick={handleSubmit}
-                        variant='text'>Sell</Button>
-                </Grid>
-                <Paper className={classes.paper} style={{ width: '100%', marginTop: '30px' }}>
-                    <List className={classes.game}>
-                        {stocks.map((stock, id) => (
-                            <React.Fragment key={id}>
-                                <Divider />
-                                <ListItem className={classes.row} style={{ width: '100%' }} >
-                                    <ListItemText style={{ width: '45%' }}>{stock.symbol}</ListItemText>
-                                    <ListItemText style={{ width: '40%' }} >{stock.count}</ListItemText>
-                                    <ListItemText ><AttachMoney style={{ margin: '-6px 6px' }} />{stock.price[id]}</ListItemText>
-                                </ListItem>
-                            </React.Fragment>))
-                        }
-                    </List>
+ 
+            { editing && <List style={{padding: 0, backgroundColor: 'white', width: '100%'}}>
+                {symbols.map((symbol, index) => (
+                    <React.Fragment key={index}>
+                        <Divider />
+                        <ListItem key={symbol.symbol} value={symbol.symbol} className={classes.dropdown} onClick={() => onSelectStock(symbol.symbol)}>
+                            <ListItemText style={{flex: 1}}>{symbol.symbol}</ListItemText>
+                            <ListItemText style={{flex: 3, overflow: 'hidden'}}>{symbol.name}</ListItemText>
+                        </ListItem>
+                    </React.Fragment>
+                ))}
+            </List>}
+            { company && (
+                <Paper style={{margin: '10px 0 0 0', padding: '10px 0'}}>
+                    <Container>
+                        <Typography variant='h4'>
+                            {company.profile && company.profile.companyName}
+                        </Typography>
+                        <Typography variant='subtitle1'>
+                            {company.symbol}
+                        </Typography>
+                        <Typography variant='subtitle2'>
+                            Price: ${company.profile && company.profile.price} {company.profile && company.profile.changesPercentage}
+                        </Typography>
+                        <Typography variant='subtitle2'>
+                            Market Cap: ${company.profile && parseFloat(company.profile.mktCap).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} 
+                        </Typography>
+                        <Typography variant='body1'>
+                            {company.profile && company.profile.description}
+                        </Typography>
+                    </Container>
                 </Paper>
-            </Grid>
+            )}
+            <Paper style={{backgroundColor: 'white', margin: '10px 0 0 0'}}>
+                 <Table>
+                     <TableHead>
+                         <TableCell>Symbol</TableCell>
+                         <TableCell>Current # of Shares</TableCell>
+                         <TableCell>Current Price</TableCell>
+                     </TableHead>
+                     <TableBody>
+                         {portfolio.map((stock, id) => {
+                             return (
+                                <TableRow key={id}>
+                                    <TableCell>{stock.symbol}</TableCell>
+                                    <TableCell>{stock.count}</TableCell>
+                                    <TableCell>{stock.value}</TableCell>
+                                    <TableCell><IconButton variant='outlined' style={{padding: 0}}><RemoveCircle /></IconButton></TableCell>
+                                </TableRow>)
+                         })}
+                     </TableBody>
+                 </Table>
+            </Paper>
         </div>
     )
 }
