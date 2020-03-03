@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react'
 import { List, ListItem, InputBase, Paper, 
     IconButton, ListItemText, makeStyles, 
     Divider, Typography, Container, Table,
-    TableHead, TableBody, TableRow, TableCell } from '@material-ui/core'
+    TableHead, TableBody, TableRow, TableCell,
+    Dialog, DialogTitle, DialogContent, DialogActions,
+    Button, TextField } from '@material-ui/core'
 import { Search, AddCircle } from '@material-ui/icons'
 import Wallet from './Wallet'
 import axios from 'axios'
@@ -23,6 +25,9 @@ export default function Buy(props) {
     const [search, setSearch] = useState('')
     const [company, setCompany] = useState(null)
     const [portfolio, setPortfolio] = useState([])
+    const [isOpen, setIsOpen] = useState(false)
+    const [symbol, setSymbol] = useState({})
+    const [count, setCount] = useState(0)
 
     useEffect(() => {
         const makePortfolio = async() => {
@@ -77,6 +82,37 @@ export default function Buy(props) {
         setCompany(data)
     }
 
+    const getStock = (index) => {
+        setSymbol(portfolio[index])
+        setIsOpen(true)
+        setCount(0)
+    }
+
+    const buyStock = async () => {
+        if(calcBalance(parseFloat(count), symbol.value)) {
+            await axios.put(`/games/${props.name}/portfolios/${props.username}/buy`, {
+                symbol: symbol.symbol,
+                count: parseFloat(count),
+                value: symbol.value
+            })
+        }
+
+        setIsOpen(false)
+    }
+
+    const handleClose = (open) => setIsOpen(open)
+    const editCount = (e) => setCount(e.target.value)
+    const calcBalance = (count, value) => {
+        console.log({
+            portfolio: props.portfolio,
+            count,
+            value
+        })
+        let temp = props.portfolio.wallet - (parseFloat(count) * value)
+        console.log(temp)
+        return temp
+    }
+
     return (
         <div style={{width: '100%'}}>
             <Wallet wallet={props.portfolio.wallet} />
@@ -121,10 +157,12 @@ export default function Buy(props) {
             <Paper style={{backgroundColor: 'white', margin: '10px 0 0 0'}}>
                  <Table>
                      <TableHead>
-                         <TableCell>Symbol</TableCell>
-                         <TableCell>Current # of Shares</TableCell>
-                         <TableCell>Current Price</TableCell>
-                         <TableCell><React.Fragment /></TableCell>
+                         <TableRow>
+                            <TableCell>Symbol</TableCell>
+                            <TableCell>Current # of Shares</TableCell>
+                            <TableCell>Current Price</TableCell>
+                            <TableCell><React.Fragment /></TableCell>
+                         </TableRow>
                      </TableHead>
                      <TableBody>
                          {portfolio.map((stock, id) => {
@@ -133,12 +171,33 @@ export default function Buy(props) {
                                     <TableCell>{stock.symbol}</TableCell>
                                     <TableCell>{stock.count}</TableCell>
                                     <TableCell>${stock.value}</TableCell>
-                                    <TableCell><IconButton><AddCircle /></IconButton></TableCell>
+                                    <TableCell><IconButton style={{padding: 0}} onClick={() => getStock(id)}><AddCircle /></IconButton></TableCell>
                                 </TableRow>)
                          })}
                      </TableBody>
                  </Table>
             </Paper>
+            <Dialog open={isOpen} onClose={() => handleClose(false)}>
+                <DialogTitle>Buy Stocks</DialogTitle>
+                <DialogContent>
+                    <Typography variant='h4'>{symbol.symbol}</Typography>
+                    <TextField type='number' label='# of Shares' onChange={editCount} />
+                    <Typography color='primary' style={{textAlign: 'right', margin: '10px 0'}}>Balance: ${props.portfolio.wallet && (props.portfolio.wallet).toFixed(2)}</Typography>
+                    <div style={{display: 'flex'}}>
+                        <Typography style={{flex: 1, textAlign: 'left', margin: '10px 0'}}>-</Typography>
+                        <Typography color='primary' style={{flex: 3, textAlign: 'right', margin: '10px 0'}}>Cost: ${(count * symbol.value).toFixed(2)}</Typography>
+                    </div>
+                    <Divider />
+                    {calcBalance(count, symbol.value) < 0 && 
+                        <Typography color='error' style={{textAlign: 'right', margin: '10px 0'}}>Total: (${Math.abs(calcBalance(count, symbol.value)).toFixed(2)})</Typography>}
+                    {calcBalance(count, symbol.value) >= 0 && 
+                        <Typography color='primary' style={{textAlign: 'right', margin: '10px 0'}}>Total: ${calcBalance(count, symbol.value).toFixed(2)}</Typography>}
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={() => handleClose(false)}>Cancel</Button>
+                    <Button color="primary" onClick={buyStock}>Buy</Button>
+                </DialogActions>
+            </Dialog>
         </div>
     )
 }
