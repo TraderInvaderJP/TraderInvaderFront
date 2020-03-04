@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Route } from 'react-router-dom'
+import { Route, useHistory } from 'react-router-dom'
 import Game from './Game/Game'
 import Games from './Games/Games'
 import Profile from './Profile/Profile'
@@ -16,6 +16,7 @@ export default function Content(props) {
     const [games, SetGames] = useState([])
     const [portfolio, SetPortfolio] = useState({})
     const [name, setName] = useState(0)
+    const history = useHistory();
 
     useEffect(() => {
         if(props.username) {
@@ -36,6 +37,7 @@ export default function Content(props) {
         const { data } = await axios.get(`/games/${name}/portfolios/${props.username}`)
 
         SetPortfolio(data.data)
+        history.push('/app/game')
     }
 
     const addGame = (name) => {

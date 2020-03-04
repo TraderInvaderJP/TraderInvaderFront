@@ -43,11 +43,11 @@ export default function Games(props) {
                             <Divider />
                             <ListItem className={classes.row}> 
                                 <ListItemText>{game}</ListItemText>
-                                <Link to='/app/game'>
+                                {/*<Link to='/app/game>*/}
                                     <IconButton className={classes.arrow} style={{ padding: 0, color: '#43AA1F' }} onClick={() => props.getGame(id)}>
                                         <ArrowForward />
                                     </IconButton>
-                                </Link>
+                                {/*</Link>*/}
                             </ListItem>
                         </React.Fragment>))
                     }
