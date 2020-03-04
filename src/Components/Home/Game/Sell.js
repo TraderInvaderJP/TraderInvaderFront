@@ -9,7 +9,6 @@ import { RemoveCircle } from '@material-ui/icons'
 import Wallet from './Wallet'
 import axios from 'axios'
 
-//on hover on buy page, search icon and plus button, need to match
 const useStyles = makeStyles({
     dropdown: {
         '&:hover': {
@@ -21,6 +20,11 @@ const useStyles = makeStyles({
     arrow: {
         "&:hover": {
             color: '#53E121',
+        }
+    },
+    cell: {
+        "&:hover": {
+            backgroundColor: '#DEDEDE',
         }
     }
 })
@@ -159,7 +163,7 @@ export default function Buy(props) {
                      <TableBody>
                          {portfolio.map((stock, id) => {
                              return (
-                                <TableRow key={id}>
+                                <TableRow key={id} className={classes.cell}>
                                     <TableCell>{stock.symbol}</TableCell>
                                     <TableCell>{stock.count}</TableCell>
                                     <TableCell>${stock.value}</TableCell>
@@ -176,8 +180,8 @@ export default function Buy(props) {
                     <TextField type='number' label='# of Shares' onChange={editCount} />
                     <Typography color='primary' style={{textAlign: 'right', margin: '10px 0'}}>Balance: ${props.portfolio.wallet && (props.portfolio.wallet).toFixed(2)}</Typography>
                     <div style={{display: 'flex'}}>
-                        <Typography style={{flex: 1, textAlign: 'left', margin: '10px 0'}}>-</Typography>
-                        <Typography color='primary' style={{flex: 3, textAlign: 'right', margin: '10px 0'}}>Cost: ${(count * symbol.value).toFixed(2)}</Typography>
+                        <Typography style={{flex: 1, textAlign: 'left', margin: '10px 0'}}>+</Typography>
+                        <Typography color='primary' style={{flex: 3, textAlign: 'right', margin: '10px 0'}}>Profit: ${(count * symbol.value).toFixed(2)}</Typography>
                     </div>
                     <Divider />
                     {calcBalance(count, symbol.value) < 0 && 

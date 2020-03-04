@@ -13,7 +13,10 @@ const useStyles = makeStyles({
     },
     row: {
         backgroundColor: 'white',
-        color: 'black'        
+        color: 'black',
+        "&:hover": {
+            backgroundColor: '#DEDEDE',
+        }
     },
     arrow: {
         "&:hover": {
@@ -27,21 +30,21 @@ export default function Games(props) {
 
     return (
         <div>
-            <Paper className={classes.paper} style={{margin: '10px 0 0 0', padding: '10px 0'}}>
+            <Paper className={classes.paper} style={{ margin: '10px 0 0 0', padding: '10px 0' }}>
                 <List className={classes.game}>
                     <ListSubheader color='primary' align='center'>
-                        <Typography variant='h5' style={{color: 'black', padding: '0 0 10px 0'}}>
+                        <Typography variant='h5' style={{ color: 'black', padding: '0 0 10px 0' }}>
                             Current Games
                         </Typography>
                     </ListSubheader>
                     {props.games.map((game, id) => (
                         <React.Fragment key={id}>
                             <Divider />
-                            <ListItem className={classes.row}> 
+                            <ListItem className={classes.row}>
                                 <ListItemText>{game}</ListItemText>
                                 <Link to='/app/game'>
                                     <IconButton className={classes.arrow} style={{ padding: 0 }} onClick={() => props.getGame(id)}>
-                                        <ArrowForward style={{padding: '5px 5px 5px 5px'}}/>
+                                        <ArrowForward style={{ padding: '5px 5px 5px 5px' }} />
                                     </IconButton>
                                 </Link>
                             </ListItem>

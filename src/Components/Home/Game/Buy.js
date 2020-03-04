@@ -16,6 +16,16 @@ const useStyles = makeStyles({
         },
         display: 'flex',
         padding: '10px'
+    },
+    arrow: {
+        "&:hover": {
+            color: '#53E121',
+        }
+    },
+    cell: {
+        "&:hover": {
+            backgroundColor: '#DEDEDE',
+        }
     }
 })
 export default function Buy(props) {
@@ -118,8 +128,8 @@ export default function Buy(props) {
             <Wallet wallet={props.portfolio.wallet} />
             <Paper style={{display: 'flex', margin: '10px 0 0 0'}}>
                 <InputBase style={{margin: '10px', flex: 10}} placeholder='Stock Symbol' onClick={() => setEditing(true)} onChange={onEditSearch}/>
-                <IconButton style={{ padding: 0, color: '#43AA1F', flex: 1, margin: '10px'}}>
-                    <Search />
+                <IconButton style={{ padding: 0, color: '#43AA1F', flex: 1, margin: '10px'}} >
+                    <Search style={{color: 'black'}}/>
                 </IconButton>
             </Paper>
             { editing && <List style={{padding: 0, backgroundColor: 'white', width: '100%'}}>
@@ -167,11 +177,11 @@ export default function Buy(props) {
                      <TableBody>
                          {portfolio.map((stock, id) => {
                              return (
-                                <TableRow key={id}>
+                                <TableRow key={id} className={classes.cell}>
                                     <TableCell>{stock.symbol}</TableCell>
                                     <TableCell>{stock.count}</TableCell>
                                     <TableCell>${stock.value}</TableCell>
-                                    <TableCell><IconButton style={{padding: 0}} onClick={() => getStock(id)}><AddCircle /></IconButton></TableCell>
+                                    <TableCell><IconButton style={{padding: 0}} onClick={() => getStock(id)}><AddCircle className={classes.arrow}/></IconButton></TableCell>
                                 </TableRow>)
                          })}
                      </TableBody>
