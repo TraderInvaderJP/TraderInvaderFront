@@ -5,7 +5,7 @@ import { List, ListItem, Paper,
     TableHead, TableBody, TableRow, TableCell,
     Dialog, DialogTitle, DialogContent, DialogActions,
     Button, TextField } from '@material-ui/core'
-import { RemoveCircle } from '@material-ui/icons'
+import { Remove } from '@material-ui/icons'
 import Wallet from './Wallet'
 import axios from 'axios'
 
@@ -48,7 +48,7 @@ export default function Buy(props) {
                 if(symbols !== "") {
                     const { data } = await axios.get(`https://financialmodelingprep.com/api/v3/stock/real-time-price/${symbols}`)
                     
-                    if (data.companiesPriceList != undefined) {
+                    if (data.companiesPriceList !== undefined) {
                         
                         let values = data.companiesPriceList.map(item => item.price)
                         temp = temp.map((item, index) => {
@@ -67,7 +67,7 @@ export default function Buy(props) {
                         }]
                     }
                     
-                    temp = temp.filter(item => item.count != 0)
+                    temp = temp.filter(item => item.count !== 0)
                     setPortfolio(temp)
                 }
             }
@@ -116,8 +116,7 @@ export default function Buy(props) {
 
     return (
         <div style={{width: '100%'}}>
-            <Wallet wallet={props.portfolio.wallet} />
-            
+            <Wallet wallet={props.portfolio.wallet} />           
             { editing && <List style={{padding: 0, backgroundColor: 'white', width: '100%'}}>
                 {symbols.map((symbol, index) => (
                     <React.Fragment key={index}>
@@ -167,7 +166,7 @@ export default function Buy(props) {
                                     <TableCell>{stock.symbol}</TableCell>
                                     <TableCell>{stock.count}</TableCell>
                                     <TableCell>${stock.value}</TableCell>
-                                    <TableCell><IconButton style={{padding: 0}} className={classes.arrow} onClick={() => getStock(id)}><RemoveCircle /></IconButton></TableCell>
+                                    <TableCell><IconButton style={{padding: 0}} className={classes.arrow} onClick={() => getStock(id)}><Remove /></IconButton></TableCell>
                                 </TableRow>)
                          })}
                      </TableBody>
@@ -178,7 +177,7 @@ export default function Buy(props) {
                 <DialogContent>
                     <Typography variant='h4'>{symbol.symbol}</Typography>
                     <TextField type='number' label='# of Shares' onChange={editCount} />
-                    <Typography color='primary' style={{textAlign: 'right', margin: '10px 0'}}>Balance: ${props.portfolio.wallet && (props.portfolio.wallet).toFixed(2)}</Typography>
+                    <Typography color='primary' style={{textAlign: 'right', margin: '10px 0'}}>Balance: ${props.portfolio.wallet && (props.portfolio.wallet)}</Typography>
                     <div style={{display: 'flex'}}>
                         <Typography style={{flex: 1, textAlign: 'left', margin: '10px 0'}}>+</Typography>
                         <Typography color='primary' style={{flex: 3, textAlign: 'right', margin: '10px 0'}}>Profit: ${(count * symbol.value).toFixed(2)}</Typography>
