@@ -7,7 +7,7 @@ export default function Wallet(props) {
         <Paper style={{display: 'flex', backgroundColor: 'white'}} elevation={2}>
             <p style={{marginLeft: '10px', flex: 10}}><b>BALANCE: </b></p>
             <AttachMoney style={{margin: '16px 0'}}/>
-            <p style={{margin: '16px 10px', flex: 1, color: '#43AA1F'}}>{Number(props.wallet).toFixed(2)}</p>
+            <p style={{margin: '16px 10px', flex: 1, color: 'black'}}>{Number(props.wallet).toFixed(2)}</p>
         </Paper>
     )
 }
