@@ -4,8 +4,9 @@ import { List, ListItem, InputBase, Paper,
     Divider, Typography, Container, Table,
     TableHead, TableBody, TableRow, TableCell,
     Dialog, DialogTitle, DialogContent, DialogActions,
-    Button, TextField } from '@material-ui/core'
-import { Search, AddCircle } from '@material-ui/icons'
+    Button, TextField, Card, CardHeader,
+    CardContent } from '@material-ui/core'
+import { Search, Add } from '@material-ui/icons'
 import Wallet from './Wallet'
 import axios from 'axios'
 
@@ -98,6 +99,16 @@ export default function Buy(props) {
         setCount(0)
     }
 
+    const getStockFromCard = async () => {
+        const { data } = await axios.get(`https://financialmodelingprep.com/api/v3/stock/real-time-price/${company.symbol}`)
+        setSymbol({
+            symbol: company.symbol,
+            value: data.price
+        })
+        setCount(0)
+        setIsOpen(true)
+    }
+
     const buyStock = async () => {
         if(calcBalance(parseFloat(count), symbol.value)) {
             await axios.put(`/games/${props.name}/portfolios/${props.username}/buy`, {
@@ -144,25 +155,27 @@ export default function Buy(props) {
                 ))}
             </List>}
             { company && (
-                <Paper style={{margin: '10px 0 0 0', padding: '10px 0'}}>
-                    <Container>
-                        <Typography variant='h4'>
-                            {company.profile && company.profile.companyName}
-                        </Typography>
-                        <Typography variant='subtitle1'>
-                            {company.symbol}
-                        </Typography>
-                        <Typography variant='subtitle2'>
-                            Price: ${company.profile && company.profile.price} {company.profile && company.profile.changesPercentage}
-                        </Typography>
-                        <Typography variant='subtitle2'>
-                            Market Cap: ${company.profile && parseFloat(company.profile.mktCap).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} 
-                        </Typography>
-                        <Typography variant='body1'>
-                            {company.profile && company.profile.description}
-                        </Typography>
-                    </Container>
-                </Paper>
+                <Card style={{marginTop: '10px'}}>
+                    <CardHeader 
+                        action={
+                            <IconButton>
+                                <Add color='primary' onClick={getStockFromCard}/>
+                            </IconButton>
+                        }
+                        title={company.profile && company.profile.companyName}
+                        subheader={company.symbol}/>
+                        <CardContent>
+                            <Typography variant='subtitle2'>
+                                Price: ${company.profile && company.profile.price} {company.profile && company.profile.changesPercentage}
+                            </Typography>
+                            <Typography variant='subtitle2'>
+                                Market Cap: ${company.profile && parseFloat(company.profile.mktCap).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")} 
+                            </Typography>
+                            <Typography variant='body1'>
+                                {company.profile && company.profile.description}
+                            </Typography>
+                        </CardContent>
+                </Card>
             )}
             <Paper style={{backgroundColor: 'white', margin: '10px 0 0 0'}}>
                  <Table>
@@ -181,7 +194,7 @@ export default function Buy(props) {
                                     <TableCell>{stock.symbol}</TableCell>
                                     <TableCell>{stock.count}</TableCell>
                                     <TableCell>${stock.value}</TableCell>
-                                    <TableCell><IconButton style={{padding: 0}} onClick={() => getStock(id)}><AddCircle className={classes.arrow}/></IconButton></TableCell>
+                                    <TableCell><IconButton style={{padding: 0}} onClick={() => getStock(id)}><Add color='primary' /></IconButton></TableCell>
                                 </TableRow>)
                          })}
                      </TableBody>

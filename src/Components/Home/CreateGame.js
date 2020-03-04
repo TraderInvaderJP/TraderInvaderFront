@@ -76,13 +76,13 @@ export default function CreateGame(props) {
             
             let response = await axios.post(encodeURI(`/games/${gameid}`), {
                 winCondition: (winCondition === 'Most Profit' ? true : false),
-                wallet: wallet,
+                wallet: parseFloat(wallet),
                 users: [props.username],
                 endTime: (temp.getTime() / 1000)
             })
     
             response = await axios.put(encodeURI(`/games/${gameid}/users/${props.username}`), {
-                initial_amount: wallet,
+                initial_amount: parseFloat(wallet),
             })
 
             props.addGame(gameid)
