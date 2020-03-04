@@ -166,7 +166,7 @@ export default function Buy(props) {
                                     <TableCell>{stock.symbol}</TableCell>
                                     <TableCell>{stock.count}</TableCell>
                                     <TableCell>${stock.value}</TableCell>
-                                    <TableCell><IconButton style={{padding: 0}} className={classes.arrow} onClick={() => getStock(id)}><Remove /></IconButton></TableCell>
+                                    <TableCell><IconButton style={{padding: 0}} onClick={() => getStock(id)}><Remove style={{color: 'red'}} /></IconButton></TableCell>
                                 </TableRow>)
                          })}
                      </TableBody>
@@ -177,7 +177,7 @@ export default function Buy(props) {
                 <DialogContent>
                     <Typography variant='h4'>{symbol.symbol}</Typography>
                     <TextField type='number' label='# of Shares' onChange={editCount} />
-                    <Typography color='primary' style={{textAlign: 'right', margin: '10px 0'}}>Balance: ${props.portfolio.wallet && (props.portfolio.wallet)}</Typography>
+                    <Typography color='primary' style={{textAlign: 'right', margin: '10px 0'}}>Balance: ${props.portfolio.wallet && (props.portfolio.wallet).toFixed(2)}</Typography>
                     <div style={{display: 'flex'}}>
                         <Typography style={{flex: 1, textAlign: 'left', margin: '10px 0'}}>+</Typography>
                         <Typography color='primary' style={{flex: 3, textAlign: 'right', margin: '10px 0'}}>Profit: ${(count * symbol.value).toFixed(2)}</Typography>

@@ -83,7 +83,7 @@ export default function Content(props) {
             </Route>
             <Route path='/app/joingame'>
                 <Container style={{width: '100%', marginTop: '130px', marginBottom: '10px'}}>
-                    <JoinGame/>
+                    <JoinGame username={props.username} addGame={addGame}/>
                 </Container>
             </Route>
             <Route path='/app/help'>

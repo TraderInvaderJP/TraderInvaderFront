@@ -5,7 +5,7 @@ import axios from 'axios'
 import { makeStyles } from '@material-ui/core/styles'
 import 'date-fns'
 import DateFnsUtils from '@date-io/date-fns'
-import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/pickers' 
+import { MuiPickersUtilsProvider, KeyboardDatePicker } from '@material-ui/pickers'
 
 const useStyles = makeStyles({
     root: {
@@ -55,9 +55,6 @@ const useStyles = makeStyles({
             borderWidth: '3px',
             borderColor: '#53E121',
         }
-    },
-    grid: {
-
     }
 })
 
@@ -73,14 +70,14 @@ export default function CreateGame(props) {
             let temp = endDate
             temp.setUTCHours(23)
             temp.setUTCMinutes(59)
-            
+
             let response = await axios.post(encodeURI(`/games/${gameid}`), {
                 winCondition: (winCondition === 'Most Profit' ? true : false),
                 wallet: parseFloat(wallet),
                 users: [props.username],
                 endTime: (temp.getTime() / 1000)
             })
-    
+
             response = await axios.put(encodeURI(`/games/${gameid}/users/${props.username}`), {
                 initial_amount: parseFloat(wallet),
             })
@@ -158,9 +155,11 @@ export default function CreateGame(props) {
                     </FormControl>
                 </Grid>
                 <Grid item style={{ marginTop: '25px', justifyContent: 'center' }}>
-                    <Button className={classes.button}
-                        onClick={handleSubmit}
-                        variant='text'>Submit</Button>
+                    <Link to='/app' style={{ textDecoration: 'none' }}>
+                        <Button className={classes.button}
+                            onClick={handleSubmit}
+                            variant='text'>Submit</Button>
+                    </Link>
                 </Grid>
 
             </Grid>
@@ -168,4 +167,3 @@ export default function CreateGame(props) {
     )
 }
 
-                    //removed link from button temporarly
