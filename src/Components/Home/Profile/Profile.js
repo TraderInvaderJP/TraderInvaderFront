@@ -1,9 +1,6 @@
 import React, { useState } from 'react'
 import { List, ListItem, Link, Button } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
-import Content from '../Content'
-import UserDrawer from '../UserDrawer'
-import ToolBar from '../ToolBar'
 
 const useStyles = makeStyles({
     root: {
@@ -43,19 +40,6 @@ const useStyles = makeStyles({
 
 function Profile(props) {
     const classes = useStyles()
-    const [isOpen, setIsOpen] = useState(false)
-
-    const Logout = () => {
-        localStorage.removeItem('token')
-        props.setAuth(false)
-        props.setUsername('')
-        props.setPassword('')
-        props.setLogin(false)
-    }
-
-    const toggleDrawer = () => {
-        setIsOpen(!isOpen)
-    }
 
     const handleSubmit = () => {
     }

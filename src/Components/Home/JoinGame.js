@@ -80,11 +80,11 @@ export default function JoinGame(props) {
                         autoComplete='off' />
                 </Grid>
                 <Grid item style={{ marginTop: '25px', justifyContent: 'center' }}>
-                    
+                <Link to='/app' style={{ textDecoration: 'none' }}>
                         <Button className={classes.button}
                             onClick={handleSubmit}
                             variant='text'>Join</Button>
-                    
+                    </Link>
                 </Grid>
 
             </Grid>
