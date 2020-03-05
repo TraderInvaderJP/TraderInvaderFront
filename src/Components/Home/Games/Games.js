@@ -6,22 +6,21 @@ import { Link } from 'react-router-dom'
 
 const useStyles = makeStyles({
     paper: {
-        backgroundColor: '#0A0708'
+        backgroundColor: 'white'
     },
     game: {
-        color: '#43AA1F',
+        color: 'black',
     },
     row: {
-        backgroundColor: '#0A0708',
-        color: '#43AA1F',
+        backgroundColor: 'white',
+        color: 'black',
         "&:hover": {
-            backgroundColor: '#272727',
-            color: '#43AA1F',
+            backgroundColor: '#DEDEDE',
         }
     },
     arrow: {
         "&:hover": {
-            backgroundColor: '#F20000',
+            backgroundColor: '#53E121',
         }
     }
 })
@@ -31,23 +30,23 @@ export default function Games(props) {
 
     return (
         <div>
-            <Paper className={classes.paper}>
+            <Paper className={classes.paper} style={{ margin: '10px 0 0 0', padding: '10px 0' }}>
                 <List className={classes.game}>
                     <ListSubheader color='primary' align='center'>
-                        <Typography variant='h5'>
+                        <Typography variant='h5' style={{ color: 'black', padding: '0 0 10px 0' }}>
                             Current Games
                         </Typography>
                     </ListSubheader>
                     {props.games.map((game, id) => (
                         <React.Fragment key={id}>
                             <Divider />
-                            <ListItem className={classes.row}> 
+                            <ListItem className={classes.row}>
                                 <ListItemText>{game}</ListItemText>
-                                <Link to='/app/game'>
+                                {/*<Link to='/app/game>*/}
                                     <IconButton className={classes.arrow} style={{ padding: 0, color: '#43AA1F' }} onClick={() => props.getGame(id)}>
                                         <ArrowForward />
                                     </IconButton>
-                                </Link>
+                                {/*</Link>*/}
                             </ListItem>
                         </React.Fragment>))
                     }

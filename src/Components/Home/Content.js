@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Route } from 'react-router-dom'
+import { Route, useHistory } from 'react-router-dom'
 import Game from './Game/Game'
 import Games from './Games/Games'
 import Profile from './Profile/Profile'
@@ -15,35 +15,33 @@ import axios from 'axios'
 export default function Content(props) {
     const [games, SetGames] = useState([])
     const [portfolio, SetPortfolio] = useState({})
+    const [name, setName] = useState(0)
+    const history = useHistory();
 
     useEffect(() => {
-        axios.get(`/games/${props.username}`, {
-        })
-            .then(res => {
-                const { data } = res.data
-                SetGames(data)
+        if(props.username) {
+            axios.get(`/games/${props.username}`, {
             })
-            .catch(err => console.log(err))
+                .then(res => {
+                    const { data } = res.data
+                    SetGames(data)
+                })
+                .catch(err => console.log(err))
+        }
     }, [props.username, SetGames])
-    
 
     const getGame = async (index) => {
         let name = games[index]
+        setName(name)
 
         const { data } = await axios.get(`/games/${name}/portfolios/${props.username}`)
 
         SetPortfolio(data.data)
+        history.push('/app/game')
     }
 
     const addGame = (name) => {
         SetGames([...games, name])
-    }
-
-    const refreshPortfolio = (count, symbol, value) => {
-        let temp = portfolio
-        temp.stocks[symbol] += count
-        temp.wallet += value
-        SetPortfolio(temp)
     }
 
     return (
@@ -69,7 +67,7 @@ export default function Content(props) {
                 </Container>
             </Route>
             <Route path='/app/game'>
-                <Game username={props.username} portfolio={portfolio} refreshPortfolio={refreshPortfolio}/>
+                <Game username={props.username} portfolio={portfolio} getGame={getGame} name={name}/>
             </Route>
             <Route path='/app/creategame'>
                 <Container style={{width: '100%', marginTop: '130px', marginBottom: '10px'}}>
@@ -78,7 +76,7 @@ export default function Content(props) {
             </Route>
             <Route path='/app/joingame'>
                 <Container style={{width: '100%', marginTop: '130px', marginBottom: '10px'}}>
-                    <JoinGame/>
+                    <JoinGame username={props.username} addGame={addGame}/>
                 </Container>
             </Route>
             <Route path='/app/help'>
