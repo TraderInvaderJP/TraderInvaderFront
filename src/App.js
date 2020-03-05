@@ -119,6 +119,8 @@ export default function App() {
                         setPassword={setPassword}
                         setLogin={setLogin}
                         username={username}
+                        password={password}
+                        email={email}
                         login={login} />
                 </Route>
             </div>
