@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Fab, Toolbar, AppBar, IconButton } from '@material-ui/core'
-import { Menu, Tv } from '@material-ui/icons'
+import { Menu, EmojiObjects} from '@material-ui/icons'
 import { Link } from 'react-router-dom'
 import templogo from '../../templogo.png'
 import { makeStyles } from '@material-ui/core/styles'
@@ -84,8 +84,11 @@ function ToolBar(props) {
                     <Menu className={classes.menuIcon} />
                 </IconButton>
                 <IconButton>
-                    <Tv className={classes.menuIcon} />
+                    {!market ? <EmojiObjects style={{ color: 'grey' }} />
+                        : <EmojiObjects style={{ color: '#ECFF00' }}  />}
                 </IconButton>
+                {!market ? <p style={{ color: 'red' }} > Market Is Closed </p>
+                        : <p style={{ color: '#43AA1F' }}  > Market Is Open </p>}
                 <div className={classes.logoHorizontallyCenter}>
                     <Link to='/app'>
                         <h1>
