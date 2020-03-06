@@ -87,8 +87,7 @@ function ToolBar(props) {
                     {!market ? <EmojiObjects style={{ color: 'grey' }} />
                         : <EmojiObjects style={{ color: '#ECFF00' }}  />}
                 </IconButton>
-                {!market ? <p style={{ color: 'red' }} > Market Is Closed </p>
-                        : <p style={{ color: '#43AA1F' }}  > Market Is Open </p>}
+           
                 <div className={classes.logoHorizontallyCenter}>
                     <Link to='/app'>
                         <h1>
