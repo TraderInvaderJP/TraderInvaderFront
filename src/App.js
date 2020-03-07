@@ -121,7 +121,10 @@ export default function App() {
                         username={username}
                         password={password}
                         email={email}
-                        login={login} />
+                        login={login}
+                        setConfirm={setConfirm}
+                        password={password}
+                        confirm={confirm} />
                 </Route>
             </div>
         </MuiThemeProvider>

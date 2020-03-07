@@ -11,6 +11,7 @@ import Help from './Help/Help'
 import Settings from './Settings'
 import { Container } from '@material-ui/core'
 import axios from 'axios'
+import ChangePassVerification from './Profile/ChangePassVerification'
 
 export default function Content(props) {
     const [games, SetGames] = useState([])
@@ -54,6 +55,11 @@ export default function Content(props) {
             <Route path='/app/profile'>
                 <Container style={{width: '100%', marginTop: '130px', marginBottom: '10px'}}>
                     <Profile username={props.username} password={props.password} email={props.email} />
+                </Container>
+            </Route>
+            <Route path='/app/changepassverification'>
+                <Container style={{width: '100%', marginTop: '130px', marginBottom: '10px'}}>
+                    <ChangePassVerification password={props.password} />
                 </Container>
             </Route>
             <Route path='/app/friends'>

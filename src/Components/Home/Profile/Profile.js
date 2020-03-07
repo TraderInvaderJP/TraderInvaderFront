@@ -88,7 +88,7 @@ function Profile(props) {
                 <ListItemText style={{color: 'white', marginTop: "-25px", marginLeft: "20px"}} primary={window.username}></ListItemText>
                 <ListItem style={{marginTop: '-35px'}}><h2>Profile Password:</h2></ListItem> 
                 <ListItem style={{ justifyContent: 'center', marginTop: '-25px' }}>
-                    <Link to='/' style={{ textDecoration: 'none' }}>
+                    <Link to='/changepassverification' style={{ textDecoration: 'none' }}>
                         <Button className={classes.button}
                         onClick={handleSubmit}
                         variant='text'>Change Password</Button>
