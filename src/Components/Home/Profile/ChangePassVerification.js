@@ -2,7 +2,6 @@ import React, { } from 'react';
 import { List, ListItem, Toolbar, AppBar, TextField, InputAdornment, IconButton, Button, Typography } from '@material-ui/core'
 import { Link } from 'react-router-dom';
 import { VisibilityOff, Visibility } from '@material-ui/icons'
-import templogo from '../../../templogo.png';
 import { makeStyles } from '@material-ui/core/styles';
 import axios from 'axios'
 
@@ -90,7 +89,7 @@ function ChangePassVerification(props) {
   }
 
   return (
-    <div className={classes.root}>
+    <div className={classes.root} style={{width: '100%', height: '100%'}}>
       <List>
             <List style={{ marginRight: '-40px' }} >
             <ListItem style={{ marginTop: '10px' }}>
