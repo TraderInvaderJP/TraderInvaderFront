@@ -71,16 +71,22 @@ function ChangePassVerification(props) {
   const handleMouseDownPassword = event => { event.preventDefault() }
 
   const handleSubmit = () => {
+    const tok = localStorage.getItem('token')
+    
+    console.log(tok)
+    console.log(props.oldpass)
+    console.log(props.password)
 
-    /*axios.put(`/users/${props.username}/password/update`, {
-      confirmation_code: props.verification,
-      new_password: props.password,
+    axios.put(`/users/${props.username}/password`, {
+      access_token: tok,
+      previous_password: props.oldpass,
+      proposed_password: props.password,
     })
       .then(function (response) {
         console.log(response)
       }).catch(function (error) {
         console.log(error);
-      })*/
+      })
   }
 
   return (
@@ -89,7 +95,7 @@ function ChangePassVerification(props) {
             <List style={{ marginRight: '-40px' }} >
             <ListItem style={{ marginTop: '10px' }}>
                 <TextField
-                  onChange={e => props.setPassword(e.target.value)}
+                  onChange={e => props.setOldPass(e.target.value)}
                   InputProps={{ classes: { underline: classes.text } }}
                   error={
                     (props.create && props.oldpass === '') ||
@@ -114,7 +120,8 @@ function ChangePassVerification(props) {
                   InputProps={{ classes: { underline: classes.text } }}
                   error={
                     (props.create && props.password === '') ||
-                    (props.create && props.password !== props.confirm)}
+                    (props.create && props.password !== props.confirm) ||
+                    (props.create && props.password === props.oldpass) }
                   name='password'
                   placeholder='New Password'
                   type={values.showPassword ? 'text' : 'password'} />
@@ -134,7 +141,8 @@ function ChangePassVerification(props) {
                   InputProps={{ classes: { underline: classes.text } }}
                   error={
                     (props.create && props.confirm === '') ||
-                    (props.create && props.password !== props.confirm)}
+                    (props.create && props.password !== props.confirm) ||
+                    (props.create && props.confirm === props.oldpass) }
                   name='confirm'
                   placeholder='Confirm New Password'
                   type={values.showPassword ? 'text' : 'password'} />
@@ -158,7 +166,7 @@ function ChangePassVerification(props) {
             </List>
             <ListItem
               style={{ justifyContent: 'center', marginTop: '30px' }}>
-              <Link to='/profile' style={{ textDecoration: 'none' }}>
+              <Link to='/app/profile' style={{ textDecoration: 'none' }}>
                 <Button className={classes.button}
                   onClick={handleSubmit}
                   variant='text'>Confirm</Button>

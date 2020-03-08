@@ -123,7 +123,6 @@ export default function App() {
                         email={email}
                         login={login}
                         setConfirm={setConfirm}
-                        password={password}
                         confirm={confirm} />
                 </Route>
             </div>

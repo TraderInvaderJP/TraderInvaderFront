@@ -18,6 +18,9 @@ export default function Content(props) {
     const [portfolio, SetPortfolio] = useState({})
     const [name, setName] = useState(0)
     const history = useHistory();
+    const [password, setPassword] = useState('')
+    const [confirm, setConfirm] = useState('');
+    const [oldpass, setOldPass] = useState('')
 
     useEffect(() => {
         if(props.username) {
@@ -59,7 +62,8 @@ export default function Content(props) {
             </Route>
             <Route path='/app/changepassverification'>
                 <Container style={{width: '100%', marginTop: '130px', marginBottom: '10px'}}>
-                    <ChangePassVerification password={props.password} />
+                    <ChangePassVerification username={props.username} oldpass = {oldpass} setOldPass = {setOldPass} password={password} 
+                    setPassword={setPassword} setConfirm={setConfirm} confirm={confirm}/>
                 </Container>
             </Route>
             <Route path='/app/friends'>
