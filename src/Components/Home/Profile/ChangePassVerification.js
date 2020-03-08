@@ -85,15 +85,6 @@ function ChangePassVerification(props) {
 
   return (
     <div className={classes.root}>
-      <AppBar position='fixed' >
-        <Toolbar position='fixed' className={classes.toolbar}>
-          <Link to='/'>
-            <div className={classes.logoHorizontallyCenter}>
-              <img src={templogo} className={classes.logo} alt="Logo" />
-            </div>
-          </Link>
-        </Toolbar>
-      </AppBar>
       <List>
             <List style={{ marginRight: '-40px' }} >
             <ListItem style={{ marginTop: '10px' }}>
@@ -167,7 +158,7 @@ function ChangePassVerification(props) {
             </List>
             <ListItem
               style={{ justifyContent: 'center', marginTop: '30px' }}>
-              <Link to='/Profile' style={{ textDecoration: 'none' }}>
+              <Link to='/profile' style={{ textDecoration: 'none' }}>
                 <Button className={classes.button}
                   onClick={handleSubmit}
                   variant='text'>Confirm</Button>

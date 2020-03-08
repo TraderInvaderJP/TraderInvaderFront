@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { List, ListItem, ListItemText, Link, Button } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
-import Content from '../Content'
-import UserDrawer from '../UserDrawer'
-import ToolBar from '../ToolBar'
+import { useHistory } from 'react-router-dom'
 import axios from 'axios'
 
 const useStyles = makeStyles({
@@ -44,39 +42,28 @@ const useStyles = makeStyles({
 
 function Profile(props) {
     const classes = useStyles()
-    const [isOpen, setIsOpen] = useState(false)
+    const history = useHistory()
     
     useEffect(() => {
-        
-    const tok = localStorage.getItem('token')
-    axios.get(`/users?access_token=${tok}`)
-      .then(function (response) {
-        console.log(response.data)
-        const { data } = response.data
+        const tok = localStorage.getItem('token')
 
-        window.username = data.Username
-        console.log(window.username)
-        window.email = data.UserAttributes[2].Value
-        console.log(window.email)
+        axios.get(`/users?access_token=${tok}`)
+            .then(function (response) {
+                console.log(response.data)
+                const { data } = response.data
 
-      }).catch(function (error) {
-        console.log(error)
-      })
-   })
+                window.username = data.Username
+                console.log(window.username)
+                window.email = data.UserAttributes[2].Value
+                console.log(window.email)
 
-    const Logout = () => {
-        localStorage.removeItem('token')
-        props.setAuth(false)
-        props.setUsername('')
-        props.setPassword('')
-        props.setLogin(false)
-    }
-
-    const toggleDrawer = () => {
-        setIsOpen(!isOpen)
-    }
+            }).catch(function (error) {
+                console.log(error)
+            })
+    })
 
     const handleSubmit = () => {
+        history.push('/app/changepassverification')
     }
 
     return (
@@ -88,11 +75,9 @@ function Profile(props) {
                 <ListItemText style={{color: 'white', marginTop: "-25px", marginLeft: "20px"}} primary={window.username}></ListItemText>
                 <ListItem style={{marginTop: '-35px'}}><h2>Profile Password:</h2></ListItem> 
                 <ListItem style={{ justifyContent: 'center', marginTop: '-25px' }}>
-                    <Link to='/changepassverification' style={{ textDecoration: 'none' }}>
-                        <Button className={classes.button}
+                    <Button className={classes.button}
                         onClick={handleSubmit}
                         variant='text'>Change Password</Button>
-                    </Link>
                 </ListItem>
                 <ListItem style={{marginTop: '-25px'}}><h2>Profile E-mail Address:</h2></ListItem> 
                 <ListItemText style={{color: 'white', marginTop: "-25px", marginLeft: "20px"}} primary={window.email}></ListItemText>
