@@ -11,6 +11,7 @@ import Help from './Help/Help'
 import Settings from './Settings'
 import { Container } from '@material-ui/core'
 import axios from 'axios'
+import ChangePassVerification from './Profile/ChangePassVerification'
 
 export default function Content(props) {
     const [games, SetGames] = useState([])
@@ -18,6 +19,9 @@ export default function Content(props) {
     const [name, setName] = useState(0)
     const [game, setGame] = useState({})
     const history = useHistory();
+    const [password, setPassword] = useState('')
+    const [confirm, setConfirm] = useState('');
+    const [oldpass, setOldPass] = useState('')
 
     useEffect(() => {
         if(props.username) {
@@ -51,13 +55,6 @@ export default function Content(props) {
         SetGames([...games, name])
     }
 
-    const refreshPortfolio = (count, symbol, value) => {
-        let temp = portfolio
-        temp.stocks[symbol] += count
-        temp.wallet += value
-        SetPortfolio(temp)
-    }
-
     return (
         <React.Fragment>
             <Route path='/app' exact>
@@ -68,6 +65,12 @@ export default function Content(props) {
             <Route path='/app/profile'>
                 <Container style={{width: '100%', marginTop: '130px', marginBottom: '10px'}}>
                     <Profile username={props.username} password={props.password} email={props.email} />
+                </Container>
+            </Route>
+            <Route path='/app/changepassverification'>
+                <Container style={{width: '100%', marginTop: '130px', marginBottom: '10px'}}>
+                    <ChangePassVerification username={props.username} oldpass = {oldpass} setOldPass = {setOldPass} password={password} 
+                    setPassword={setPassword} setConfirm={setConfirm} confirm={confirm}/>
                 </Container>
             </Route>
             <Route path='/app/friends'>
@@ -81,7 +84,11 @@ export default function Content(props) {
                 </Container>
             </Route>
             <Route path='/app/game'>
+<<<<<<< HEAD
                 <Game username={props.username} portfolio={portfolio} refreshPortfolio={refreshPortfolio} getGame={getGame} name={name} gameInfo={game}/>
+=======
+                <Game username={props.username} portfolio={portfolio} getGame={getGame} name={name}/>
+>>>>>>> 73a9585c2bda749ba40b1c6af5ac01cfe05b7614
             </Route>
             <Route path='/app/creategame'>
                 <Container style={{width: '100%', marginTop: '130px', marginBottom: '10px'}}>
@@ -90,7 +97,7 @@ export default function Content(props) {
             </Route>
             <Route path='/app/joingame'>
                 <Container style={{width: '100%', marginTop: '130px', marginBottom: '10px'}}>
-                    <JoinGame/>
+                    <JoinGame username={props.username} addGame={addGame}/>
                 </Container>
             </Route>
             <Route path='/app/help'>
