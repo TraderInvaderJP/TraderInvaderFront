@@ -39,7 +39,7 @@ export default function Game(props) {
                     <Sell portfolio={props.portfolio} getPortfolio={props.getPortfolio} name={props.name} username={props.username}/>
                 }
                 {value === 2 &&
-                    <Info portfolio={props.portfolio} />
+                    <Info portfolio={props.portfolio} gameInfo={props.gameInfo}/>
                 }
             </Container>
         </div>

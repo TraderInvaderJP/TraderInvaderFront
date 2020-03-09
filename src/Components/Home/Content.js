@@ -16,6 +16,7 @@ export default function Content(props) {
     const [games, SetGames] = useState([])
     const [portfolio, SetPortfolio] = useState({})
     const [name, setName] = useState(0)
+    const [game, setGame] = useState({})
     const history = useHistory();
 
     useEffect(() => {
@@ -34,9 +35,15 @@ export default function Content(props) {
         let name = games[index]
         setName(name)
 
-        const { data } = await axios.get(`/games/${name}/portfolios/${props.username}`)
 
-        SetPortfolio(data.data)
+        const portfolioData = (await axios.get(`/games/${name}/portfolios/${props.username}`)).data
+
+        SetPortfolio(portfolioData.data)
+
+        const gameData = (await axios.get(`/games/${name}/info`)).data
+
+        setGame(gameData.data)
+
         history.push('/app/game')
     }
 
@@ -74,7 +81,7 @@ export default function Content(props) {
                 </Container>
             </Route>
             <Route path='/app/game'>
-                <Game username={props.username} portfolio={portfolio} refreshPortfolio={refreshPortfolio} getGame={getGame} name={name}/>
+                <Game username={props.username} portfolio={portfolio} refreshPortfolio={refreshPortfolio} getGame={getGame} name={name} gameInfo={game}/>
             </Route>
             <Route path='/app/creategame'>
                 <Container style={{width: '100%', marginTop: '130px', marginBottom: '10px'}}>

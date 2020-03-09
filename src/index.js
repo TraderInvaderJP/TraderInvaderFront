@@ -1,4 +1,5 @@
-import React from 'react';
+import React, {Suspense} from 'react';
+import { CircularProgress } from '@material-ui/core'
 import ReactDOM from 'react-dom';
 import './index.css';
 import * as serviceWorker from './serviceWorker';

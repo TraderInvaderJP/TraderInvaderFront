@@ -193,7 +193,7 @@ export default function Buy(props) {
                                 <TableRow key={id} className={classes.cell}>
                                     <TableCell>{stock.symbol}</TableCell>
                                     <TableCell>{stock.count}</TableCell>
-                                    <TableCell>${stock.value}</TableCell>
+                                    <TableCell>${(stock.value).toFixed(2)}</TableCell>
                                     <TableCell><IconButton style={{padding: 0}} onClick={() => getStock(id)}><Add color='primary' /></IconButton></TableCell>
                                 </TableRow>)
                          })}
