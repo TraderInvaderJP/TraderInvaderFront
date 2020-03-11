@@ -59,7 +59,7 @@ function UserHome(props) {
 
     return (
         <div className={classes.root} style={{width: '100%', height: '100%'}}> 
-            <ToolBar Logout={Logout} toggleDrawer={toggleDrawer} style={{ width: '100%'}}/>  
+            <ToolBar Logout={Logout} toggleDrawer={toggleDrawer} username={props.username} style={{ width: '100%'}}/>  
             <UserDrawer toggleDrawer={toggleDrawer} isOpen={isOpen}/>
             <Content username={props.username} />
         </div>
