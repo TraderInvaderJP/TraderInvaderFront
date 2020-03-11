@@ -84,11 +84,7 @@ export default function Content(props) {
                 </Container>
             </Route>
             <Route path='/app/game'>
-<<<<<<< HEAD
-                <Game username={props.username} portfolio={portfolio} refreshPortfolio={refreshPortfolio} getGame={getGame} name={name} gameInfo={game}/>
-=======
-                <Game username={props.username} portfolio={portfolio} getGame={getGame} name={name}/>
->>>>>>> 73a9585c2bda749ba40b1c6af5ac01cfe05b7614
+                <Game username={props.username} portfolio={portfolio} getGame={getGame} name={name} gameInfo={game}/>
             </Route>
             <Route path='/app/creategame'>
                 <Container style={{width: '100%', marginTop: '130px', marginBottom: '10px'}}>

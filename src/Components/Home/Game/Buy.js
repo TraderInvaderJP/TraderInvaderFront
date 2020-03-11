@@ -50,7 +50,7 @@ export default function Buy(props) {
                 if(symbols !== "") {
                     const { data } = await axios.get(`https://financialmodelingprep.com/api/v3/stock/real-time-price/${symbols}`)
                     
-                    if (data.companiesPriceList != undefined) {
+                    if (data.companiesPriceList !== undefined) {
                         
                         let values = data.companiesPriceList.map(item => item.price)
                         temp = temp.map((item, index) => {
@@ -69,7 +69,7 @@ export default function Buy(props) {
                         }]
                     }
                     
-                    temp = temp.filter(item => item.count != 0)
+                    temp = temp.filter(item => item.count !== 0)
                     setPortfolio(temp)
                 }
             }
@@ -124,13 +124,7 @@ export default function Buy(props) {
     const handleClose = (open) => setIsOpen(open)
     const editCount = (e) => setCount(e.target.value)
     const calcBalance = (count, value) => {
-        console.log({
-            portfolio: props.portfolio,
-            count,
-            value
-        })
         let temp = props.portfolio.wallet - (parseFloat(count) * value)
-        console.log(temp)
         return temp
     }
 
