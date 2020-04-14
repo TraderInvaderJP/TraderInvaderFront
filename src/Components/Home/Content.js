@@ -18,9 +18,9 @@ export default function Content(props) {
     const [portfolio, SetPortfolio] = useState({})
     const [name, setName] = useState(0)
     const [game, setGame] = useState({})
-    const history = useHistory();
+    const history = useHistory()
     const [password, setPassword] = useState('')
-    const [confirm, setConfirm] = useState('');
+    const [confirm, setConfirm] = useState('')
     const [oldpass, setOldPass] = useState('')
 
     useEffect(() => {
@@ -75,7 +75,7 @@ export default function Content(props) {
             </Route>
             <Route path='/app/friends'>
                 <Container style={{width: '100%', marginTop: '130px', marginBottom: '10px'}}>
-                    <Friends />
+                    <Friends username={props.username} />
                 </Container>
             </Route>
             <Route path='/app/statistics'>
