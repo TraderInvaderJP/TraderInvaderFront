@@ -70,7 +70,7 @@ function Create(props) {
   const handleMouseDownPassword = event => { event.preventDefault() }
 
   const TryCreate = () => {
-    axios.post('https://o5gn70te7h.execute-api.us-west-2.amazonaws.com/latest/users/', {
+    axios.post('/users', {
       password: props.password,
       username: props.username,
       email: props.email,
