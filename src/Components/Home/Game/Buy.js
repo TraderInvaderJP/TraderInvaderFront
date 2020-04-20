@@ -6,7 +6,8 @@ import { List, ListItem, InputBase, Paper,
     Dialog, DialogTitle, DialogContent, DialogActions,
     Button, TextField, Card, CardHeader,
     CardContent } from '@material-ui/core'
-import { Search, Add } from '@material-ui/icons'
+import { Search, Add, TrendingDown, TrendingUp, 
+    TrendingFlat } from '@material-ui/icons'
 import Wallet from './Wallet'
 import axios from 'axios'
 
@@ -42,11 +43,13 @@ export default function Buy(props) {
 
     useEffect(() => {
         const makePortfolio = async() => {
+            console.log('In makePortfolio')
             if(props.portfolio.stocks) {
                 let temp = Object.entries(props.portfolio.stocks)
                 let symbols = Object.keys(props.portfolio.stocks).join(',')
 
                 temp.sort((left, right) => (left[0] < right[0] ? -1 : 1))
+
                 if(symbols !== "") {
                     const { data } = await axios.get(`https://financialmodelingprep.com/api/v3/stock/real-time-price/${symbols}`)
                     
@@ -56,15 +59,18 @@ export default function Buy(props) {
                         temp = temp.map((item, index) => {
                             return {
                                 symbol: item[0],
-                                count: item[1],
+                                count: item[1].count,
+                                purchased: item[1].purchased,
                                 value: values[index]
                             }
                         })
                     }
                     else {
+                        console.log(temp)
                         temp = [{
                             symbol: temp[0][0],
-                            count: temp[0][1],
+                            count: temp[0][1].count,
+                            purchased: temp[0][1].purchased,
                             value: data.price
                         }]
                     }
@@ -187,7 +193,16 @@ export default function Buy(props) {
                                 <TableRow key={id} className={classes.cell}>
                                     <TableCell>{stock.symbol}</TableCell>
                                     <TableCell>{stock.count}</TableCell>
-                                    <TableCell>${(stock.value).toFixed(2)}</TableCell>
+                                    <TableCell>
+                                        { (stock.purchased < stock.value)? <TrendingUp style={{color: 'green'}}/> : 
+                                            (stock.purchased == stock.value)? <TrendingFlat /> : <TrendingDown style={{color: 'red'}}/>    
+                                        }
+                                        { ' $' }{(stock.value).toFixed(2)}
+                                        {
+                                            (stock.purchased > stock.value)? `(${(stock.value - stock.purchased).toFixed(2)})` : 
+                                                (stock.purchased == stock.value) ? '' : `(+${(stock.value - stock.purchased).toFixed(2)})`
+                                        }
+                                    </TableCell>
                                     <TableCell><IconButton style={{padding: 0}} onClick={() => getStock(id)}><Add color='primary' /></IconButton></TableCell>
                                 </TableRow>)
                          })}

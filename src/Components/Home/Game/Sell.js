@@ -54,7 +54,7 @@ export default function Sell(props) {
                         temp = temp.map((item, index) => {
                             return {
                                 symbol: item[0],
-                                count: item[1],
+                                count: item[1].count,
                                 value: values[index]
                             }
                         })
@@ -62,7 +62,7 @@ export default function Sell(props) {
                     else {
                         temp = [{
                             symbol: temp[0][0],
-                            count: temp[0][1],
+                            count: temp[0][1].count,
                             value: data.price
                         }]
                     }

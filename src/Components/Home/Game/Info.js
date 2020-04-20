@@ -18,7 +18,7 @@ export default function Info(props) {
     return (
         <div>
             <Paper style={{width: '100%'}}>
-                <Container>
+                <Container style={{paddingTop: '10px', paddingBottom: '10px'}}>
                     <Typography variant='h4'>
                         Name: {props.gameInfo.game.identifier}
                     </Typography>
