@@ -7,47 +7,35 @@ export default function Info(props) {
     const [portfolioValues, setPortfolioValues] = useState([])
 
     useEffect(() => {
-        let userValues = []
-
-        props.gameInfo.portfolios.forEach(async portfolio => {
-            const { wallet, stocks, username } = portfolio
-            let value = 0
-
-            const stockKeys = Object.keys(stocks)
-            const stockNames = stockKeys.join(',')
-
-            if(stockKeys.length > 1) {
-                const { data } = await axios.get(`https://financialmodelingprep.com/api/v3/stock/real-time-price/${stockNames}`)
-
-                let list = {}
-                data.companiesPriceList.forEach(item => list[item.symbol] = item)
-
-                stockKeys.forEach(key => value += stocks[key] * list[key].price)
-
-                userValues.push({
-                    username: username.split('#')[1],
-                    value: value + wallet
-                })
-            }
-        })
-
-        userValues = userValues.sort((left, right) => left.value > right.value ? -1 : 1)
-        setPortfolioValues(userValues)
-    }, [setPortfolioValues, props.gameInfo.portfolios])
+        if(props.gameInfo.game.winCondition)
+            setPortfolioValues(props.gameInfo.scoreboard.sort((left, right) => 
+                (left.total > right.total)? -1 : (left.portfolio > right.portfolio)? -1 : 1))
+        else
+            setPortfolioValues(props.gameInfo.scoreboard.sort((left, right) => 
+                (left.total < right.total)? -1 : (left.portfolio < right.portfolio)? -1 : 1))
+    }, [setPortfolioValues, props.gameInfo.scoreboard])
 
     return (
         <div>
             <Paper style={{width: '100%'}}>
                 <Container>
                     <Typography variant='h4'>
-                        {props.gameInfo.game.identifier}
+                        Name: {props.gameInfo.game.identifier}
+                    </Typography>
+                    <Typography variant='h6'>
+                        Starting Value: ${props.gameInfo.game.wallet}
+                    </Typography>
+                    <Typography variant='h6'>
+                        Game Mode: {props.gameInfo.game.winCondition ? 'Most Gained' : 'Most Lost'}
                     </Typography>
                     <Table>
                         <TableHead>
                             <TableRow>
                                 <TableCell><React.Fragment /></TableCell>
                                 <TableCell>Username</TableCell>
-                                <TableCell>Value</TableCell>
+                                <TableCell>Total</TableCell>
+                                <TableCell>Wallet</TableCell>
+                                <TableCell>Portfolio</TableCell>
                             </TableRow>
                         </TableHead>
                         <TableBody>
@@ -55,7 +43,9 @@ export default function Info(props) {
                                 <TableRow key={index}>
                                     <TableCell>{index + 1}</TableCell>
                                     <TableCell>{item.username}</TableCell>
-                                    <TableCell>${item.value}</TableCell>
+                                    <TableCell>${(item.total).toFixed(2)}</TableCell>
+                                    <TableCell>${(item.wallet).toFixed(2)}</TableCell>
+                                    <TableCell>${(item.portfolio).toFixed(2)}</TableCell>
                                 </TableRow>
                                 )
                             )}
