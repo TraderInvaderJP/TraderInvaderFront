@@ -28,7 +28,7 @@ const useStyles = makeStyles({
         }
     }
 })
-export default function Buy(props) {
+export default function Sell(props) {
     const classes = useStyles()
     const [symbols, setSymbols] = useState([])
     const [editing, setEditing] = useState(false)
@@ -69,6 +69,8 @@ export default function Buy(props) {
                     
                     temp = temp.filter(item => item.count !== 0)
                     setPortfolio(temp)
+                    console.log(portfolio)
+                    console.log(temp)
                 }
             }
         }

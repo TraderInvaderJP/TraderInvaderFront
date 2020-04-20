@@ -65,7 +65,7 @@ function Verification(props) {
 
   const handleSubmit = () => {
 
-    let url = `https://o5gn70te7h.execute-api.us-west-2.amazonaws.com/latest/users/${props.username}/verification`
+    let url = `/users/${props.username}/verification`
     axios.put(url, {
       confirmation_code: props.verification
     })
