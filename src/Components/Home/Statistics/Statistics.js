@@ -14,23 +14,45 @@ const useStyles = makeStyles({
     }
 })
 
-
-
 export default function Statistics(props) {
     const classes = useStyles()
     const [achievements, SetAchievements] = useState([])
+    const [stats, SetStats] = useState([])
 
     useEffect(() => {
         if (props.username) {
-            axios.get(`/users/${props.username}/achievements`, {
+            axios.get(`/statistics/users/${props.username}/achievements`, {
             })
                 .then(res => {
                     const { data } = res.data
-                    SetAchievements(data)
+                    const obj = Object.entries(data).map(([key, value]) => ({key, value}))
+
+                    SetAchievements(obj)
+                    console.log(achievements)
+                    console.log(obj)
+                    console.log(data)
                 })
                 .catch(err => console.log(err))
         }
     }, [props.username, SetAchievements])
+
+    useEffect(() => {
+        if (props.username) {
+            axios.get(`/statistics/users/${props.username}/statistics`, {
+            })
+                .then(res => {
+                    const { data } = res.data
+                    const obj = Object.entries(data).map(([key, value]) => ({key, value}))
+                    SetStats(obj)
+
+                    console.log(obj)
+                    console.log(data)
+                    console.log(stats)
+
+                })
+                .catch(err => console.log(err))
+        }
+    }, [props.username, SetStats])
 
     return (
         <div>
@@ -46,10 +68,8 @@ export default function Statistics(props) {
                     </TableHead>
                     <TableBody>
                         <TableRow className={classes.cell}>
-                            <TableCell>Games Won</TableCell>
+                            <TableCell>Games Won </TableCell>
                             <TableCell><React.Fragment /></TableCell>
-                        </TableRow>
-                        <TableRow className={classes.cell}>
                         </TableRow>
                         <TableRow className={classes.cell}>
                             <TableCell>Games Lost</TableCell>
@@ -72,14 +92,17 @@ export default function Statistics(props) {
                     <ListSubheader color='primary'>
                         <Typography variant='h5' style={{ color: 'black', padding: '0 0 10px 0' }}>Achievements</Typography>
                     </ListSubheader>
-                    {achievements.map((achievement, id) => (
+                    <ListItem className={classes.row}>
+                        <ListItemText>{}</ListItemText>
+                    </ListItem>
+                    {/* {achievements.map((achievement, id) => (
                         <React.Fragment key={id}>
                             <Divider />
                             <ListItem className={classes.row}>
                                 <ListItemText>{achievement}</ListItemText>
                             </ListItem>
                         </React.Fragment>))
-                    }
+                    } */}
                 </List>
             </Paper>
         </div>
