@@ -80,7 +80,7 @@ export default function Content(props) {
             </Route>
             <Route path='/app/statistics'>
                 <Container style={{width: '100%', marginTop: '130px', marginBottom: '10px'}}>
-                    <Statistics username={props.username} portfolio={portfolio}/>
+                    <Statistics username={props.username} />
                 </Container>
             </Route>
             <Route path='/app/game'>
