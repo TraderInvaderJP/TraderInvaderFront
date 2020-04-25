@@ -25,7 +25,7 @@ export default function Content(props) {
 
     useEffect(() => {
         if(props.username) {
-            axios.get(`/games/${props.username}`, {
+            axios.get(`/games/${props.username}/active`, {
             })
                 .then(res => {
                     const { data } = res.data
