@@ -1,9 +1,20 @@
 import React from 'react'
-
-export default function Confirmed() {
+import { ListItem, ListItemText, ListItemSecondaryAction, Divider,
+    Button } from '@material-ui/core'
+export default function Confirmed(props) {
     return (
-        <div>
-            <h1>Confirmed</h1>
-        </div>
+        <React.Fragment>
+            { props.friends.map(friend => (
+                <React.Fragment>
+                    <Divider />
+                    <ListItem>
+                        <ListItemText>{friend}</ListItemText>
+                        <ListItemSecondaryAction>
+                            <Button color='primary'>Invite</Button>
+                        </ListItemSecondaryAction>
+                    </ListItem>
+                </React.Fragment>
+            ))}
+        </React.Fragment>
     )
 }

@@ -1,9 +1,24 @@
 import React from 'react'
+import { ListItem, ListItemText, ListItemSecondaryAction, Divider,
+    IconButton } from '@material-ui/core'
+import { Clear } from '@material-ui/icons'
 
-export default function Requests() {
+export default function Requests(props) {
     return (
-        <div>
-            <h1>Requests</h1>
-        </div>
+        <React.Fragment>
+            { props.requests.map(request => (
+                <React.Fragment>
+                    <Divider />
+                    <ListItem>
+                        <ListItemText>{request}</ListItemText>
+                        <ListItemSecondaryAction>
+                            <IconButton>
+                                <Clear />
+                            </IconButton>
+                        </ListItemSecondaryAction>
+                    </ListItem>
+                </React.Fragment>
+            ))}
+        </React.Fragment>
     )
 }
