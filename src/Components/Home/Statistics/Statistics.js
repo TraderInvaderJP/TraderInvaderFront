@@ -21,38 +21,23 @@ export default function Statistics(props) {
     let s = {}
 
     useEffect(() => {
-        if (props.username) {
-            axios.get(`/statistics/users/${props.username}/achievements`, {
-            })
-                .then(res => {
-                    const { data } = res.data
-                    const obj = Object.entries(data).map(([key, value]) => ({key, value}))
+        (async () => {
+            if(props.username) {
+                const { data } = await axios.get(`/statistics/${props.username}/achievements`)
 
-                    // SetAchievements(obj)
-                    // console.log(achievements)
-                    // console.log(obj)
-                    // console.log(data)
-                })
-                .catch(err => console.log(err))
-        }
+                SetAchievements(Object.entries(data.data))
+            }
+        })()
     }, [props.username, SetAchievements])
 
     useEffect(() => {
-        if (props.username) {
-            axios.get(`/statistics/users/${props.username}/statistics`, {
-            })
-                .then(res => {
-                    const { data } = res.data
-                  //  let obj = Object.entries(data).map(([key, value]) => ({key, value}))
-                   // SetStats(data)
-                  // s = obj
-                   // console.log(obj)
-                 //   console.log(data)
-                    console.log(s)
+        (async () => {
+            if(props.username) {            
+                const { data } = await axios.get(`/statistics/${props.username}/statistics`)
 
-                })
-                .catch(err => console.log(err))
-        }
+                SetStats(data.data)
+            }
+        })()
     }, [props.username, SetStats])
 
     return (
