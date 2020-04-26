@@ -20,10 +20,12 @@ export default function Content(props) {
     const [password, setPassword] = useState('')
     const [confirm, setConfirm] = useState('')
     const [oldpass, setOldPass] = useState('')
+    const [stats, setStats] = useState('')
+    const [achievements, setAchievements] = useState([])
 
     useEffect(() => {
         if(props.username) {
-            axios.get(`/games/${props.username}/active`, {
+            axios.get(`/games/${props.username}`, {
             })
                 .then(res => {
                     const { data } = res.data
@@ -32,6 +34,32 @@ export default function Content(props) {
                 .catch(err => console.log(err))
         }
     }, [props.username, SetGames])
+
+    useEffect(() => {
+        const GetStats = async () => {
+
+            try {
+                const { data } = await axios.get(`/statistics/${props.username}/statistics`)
+                setStats(data.data)
+            } catch (err) {
+                console.log(err)
+            }
+        }
+        GetStats()
+    }, [props.username, setStats])
+
+    useEffect(() => {
+        const GetAchievements = async () => {
+
+            try {
+                const { data } = await axios.get(`/statistics/${props.username}/achievements`)
+                setAchievements(Object.entries(data.data))
+            } catch (err) {
+                console.log(err)
+            }
+        }
+        GetAchievements()
+    }, [props.username, setAchievements])
 
     const getGame = async (index) => {
         let name = games[index]
@@ -73,7 +101,7 @@ export default function Content(props) {
             </Route>
             <Route path='/app/statistics'>
                 <Container style={{width: '100%', marginTop: '130px', marginBottom: '10px'}}>
-                    <Statistics username={props.username} />
+                    <Statistics username={props.username} stats={stats} achievements={achievements}/>
                 </Container>
             </Route>
             <Route path='/app/game'>

@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import {
     Paper, makeStyles, Table, ListSubheader, Typography,
-    TableHead, TableBody, TableRow, TableCell,
-    List, Divider, ListItem, ListItemText
+    TableHead, TableBody, TableRow, TableCell, Divider,
+    List, ListItem, ListItemText
 } from '@material-ui/core'
-import axios from 'axios'
 
 const useStyles = makeStyles({
     cell: {
@@ -16,29 +15,8 @@ const useStyles = makeStyles({
 
 export default function Statistics(props) {
     const classes = useStyles()
-    const [achievements, SetAchievements] = useState([])
-    const [stats, SetStats] = useState({})
-    let s = {}
 
-    useEffect(() => {
-        (async () => {
-            if(props.username) {
-                const { data } = await axios.get(`/statistics/${props.username}/achievements`)
-
-                SetAchievements(Object.entries(data.data))
-            }
-        })()
-    }, [props.username, SetAchievements])
-
-    useEffect(() => {
-        (async () => {
-            if(props.username) {            
-                const { data } = await axios.get(`/statistics/${props.username}/statistics`)
-
-                SetStats(data.data)
-            }
-        })()
-    }, [props.username, SetStats])
+console.log(props.achievements)
 
     return (
         <div>
@@ -55,40 +33,40 @@ export default function Statistics(props) {
                     <TableBody>
                         <TableRow className={classes.cell}>
                             <TableCell>Games Won </TableCell>
-                            <TableCell><React.Fragment /></TableCell>
+                            <TableCell>{props.stats.numberOfWins}</TableCell>
                         </TableRow>
                         <TableRow className={classes.cell}>
                             <TableCell>Games Lost</TableCell>
-                            <TableCell><React.Fragment /></TableCell>
+                            <TableCell>{props.stats.numberOfLosses}</TableCell>
                         </TableRow>
                         <TableRow className={classes.cell}>
-                            <TableCell>Win Streak</TableCell>
-                            <TableCell><React.Fragment /></TableCell>
+                            <TableCell>Win Streak </TableCell>
+                            <TableCell>{props.stats.currentWinStreak}</TableCell>
                         </TableRow>
                         <TableRow className={classes.cell}>
                             <TableCell>Loss Streak</TableCell>
-                            <TableCell><React.Fragment /></TableCell>
+                            <TableCell>{props.stats.currentLossStreak}</TableCell>
                         </TableRow>
                     </TableBody>
                 </Table>
             </Paper>
 
             <Paper className={classes.paper} style={{ margin: '10px 0 0 0', padding: '10px 0' }}>
-                <List>
-                    <ListSubheader color='primary'>
-                        <Typography variant='h5' style={{ color: 'black', padding: '0 0 10px 0' }}>Achievements</Typography>
+                <List className={classes.game}>
+                    <ListSubheader color='primary' align='center'>
+                        <Typography variant='h5' style={{ color: 'black', padding: '0 0 10px 0' }}>
+                            Achievements
+                        </Typography>
                     </ListSubheader>
-                    <ListItem className={classes.row}>
-                        <ListItemText>{}</ListItemText>
-                    </ListItem>
-                    {/* {achievements.map((achievement, id) => (
+                    {props.achievements.map((achievement, id) => (
                         <React.Fragment key={id}>
                             <Divider />
                             <ListItem className={classes.row}>
                                 <ListItemText>{achievement}</ListItemText>
+                            
                             </ListItem>
                         </React.Fragment>))
-                    } */}
+                    }
                 </List>
             </Paper>
         </div>
