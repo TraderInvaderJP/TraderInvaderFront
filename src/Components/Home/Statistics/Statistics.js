@@ -17,7 +17,8 @@ const useStyles = makeStyles({
 export default function Statistics(props) {
     const classes = useStyles()
     const [achievements, SetAchievements] = useState([])
-    const [stats, SetStats] = useState([])
+    const [stats, SetStats] = useState({})
+    let s = {}
 
     useEffect(() => {
         if (props.username) {
@@ -27,10 +28,10 @@ export default function Statistics(props) {
                     const { data } = res.data
                     const obj = Object.entries(data).map(([key, value]) => ({key, value}))
 
-                    SetAchievements(obj)
-                    console.log(achievements)
-                    console.log(obj)
-                    console.log(data)
+                    // SetAchievements(obj)
+                    // console.log(achievements)
+                    // console.log(obj)
+                    // console.log(data)
                 })
                 .catch(err => console.log(err))
         }
@@ -42,12 +43,12 @@ export default function Statistics(props) {
             })
                 .then(res => {
                     const { data } = res.data
-                    const obj = Object.entries(data).map(([key, value]) => ({key, value}))
-                    SetStats(obj)
-
-                    console.log(obj)
-                    console.log(data)
-                    console.log(stats)
+                  //  let obj = Object.entries(data).map(([key, value]) => ({key, value}))
+                   // SetStats(data)
+                  // s = obj
+                   // console.log(obj)
+                 //   console.log(data)
+                    console.log(s)
 
                 })
                 .catch(err => console.log(err))
