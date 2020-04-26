@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { Paper, List, ListItem, ListItemText, IconButton, ListSubheader, Typography, Divider } from '@material-ui/core'
 import { ArrowForward } from '@material-ui/icons'
 import { makeStyles } from '@material-ui/core/styles'
@@ -41,11 +41,9 @@ export default function Games(props) {
                             <Divider />
                             <ListItem className={classes.row}>
                                 <ListItemText>{game}</ListItemText>
-                                {/*<Link to='/app/game>*/}
                                     <IconButton className={classes.arrow} style={{ padding: 0, color: '#43AA1F' }} onClick={() => props.getGame(id)}>
                                         <ArrowForward />
                                     </IconButton>
-                                {/*</Link>*/}
                             </ListItem>
                         </React.Fragment>))
                     }

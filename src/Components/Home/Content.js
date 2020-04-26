@@ -24,7 +24,7 @@ export default function Content(props) {
     const [achievements, setAchievements] = useState([])
 
     useEffect(() => {
-        if(props.username) {
+        if (props.username) {
             axios.get(`/games/${props.username}`, {
             })
                 .then(res => {
@@ -84,41 +84,41 @@ export default function Content(props) {
     return (
         <React.Fragment>
             <Route path='/app' exact>
-            <Container style={{width: '100%', marginTop: '130px', marginBottom: '10px'}}>
-                <Games username={props.username} games={games} getGame={getGame} />
-            </Container>
+                <Container style={{ width: '100%', marginTop: '130px', marginBottom: '10px' }}>
+                    <Games username={props.username} games={games} getGame={getGame} />
+                </Container>
             </Route>
             <Route path='/app/changepassverification'>
-                <Container style={{width: '100%', marginTop: '130px', marginBottom: '10px'}}>
-                    <ChangePassVerification username={props.username} oldpass = {oldpass} setOldPass = {setOldPass} password={password} 
-                    setPassword={setPassword} setConfirm={setConfirm} confirm={confirm}/>
+                <Container style={{ width: '100%', marginTop: '130px', marginBottom: '10px' }}>
+                    <ChangePassVerification username={props.username} oldpass={oldpass} setOldPass={setOldPass} password={password}
+                        setPassword={setPassword} setConfirm={setConfirm} confirm={confirm} />
                 </Container>
             </Route>
             <Route path='/app/friends'>
-                <Container style={{width: '100%', marginTop: '130px', marginBottom: '10px'}}>
+                <Container style={{ width: '100%', marginTop: '130px', marginBottom: '10px' }}>
                     <Friends username={props.username} />
                 </Container>
             </Route>
             <Route path='/app/statistics'>
-                <Container style={{width: '100%', marginTop: '130px', marginBottom: '10px'}}>
-                    <Statistics username={props.username} stats={stats} achievements={achievements}/>
+                <Container style={{ width: '100%', marginTop: '130px', marginBottom: '10px' }}>
+                    <Statistics username={props.username} stats={stats} achievements={achievements} />
                 </Container>
             </Route>
             <Route path='/app/game'>
-                <Game username={props.username} portfolio={portfolio} getGame={getGame} name={name} gameInfo={game}/>
+                <Game username={props.username} portfolio={portfolio} getGame={getGame} name={name} gameInfo={game} />
             </Route>
             <Route path='/app/creategame'>
-                <Container style={{width: '100%', marginTop: '130px', marginBottom: '10px'}}>
-                    <CreateGame username={props.username} addGame={addGame}/>
+                <Container style={{ width: '100%', marginTop: '130px', marginBottom: '10px' }}>
+                    <CreateGame username={props.username} addGame={addGame} />
                 </Container>
             </Route>
             <Route path='/app/joingame'>
-                <Container style={{width: '100%', marginTop: '130px', marginBottom: '10px'}}>
-                    <JoinGame username={props.username} addGame={addGame}/>
+                <Container style={{ width: '100%', marginTop: '130px', marginBottom: '10px' }}>
+                    <JoinGame username={props.username} addGame={addGame} />
                 </Container>
             </Route>
             <Route path='/app/help'>
-                <Container style={{width: '100%', marginTop: '130px', marginBottom: '10px'}}>
+                <Container style={{ width: '100%', marginTop: '130px', marginBottom: '10px' }}>
                     <Help />
                 </Container>
             </Route>

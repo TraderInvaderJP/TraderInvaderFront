@@ -195,12 +195,12 @@ export default function Buy(props) {
                                     <TableCell>{stock.count}</TableCell>
                                     <TableCell>
                                         { (stock.purchased < stock.value)? <TrendingUp style={{color: 'green'}}/> : 
-                                            (stock.purchased == stock.value)? <TrendingFlat /> : <TrendingDown style={{color: 'red'}}/>    
+                                            (stock.purchased === stock.value)? <TrendingFlat /> : <TrendingDown style={{color: 'red'}}/>    
                                         }
                                         { ' $' }{(stock.value).toFixed(2)}
                                         {
                                             (stock.purchased > stock.value)? `(${(stock.value - stock.purchased).toFixed(2)})` : 
-                                                (stock.purchased == stock.value) ? '' : `(+${(stock.value - stock.purchased).toFixed(2)})`
+                                                (stock.purchased === stock.value) ? '' : `(+${(stock.value - stock.purchased).toFixed(2)})`
                                         }
                                     </TableCell>
                                     <TableCell><IconButton style={{padding: 0}} onClick={() => getStock(id)}><Add color='primary' /></IconButton></TableCell>

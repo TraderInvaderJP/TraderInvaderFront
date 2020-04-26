@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import {
     Paper, makeStyles, Table, ListSubheader, Typography,
     TableHead, TableBody, TableRow, TableCell, Divider,
@@ -16,7 +16,7 @@ const useStyles = makeStyles({
 export default function Statistics(props) {
     const classes = useStyles()
 
-console.log(props.achievements)
+    console.log(props.achievements)
 
     return (
         <div>
@@ -63,7 +63,7 @@ console.log(props.achievements)
                             <Divider />
                             <ListItem className={classes.row}>
                                 <ListItemText>{achievement}</ListItemText>
-                            
+
                             </ListItem>
                         </React.Fragment>))
                     }
