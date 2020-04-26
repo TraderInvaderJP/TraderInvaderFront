@@ -1,7 +1,7 @@
 import React, { } from 'react';
 import { List, ListItem, Divider, ListItemIcon, ListItemText, Drawer } from '@material-ui/core'
 import { Link } from 'react-router-dom'
-import { People, Equalizer, Settings, Person, Help, Home, GroupAdd, Create } from '@material-ui/icons'
+import { People, Equalizer, Help, Home, GroupAdd, Create } from '@material-ui/icons'
 import { makeStyles } from '@material-ui/core/styles'
 
 const useStyles = makeStyles({
@@ -37,14 +37,6 @@ function UserDrawer(props) {
                                 <Home />
                             </ListItemIcon>
                             <ListItemText primary={'Home'} />
-                        </ListItem>
-                    </Link>
-                    <Link to='/app/profile' style={{ color: 'black', textDecoration: 'none' }}>
-                        <ListItem button>
-                            <ListItemIcon>
-                                <Person />
-                            </ListItemIcon>
-                            <ListItemText primary={'Profile'} />
                         </ListItem>
                     </Link>
                     <Link to='/app/friends' style={{ color: 'black', textDecoration: 'none' }}>
@@ -85,14 +77,6 @@ function UserDrawer(props) {
                 </List>
                 <Divider />
                 <List>
-                    <Link to='/app/settings' style={{ color: 'black', textDecoration: 'none' }}>
-                        <ListItem button>
-                            <ListItemIcon>
-                                <Settings />
-                            </ListItemIcon>
-                            <ListItemText primary={'Settings'} />
-                        </ListItem>
-                    </Link>
                     <Link to='/app/help' style={{ color: 'black', textDecoration: 'none' }}>
                         <ListItem button>
                             <ListItemIcon>

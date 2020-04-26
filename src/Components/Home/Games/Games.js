@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import { Paper, List, ListItem, ListItemText, IconButton, ListSubheader, Typography, Divider } from '@material-ui/core'
 import { ArrowForward } from '@material-ui/icons'
 import { makeStyles } from '@material-ui/core/styles'
-import { Link } from 'react-router-dom'
 
 const useStyles = makeStyles({
     paper: {

@@ -2,13 +2,11 @@ import React, { useState, useEffect } from 'react'
 import { Route, useHistory } from 'react-router-dom'
 import Game from './Game/Game'
 import Games from './Games/Games'
-import Profile from './Profile/Profile'
 import Friends from './Friends/Friends'
 import Statistics from './Statistics/Statistics'
 import CreateGame from './CreateGame'
 import JoinGame from './JoinGame'
 import Help from './Help/Help'
-import Settings from './Settings'
 import { Container } from '@material-ui/core'
 import axios from 'axios'
 import ChangePassVerification from './Profile/ChangePassVerification'
@@ -62,11 +60,6 @@ export default function Content(props) {
                 <Games username={props.username} games={games} getGame={getGame} />
             </Container>
             </Route>
-            <Route path='/app/profile'>
-                <Container style={{width: '100%', marginTop: '130px', marginBottom: '10px'}}>
-                    <Profile username={props.username} password={props.password} email={props.email} />
-                </Container>
-            </Route>
             <Route path='/app/changepassverification'>
                 <Container style={{width: '100%', marginTop: '130px', marginBottom: '10px'}}>
                     <ChangePassVerification username={props.username} oldpass = {oldpass} setOldPass = {setOldPass} password={password} 
@@ -99,11 +92,6 @@ export default function Content(props) {
             <Route path='/app/help'>
                 <Container style={{width: '100%', marginTop: '130px', marginBottom: '10px'}}>
                     <Help />
-                </Container>
-            </Route>
-            <Route path='/app/settings'>
-                <Container style={{width: '100%', marginTop: '130px', marginBottom: '10px'}}>
-                    <Settings />
                 </Container>
             </Route>
         </React.Fragment>
