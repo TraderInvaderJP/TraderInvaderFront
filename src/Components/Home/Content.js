@@ -53,7 +53,7 @@ export default function Content(props) {
 
             try {
                 const { data } = await axios.get(`/statistics/${props.username}/achievements`)
-                setAchievements(Object.entries(data.data))
+                setAchievements(Object.keys(data.data))
             } catch (err) {
                 console.log(err)
             }
