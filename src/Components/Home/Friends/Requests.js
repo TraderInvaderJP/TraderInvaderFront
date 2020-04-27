@@ -1,6 +1,6 @@
 import React from 'react'
 import { ListItem, ListItemText, ListItemSecondaryAction, Divider,
-    IconButton } from '@material-ui/core'
+    IconButton, Button } from '@material-ui/core'
 import { Clear } from '@material-ui/icons'
 
 export default function Requests(props) {
@@ -12,6 +12,7 @@ export default function Requests(props) {
                     <ListItem>
                         <ListItemText>{request}</ListItemText>
                         <ListItemSecondaryAction>
+                            <Button color='primary'>Confirm</Button>
                             <IconButton>
                                 <Clear />
                             </IconButton>
