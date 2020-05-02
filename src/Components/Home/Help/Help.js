@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { Grid, Typography, Paper, List, ListSubheader } from '@material-ui/core'
+import { Grid, Typography, Paper, List, ListSubheader, Divider, ListItem, ListItemText, IconButton } from '@material-ui/core'
+import { ArrowForward } from '@material-ui/icons'
 import { makeStyles } from '@material-ui/core/styles'
 
 const useStyles = makeStyles({
@@ -8,6 +9,18 @@ const useStyles = makeStyles({
     },
     sections: {
         color: 'black',
+    },
+    row: {
+        backgroundColor: 'white',
+        color: 'black',
+        "&:hover": {
+            backgroundColor: '#DEDEDE',
+        }
+    },
+    arrow: {
+        "&:hover": {
+            backgroundColor: '#53E121',
+        }
     }
 })
 
@@ -30,10 +43,31 @@ export default function Help() {
                     <Paper className={classes.paper} style={{ margin: '10px 0 0 0', padding: '10px 0' }}>
                         <List className={classes.sections}>
                             <ListSubheader color='primary' align='center'>
-                                <Typography varient = "h5" style={{color: 'black', textAlign: 'center'}}>
+                                <Typography varient = "h5" style={{color: 'black', padding: '0 0 10px 0', textAlign: 'center'}}>
                                     Jump To Section
                                 </Typography>
                             </ListSubheader>
+                            <Divider />
+                            <ListItem classname={classes.row}>
+                                <ListItemText>Accounts</ListItemText>
+                                <IconButton className={classes.arrow} style={{ padding: 0, color: '#43AA1F' }} /*onClick={}*/>
+                                    <ArrowForward />
+                                </IconButton>
+                            </ListItem>
+
+                            <ListItem classname={classes.row}>
+                                <ListItemText>Games</ListItemText>
+                                <IconButton className={classes.arrow} style={{ padding: 0, color: '#43AA1F' }} /*onClick={}*/>
+                                    <ArrowForward />
+                                </IconButton>
+                            </ListItem>
+
+                            <ListItem classname={classes.row}>
+                                <ListItemText>Friends</ListItemText>
+                                <IconButton className={classes.arrow} style={{ padding: 0, color: '#43AA1F' }} /*onClick={}*/>
+                                    <ArrowForward />
+                                </IconButton>
+                            </ListItem>
                         </List>
                     </Paper>
                 </Grid>
