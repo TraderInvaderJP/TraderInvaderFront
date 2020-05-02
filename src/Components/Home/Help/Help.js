@@ -1,7 +1,8 @@
-import React, { useState } from 'react'
-import { Grid, Typography, Paper, List, ListSubheader, Divider, ListItem, ListItemText, IconButton } from '@material-ui/core'
+import React, { useState} from 'react'
+import { Grid, Typography, Paper, List, ListSubheader, Divider, ListItem, ListItemText, IconButton, Link } from '@material-ui/core'
 import { ArrowForward } from '@material-ui/icons'
 import { makeStyles } from '@material-ui/core/styles'
+import ScrollIntoView from 'react-scroll-into-view'
 
 const useStyles = makeStyles({
     paper: {
@@ -50,23 +51,29 @@ export default function Help() {
                             <Divider />
                             <ListItem classname={classes.row}>
                                 <ListItemText>Accounts</ListItemText>
-                                <IconButton className={classes.arrow} style={{ padding: 0, color: '#43AA1F' }} /*onClick={}*/>
-                                    <ArrowForward />
-                                </IconButton>
+                                <ScrollIntoView selector ="#accsec">
+                                    <IconButton className={classes.arrow} style={{ padding: 0, color: '#43AA1F' }}>
+                                        <ArrowForward />
+                                    </IconButton>
+                                </ScrollIntoView>
                             </ListItem>
 
                             <ListItem classname={classes.row}>
                                 <ListItemText>Games</ListItemText>
-                                <IconButton className={classes.arrow} style={{ padding: 0, color: '#43AA1F' }} /*onClick={}*/>
-                                    <ArrowForward />
-                                </IconButton>
+                                <ScrollIntoView selector ="#gamesec">
+                                    <IconButton className={classes.arrow} style={{ padding: 0, color: '#43AA1F' }}>
+                                        <ArrowForward />
+                                    </IconButton>
+                                </ScrollIntoView>
                             </ListItem>
 
                             <ListItem classname={classes.row}>
                                 <ListItemText>Friends</ListItemText>
-                                <IconButton className={classes.arrow} style={{ padding: 0, color: '#43AA1F' }} /*onClick={}*/>
-                                    <ArrowForward />
-                                </IconButton>
+                                <ScrollIntoView selector ="#friendsec">
+                                    <IconButton className={classes.arrow} style={{ padding: 0, color: '#43AA1F' }} /*onClick={}*/>
+                                        <ArrowForward />
+                                    </IconButton>
+                                </ScrollIntoView>
                             </ListItem>
                         </List>
                     </Paper>
@@ -78,7 +85,7 @@ export default function Help() {
                 alignItems='left'
                 spacing={2}>
                 <Grid item style={{justifyContent: "center"}}>
-                    <Typography variant = 'h4' style={{color: 'black', padding: '0 0 10px 0', textAlign: 'left'}}>
+                    <Typography variant = 'h4' style={{color: 'black', padding: '0 0 10px 0', textAlign: 'left'}} id = "accsec">
                         Accounts
                     </Typography>
                     <Typography variant = 'h5' style={{color: 'black', padding: '0 0 10px 0', textAlign: 'left'}}>
@@ -92,7 +99,7 @@ export default function Help() {
                 </Grid>
 
                 <Grid item style={{justifyContent: "center"}}>
-                    <Typography variant = 'h4' style={{color: 'black', padding: '0 0 10px 0', textAlign: 'left'}}>
+                    <Typography variant = 'h4' style={{color: 'black', padding: '0 0 10px 0', textAlign: 'left'}} id = "gamesec">
                         Games
                     </Typography>
                     <Typography variant = 'h5' style={{color: 'black', padding: '0 0 10px 0', textAlign: 'left'}}>
@@ -111,7 +118,7 @@ export default function Help() {
                 </Grid>
 
                 <Grid item style={{justifyContent: "center"}}>
-                    <Typography variant = 'h4' style={{color: 'black', padding: '0 0 10px 0', textAlign: 'left'}}>
+                    <Typography variant = 'h4' style={{color: 'black', padding: '0 0 10px 0', textAlign: 'left'}} id="friendsec">
                         Friends
                     </Typography>
                     <Typography variant = 'h5' style={{color: 'black', padding: '0 0 10px 0', textAlign: 'left'}}>
