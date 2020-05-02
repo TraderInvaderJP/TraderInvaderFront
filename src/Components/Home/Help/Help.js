@@ -1,7 +1,19 @@
 import React, { useState } from 'react'
-import { Grid, Typography } from '@material-ui/core'
+import { Grid, Typography, Paper, List, ListSubheader } from '@material-ui/core'
+import { makeStyles } from '@material-ui/core/styles'
+
+const useStyles = makeStyles({
+    paper: {
+        backgroundColor: 'white'
+    },
+    sections: {
+        color: 'black',
+    }
+})
 
 export default function Help() {
+    const classes = useStyles()  
+
     return (
         <div>
             <Grid container style={{ justifyContent: 'center', marginTop: '25px' }} 
@@ -10,9 +22,20 @@ export default function Help() {
                 alignItems= 'center'
                 spacing={2}>
                 <Grid item style={{justifyContent: 'center' }}>
-                    <Typography variant = "h4" style={{color: 'black', padding: '0 0 10px 0', textAlign: 'center'}}>
+                    <Typography variant = "h4" style={{color: 'black', textAlign: 'center'}}>
                         Help
                     </Typography>
+                </Grid>
+                <Grid item style={{justifyContent: 'center'}}>
+                    <Paper className={classes.paper} style={{ margin: '10px 0 0 0', padding: '10px 0' }}>
+                        <List className={classes.sections}>
+                            <ListSubheader color='primary' align='center'>
+                                <Typography varient = "h5" style={{color: 'black', textAlign: 'center'}}>
+                                    Jump To Section
+                                </Typography>
+                            </ListSubheader>
+                        </List>
+                    </Paper>
                 </Grid>
             </Grid>
             <Grid container style={{ justifycontent: 'left', marginTop: '25px'}}
