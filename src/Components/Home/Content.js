@@ -96,7 +96,7 @@ export default function Content(props) {
             </Route>
             <Route path='/app/friends'>
                 <Container style={{ width: '100%', marginTop: '130px', marginBottom: '10px' }}>
-                    <Friends username={props.username} />
+                    <Friends username={props.username} games={games}/>
                 </Container>
             </Route>
             <Route path='/app/statistics'>

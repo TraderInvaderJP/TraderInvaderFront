@@ -10,7 +10,7 @@ export default function Confirmed(props) {
                     <ListItem>
                         <ListItemText>{friend}</ListItemText>
                         <ListItemSecondaryAction>
-                            <Button color='primary'>Invite</Button>
+                            <Button color='primary' onClick={() => props.setNameAndOpen(friend)}>Invite</Button>
                         </ListItemSecondaryAction>
                     </ListItem>
                 </React.Fragment>
