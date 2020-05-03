@@ -12,7 +12,7 @@ export default function Info(props) {
                 (left.total > right.total)? -1 : (left.portfolio > right.portfolio)? -1 : 1))
         else
             setPortfolioValues(props.gameInfo.scoreboard.sort((left, right) => 
-                (left.total < right.total)? -1 : (left.portfolio < right.portfolio)? -1 : 1))
+                (left.total < right.total)? -1 : 1))
     }, [setPortfolioValues, props.gameInfo.scoreboard])
 
     return (
