@@ -35,26 +35,38 @@ export default function Friends(props) {
   const [friendName, setFriendName] = useState('')
 
   useEffect(() => {
-    ;(async () => {
-      let confirmedData = await axios.get(`/users/${props.username}/confirmed`)
-
-      setFriends(confirmedData.data.data)
-
-      let requestData = await axios.get(`/users/${props.username}/requests`)
-
-      setRequests(requestData.data.data)
-    })()
+    getFriendsAndRequests()
   }, [props.username, setFriends, setRequests])
+
+  const getFriendsAndRequests = async () => {
+    let confirmedData = await axios.get(`/users/${props.username}/confirmed`)
+
+    setFriends(confirmedData.data.data)
+
+    let requestData = await axios.get(`/users/${props.username}/requests`)
+
+    setRequests(requestData.data.data)
+  }
 
   const setNameAndOpen = (username) => {
     setFriendName(username)
     toggleOpen()
   }
 
-  const sendInviteAndClose = (game) => {
+  const sendInviteAndClose = async (game) => {
+    await axios.post(`/users/${friendName}/invites/${game}`)
     toggleOpen()
   }
 
+  const confirmRequest = async (friend) => {
+    await axios.put(`/users/${props.username}/friends/${friend}`)
+    getFriendsAndRequests()
+  }
+
+  const deleteRequest = async (friend) => {
+    await axios.delete(`/users/${props.username}/requests/${friend}`)
+    getFriendsAndRequests()
+  }
   const toggleOpen = () => setOpen(!open)
 
   return (
@@ -88,7 +100,7 @@ export default function Friends(props) {
               Friend Requests
             </Typography>
           </ListSubheader>
-          <Requests requests={requests} />
+          <Requests requests={requests} confirmRequest={confirmRequest} deleteRequest={deleteRequest}/>
         </List>
       </Paper>
       <InviteDialog

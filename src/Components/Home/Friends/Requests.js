@@ -12,8 +12,8 @@ export default function Requests(props) {
                     <ListItem>
                         <ListItemText>{request}</ListItemText>
                         <ListItemSecondaryAction>
-                            <Button color='primary'>Confirm</Button>
-                            <IconButton>
+                            <Button color='primary' onClick={() => props.confirmRequest(request)}>Confirm</Button>
+                            <IconButton onClick={() => props.deleteRequest(request)}>
                                 <Clear />
                             </IconButton>
                         </ListItemSecondaryAction>
