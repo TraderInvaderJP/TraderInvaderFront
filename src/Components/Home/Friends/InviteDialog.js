@@ -7,20 +7,32 @@ import {
   ListItemText,
   ListItemSecondaryAction,
   Button,
+  Divider,
 } from '@material-ui/core'
 
 export default function InviteDialog(props) {
   return (
     <Dialog open={props.open} onClose={props.toggleOpen}>
-      <DialogTitle>Invite <b>{props.friendName}</b> to Game</DialogTitle>
+      <DialogTitle>
+        Invite <b>{props.friendName}</b> to Game
+      </DialogTitle>
       <List>
         {props.games.map((item) => (
-          <ListItem>
-            <ListItemText>{item}</ListItemText>
-            <ListItemSecondaryAction>
-              <Button color='primary' style={{padding: '0 5px'}} onClick={() => props.sendInviteAndClose(item)}>Invite</Button>
-            </ListItemSecondaryAction>
-          </ListItem>
+          <React.Fragment>
+            <Divider />
+            <ListItem>
+              <ListItemText>{item}</ListItemText>
+              <ListItemSecondaryAction>
+                <Button
+                  color="primary"
+                  style={{ padding: '0 5px' }}
+                  onClick={() => props.sendInviteAndClose(item)}
+                >
+                  Invite
+                </Button>
+              </ListItemSecondaryAction>
+            </ListItem>
+          </React.Fragment>
         ))}
       </List>
     </Dialog>
