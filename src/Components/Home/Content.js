@@ -16,6 +16,7 @@ export default function Content(props) {
     const [portfolio, SetPortfolio] = useState({})
     const [name, setName] = useState(0)
     const [game, setGame] = useState({})
+    const [inactive, setInactive] = useState({})
     const history = useHistory()
     const [password, setPassword] = useState('')
     const [confirm, setConfirm] = useState('')
@@ -34,6 +35,18 @@ export default function Content(props) {
                 .catch(err => console.log(err))
         }
     }, [props.username, SetGames])
+
+    useEffect(() => {
+        if (props.username) {
+            axios.get(`/games/${props.username}/inactive`, {
+            })
+                .then(res => {
+                    const { data } = res.data
+                    setInactive(data)
+                })
+                .catch(err => console.log(err))
+        }
+    }, [props.username, setInactive])
 
     useEffect(() => {
         const GetStats = async () => {
@@ -101,7 +114,7 @@ export default function Content(props) {
             </Route>
             <Route path='/app/statistics'>
                 <Container style={{ width: '100%', marginTop: '130px', marginBottom: '10px' }}>
-                    <Statistics username={props.username} stats={stats} achievements={achievements} />
+                    <Statistics username={props.username} stats={stats} achievements={achievements} inactive={inactive}/>
                 </Container>
             </Route>
             <Route path='/app/game'>
