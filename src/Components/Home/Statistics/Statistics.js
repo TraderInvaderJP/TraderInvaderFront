@@ -1,9 +1,10 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {
     Paper, makeStyles, Table, ListSubheader, Typography,
     TableHead, TableBody, TableRow, TableCell, Divider,
     List, ListItem, ListItemText
 } from '@material-ui/core'
+import axios from 'axios'
 
 const useStyles = makeStyles({
     cell: {
@@ -15,6 +16,21 @@ const useStyles = makeStyles({
 
 export default function Statistics(props) {
     const classes = useStyles()
+
+
+    const getWinner = async (game) => {
+        try {
+
+           let response = await axios.get(`/games/${game}/info`)
+           response = response.data.data.game.winner
+               console.log(response) 
+               return ( response )
+
+        }
+        catch (err) {
+            console.log(err)
+        }
+    }
 
 
     return (
@@ -79,7 +95,7 @@ export default function Statistics(props) {
                             <Divider />
                             <ListItem className={classes.row}>
                                 <ListItemText>{game}</ListItemText>
-                                
+                                <ListItemText align='right'>Winner: {Object.values(getWinner(game))}</ListItemText> 
                             </ListItem>
                         </React.Fragment>))
                     }
