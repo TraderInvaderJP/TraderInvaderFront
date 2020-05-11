@@ -1,5 +1,5 @@
 import React, { PreventDefault } from 'react';
-import { List, ListItem, Toolbar, AppBar, IconButton, InputAdornment, Typography, Button, TextField } from '@material-ui/core'
+import { List, ListItem, Toolbar, AppBar, IconButton, InputAdornment, Typography, Button, TextField, Grid } from '@material-ui/core'
 import { VisibilityOff, Visibility } from '@material-ui/icons'
 import { Link } from 'react-router-dom'
 import templogo from '../../templogo.png'
@@ -109,9 +109,13 @@ function Home(props) {
           </div>
         </Toolbar>
       </AppBar>
-      <List>
-        <List style={{ marginTop: '30px', marginRight: '-40px' }}>
-          <ListItem>
+      <Grid container style={{ justifyContent: 'center', marginTop: '25px' }} 
+        direction= 'column'
+        justify= 'center'
+        alignItems= 'center'
+        spacing={0}>
+        <Grid item style={{ marginTop: '30px', marginRight: '-40px' }}>
+          <Grid item>
             <TextField
               onChange={e => props.setUsername(e.target.value)}
               InputProps={{ classes: { underline: classes.text } }}
@@ -123,8 +127,8 @@ function Home(props) {
               placeholder='Username '
               type='text'
               autoComplete='off' />
-          </ListItem >
-          <ListItem >
+          </Grid >
+          <Grid item style={{marginTop: '20px'}}>
             <TextField
               onChange={e => props.setPassword(e.target.value)}
               InputProps={{ classes: { underline: classes.text } }}
@@ -137,41 +141,39 @@ function Home(props) {
               position='fixed'
               autoComplete='off'
               type={values.showPassword ? 'text' : 'password'} />
-            <InputAdornment>
               <IconButton
                 aria-label='toggle password visibility'
                 onClick={handleClickShowPassword}
                 onMouseDown={handleMouseDownPressed}>
                 {values.showPassword ? <Visibility /> : <VisibilityOff />}
               </IconButton>
-            </InputAdornment>
-          </ListItem>
+          </Grid>
           {props.login && (
-            <ListItem>
+            <Grid item>
               <Typography
                 style={{ fontSize: 12, color: 'red' }} >
                 incorrect username or password
               </Typography>
-            </ListItem>
+            </Grid>
           )}
-        </List>
-        <ListItem style={{ justifyContent: 'center', marginTop: '10px' }}>
+        </Grid>
+        <Grid container style={{ justifyContent: 'center', marginTop: '10px' }}>
           <Link to='/' style={{ textDecoration: 'none' }}>
             <Button className={classes.button}
               onClick={handleSubmit}
               variant='text'>Login</Button>
           </Link>
-        </ListItem>
-        <ListItem style={{ justifyContent: 'center', marginTop: '30px' }}>
+        </Grid>
+        <Grid container style={{ justifyContent: 'center', marginTop: '30px' }}>
           <Link
             to='/Forgot'>Forgot Password?</Link>
-        </ListItem>
-        <ListItem style={{ justifyContent: 'center', marginTop: '5px' }}>
+        </Grid>
+        <Grid container style={{ justifyContent: 'center', marginTop: '5px' }}>
           <Link
             to='/create'
             onClick={PreventDefault}>Create New Account</Link>
-        </ListItem>
-      </List >
+        </Grid>
+      </Grid >
     </div>
   )
 }
