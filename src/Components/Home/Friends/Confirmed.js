@@ -4,8 +4,8 @@ import { ListItem, ListItemText, ListItemSecondaryAction, Divider,
 export default function Confirmed(props) {
     return (
         <React.Fragment>
-            { props.friends.map(friend => (
-                <React.Fragment>
+            { props.friends.map((friend, index) => (
+                <React.Fragment key={index}>
                     <Divider />
                     <ListItem>
                         <ListItemText>{friend}</ListItemText>

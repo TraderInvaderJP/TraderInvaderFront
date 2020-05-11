@@ -17,8 +17,8 @@ export default function InviteDialog(props) {
         Invite <b>{props.friendName}</b> to Game
       </DialogTitle>
       <List>
-        {props.games.map((item) => (
-          <React.Fragment>
+        {props.games.map((item, index) => (
+          <React.Fragment key={index}>
             <Divider />
             <ListItem>
               <ListItemText>{item}</ListItemText>

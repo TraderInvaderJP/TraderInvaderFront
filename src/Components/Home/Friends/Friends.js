@@ -5,6 +5,7 @@ import Confirmed from './Confirmed'
 import Requests from './Requests'
 import axios from 'axios'
 import InviteDialog from './InviteDialog'
+import SearchBar from './SearchBar'
 
 const useStyles = makeStyles({
   paper: {
@@ -33,6 +34,8 @@ export default function Friends(props) {
   const [requests, setRequests] = useState([])
   const [open, setOpen] = useState(false)
   const [friendName, setFriendName] = useState('')
+  const [editing, setEditing] = useState(false)
+  const [users, setUsers] = useState([])
 
   useEffect(() => {
     getFriendsAndRequests()
@@ -46,6 +49,17 @@ export default function Friends(props) {
     let requestData = await axios.get(`/users/${props.username}/requests`)
 
     setRequests(requestData.data.data)
+  }
+
+  const onEditSearch = async (e) => {
+    let { data } = await axios.get(`/users/list?segment=${e.target.value}&limit=5`)
+
+    setUsers(data.data)
+  }
+
+  const sendRequestAndClose = async (user) => {
+    await axios.put(`/users/${user}/requests/${props.username}`)
+    setEditing(false)
   }
 
   const setNameAndOpen = (username) => {
@@ -67,10 +81,17 @@ export default function Friends(props) {
     await axios.delete(`/users/${props.username}/requests/${friend}`)
     getFriendsAndRequests()
   }
+
   const toggleOpen = () => setOpen(!open)
 
   return (
     <div>
+      <SearchBar 
+        onEditSearch={onEditSearch} 
+        users={users} 
+        editing={editing} 
+        setEditing={setEditing} 
+        sendRequestAndClose={sendRequestAndClose}/>
       <Paper
         className={classes.paper}
         style={{ margin: '10px 0 0 0', padding: '10px 0' }}
