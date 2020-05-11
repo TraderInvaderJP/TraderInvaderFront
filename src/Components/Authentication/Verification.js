@@ -1,5 +1,5 @@
 import React, { } from 'react';
-import { List, ListItem, Toolbar, AppBar, TextField, Button } from '@material-ui/core'
+import { List, ListItem, Toolbar, AppBar, TextField, Button, Grid } from '@material-ui/core'
 import { Link } from 'react-router-dom';
 import axios from 'axios'
 import templogo from '../../templogo.png';
@@ -87,8 +87,12 @@ function Verification(props) {
           </Link>
         </Toolbar>
       </AppBar>
-      <List>
-        <ListItem style={{ marginTop: '10px' }}>
+      <Grid container style={{ justifyContent: 'center', marginTop: '25px' }} 
+        direction= 'column'
+        justify= 'center'
+        alignItems= 'center'
+        spacing={0}>>
+        <Grid item style={{ marginTop: '10px' }}>
           <TextField
             onChange={handleVerificationChange}
             InputProps={{ classes: { underline: classes.text } }}
@@ -96,21 +100,21 @@ function Verification(props) {
             name='verification'
             placeholder='Verification Code'
             type='text' />
-        </ListItem>
-        <List >
-          <ListItem style={{ justifyContent: 'center', marginTop: '50px' }}>
+        </Grid>
+        <Grid item>
+          <Grid item style={{ justifyContent: 'center', marginTop: '25px' }}>
             <Link to='/' style={{ textDecoration: 'none' }}>
               <Button className={classes.button}
                 onClick={handleSubmit}
                 variant='text'>Submit</Button>
             </Link>
-          </ListItem>
-          <ListItem style={{ justifyContent: 'center', marginTop: '5px' }}>
+          </Grid>
+          <Grid item style={{ justifyContent: 'center', marginTop: '15px' }}>
             <Link to='#'>
               Didn't Receive Code?</Link>
-          </ListItem>
-        </List>
-      </List>
+          </Grid>
+        </Grid>
+      </Grid>
     </div>
   )
 }
