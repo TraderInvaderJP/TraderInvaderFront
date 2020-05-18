@@ -23,17 +23,10 @@ export default function Content(props) {
     const [oldpass, setOldPass] = useState('')
     const [stats, setStats] = useState('')
     const [achievements, setAchievements] = useState([])
+    const [invites, setInvites] = useState([])
 
     useEffect(() => {
-        if (props.username) {
-            axios.get(`/games/${props.username}/active`, {
-            })
-                .then(res => {
-                    const { data } = res.data
-                    SetGames(data)
-                })
-                .catch(err => console.log(err))
-        }
+        getGames()
     }, [props.username, SetGames])
 
     useEffect(() => {
@@ -50,7 +43,6 @@ export default function Content(props) {
 
     useEffect(() => {
         const GetStats = async () => {
-
             try {
                 const { data } = await axios.get(`/statistics/${props.username}/statistics`)
                 setStats(data.data)
@@ -63,7 +55,6 @@ export default function Content(props) {
 
     useEffect(() => {
         const GetAchievements = async () => {
-
             try {
                 const { data } = await axios.get(`/statistics/${props.username}/achievements`)
                 setAchievements(Object.keys(data.data))
@@ -74,10 +65,13 @@ export default function Content(props) {
         GetAchievements()
     }, [props.username, setAchievements])
 
+    useEffect(() => {
+        getInvites()
+    }, [props.username, setInvites])
+
     const getGame = async (index) => {
         let name = games[index]
         setName(name)
-
 
         const portfolioData = (await axios.get(`/games/${name}/portfolios/${props.username}`)).data
 
@@ -90,15 +84,53 @@ export default function Content(props) {
         history.push('/app/game')
     }
 
+    const getGames = async () => {
+        try {
+            if(props.username) {
+                const { data } = await axios.get(`/games/${props.username}/active`)
+
+                SetGames(data.data)
+            }
+        } 
+        catch (err) {
+            console.log(err)
+        }
+    }
+
+    const getInvites = async () => {
+        try {
+            const { data } = await axios.get(`/users/${props.username}/invites`)
+
+            if(data.success)
+                setInvites(data.data)
+            else
+                throw 'No good'
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
     const addGame = (name) => {
         SetGames([...games, name])
+    }
+
+    const joinGame = async (name) => {
+        const { data } = await axios.get(`/games/${name}/info`)
+
+        console.log(data)
+        
+        await axios.put(`/games/${name}/users/${props.username}`, { initial_amount: data.data.game.wallet })
+        await axios.delete(`/users/${props.username}/invites/${name}`)
+
+        getInvites()
+        getGames()
     }
 
     return (
         <React.Fragment>
             <Route path='/app' exact>
                 <Container style={{ width: '100%', marginTop: '130px', marginBottom: '10px' }}>
-                    <Games username={props.username} games={games} getGame={getGame} />
+                    <Games username={props.username} games={games} getGame={getGame} invites={invites} joinGame={joinGame}/>
                 </Container>
             </Route>
             <Route path='/app/changepassverification'>

@@ -1,5 +1,7 @@
 import React from 'react'
-import { Paper, List, ListItem, ListItemText, IconButton, ListSubheader, Typography, Divider } from '@material-ui/core'
+import { Paper, List, ListItem, ListItemText,
+    IconButton, ListSubheader, Typography, Divider, 
+    ListItemSecondaryAction, Button } from '@material-ui/core'
 import { ArrowForward } from '@material-ui/icons'
 import { makeStyles } from '@material-ui/core/styles'
 
@@ -46,6 +48,35 @@ export default function Games(props) {
                                     </IconButton>
                             </ListItem>
                         </React.Fragment>))
+                    }
+                </List>
+            </Paper>
+            <Paper
+                className={classes.paper}
+                style={{ margin: '10px 0 0 0', padding: '10px 0' }}
+            >
+                <List className={classes.game}>
+                    <ListSubheader color="primary" align='center'>
+                        <Typography
+                        variant="h5"
+                        style={{ color: 'black', padding: '0 0 10px 0' }}
+                        >
+                        Game Invites
+                        </Typography>
+                    </ListSubheader>
+                    {
+                        (props.invites.length > 0 ? 
+                        props.invites.map((invite, index) => (
+                            <ListItem key={index}>
+                                <ListItemText>{invite}</ListItemText>
+                                <ListItemSecondaryAction>
+                                    <Button color='primary' onClick={() => props.joinGame(invite)}>Join</Button>
+                                </ListItemSecondaryAction>
+                            </ListItem>
+                        )) : 
+                        <ListItem style={{textAlign:'center'}}>
+                            <ListItemText>No Invites</ListItemText>
+                        </ListItem>)
                     }
                 </List>
             </Paper>
