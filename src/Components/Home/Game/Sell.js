@@ -46,7 +46,7 @@ export default function Sell(props) {
 
                 temp.sort((left, right) => (left[0] < right[0] ? -1 : 1))
                 if(symbols !== "") {
-                    const { data } = await axios.get(`https://financialmodelingprep.com/api/v3/stock/real-time-price/${symbols}`)
+                    const { data } = await axios.get(`https://financialmodelingprep.com/api/v3/stock/real-time-price/${symbols}?apikey=${process.env.REACT_APP_API_KEY}`)
                     
                     if (data.companiesPriceList !== undefined) {
                         
@@ -80,7 +80,7 @@ export default function Sell(props) {
     const onSelectStock = async (symbol) => {
         setEditing(false)
 
-        let { data } = await axios.get(`https://financialmodelingprep.com/api/v3/company/profile/${symbol}`)
+        let { data } = await axios.get(`https://financialmodelingprep.com/api/v3/company/profile/${symbol}?apikey=${process.env.REACT_APP_API_KEY}`)
 
         setCompany(data)
     }

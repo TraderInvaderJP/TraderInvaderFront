@@ -69,8 +69,7 @@ export default function Content(props) {
         getInvites()
     }, [props.username, setInvites])
 
-    const getGame = async (index) => {
-        let name = games[index]
+    const getGame = async (name) => {
         setName(name)
 
         const portfolioData = (await axios.get(`/games/${name}/portfolios/${props.username}`)).data
@@ -79,9 +78,10 @@ export default function Content(props) {
 
         const gameData = (await axios.get(`/games/${name}/info`)).data
 
+        console.log(gameData)
         setGame(gameData.data)
 
-        history.push('/app/game')
+        //history.push('/app/game')
     }
 
     const getGames = async () => {

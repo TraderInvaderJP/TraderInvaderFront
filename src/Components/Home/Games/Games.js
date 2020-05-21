@@ -43,7 +43,7 @@ export default function Games(props) {
                             <Divider />
                             <ListItem className={classes.row}>
                                 <ListItemText>{game}</ListItemText>
-                                    <IconButton className={classes.arrow} style={{ padding: 0, color: '#43AA1F' }} onClick={() => props.getGame(id)}>
+                                    <IconButton className={classes.arrow} style={{ padding: 0, color: '#43AA1F' }} onClick={() => props.getGame(game)}>
                                         <ArrowForward />
                                     </IconButton>
                             </ListItem>
