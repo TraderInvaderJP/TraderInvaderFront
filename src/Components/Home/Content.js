@@ -81,7 +81,7 @@ export default function Content(props) {
         console.log(gameData)
         setGame(gameData.data)
 
-        //history.push('/app/game')
+        history.push('/app/game')
     }
 
     const getGames = async () => {

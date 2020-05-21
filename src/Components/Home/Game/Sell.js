@@ -98,6 +98,8 @@ export default function Sell(props) {
                 count: parseFloat(count),
                 value: symbol.value
             })
+
+            props.getGame(props.name)
         }
 
         setIsOpen(false)

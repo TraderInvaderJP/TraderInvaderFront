@@ -122,6 +122,8 @@ export default function Buy(props) {
                 count: parseFloat(count),
                 value: symbol.value
             })
+
+            props.getGame(props.name)
         }
 
         setIsOpen(false)
