@@ -87,15 +87,13 @@ export default function Statistics(props) {
                 <List className={classes.game}>
                     <ListSubheader color='primary' align='center'>
                         <Typography variant='h5' style={{ color: 'black', padding: '0 0 10px 0' }}>
-                            Inactive Games
-                        </Typography>
+                            Inactive Games </Typography>
                     </ListSubheader>
                     {props.inactive.map((game, id) => (
                         <React.Fragment key={id}>
                             <Divider />
                             <ListItem className={classes.row}>
                                 <ListItemText>{game}</ListItemText>
-                                <ListItemText align='right'>Winner: {Object.values(getWinner(game))}</ListItemText> 
                             </ListItem>
                         </React.Fragment>))
                     }
